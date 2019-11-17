@@ -1,0 +1,20 @@
+{
+	"prefix": "tt!",
+	"class": "your class prefix",
+	"replacementsUrl": "main directory of your replacements site",
+	"botOwners":
+	[
+      "your id"
+	],
+	"intervals":
+	{
+		"replacementsChannelsUpdate": "0,30 * * * *"
+	},
+	"replacementsChannels" :
+	[
+		{
+			"guild" : "guild with replacement channel",
+			"channel" : "replacement channel on this guild"
+		}
+	]
+}
