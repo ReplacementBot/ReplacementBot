@@ -12,10 +12,10 @@ CommandsManager.prototype.executeCommand = function(message)
 {
 	if (!messageContainsPrefix(message)) return;
 	const commandArguments = splitMessage(message);
-	const commandName = commandArguments.split();
-	if(!commandExist(commandName)) return;
+	const commandName = commandArguments.split(/ +/).toString().toLowerCase();
+	if(!commandExist(this.commandsManager.commands, commandName)) return;
 
-	const command = this.commands.get(commandName);
+	const command = this.commandsManager.commands.get(commandName);
 	if(userHaveEnoughPermissions(message, command))
 	{
 		try
@@ -49,11 +49,11 @@ function messageContainsPrefix(message)
 }
 function splitMessage(message)
 {
-	return message.content.slice(global.config.get('prefix').length).split(/ +/);
+	return message.content.slice(global.config.get('prefix').length);
 }
-function commandExist(commandName)
+function commandExist(commands, commandName)
 {
-	return this.commands.has(commandName);
+	return commands.has(commandName);
 }
 function userHaveEnoughPermissions(message, command)
 {
