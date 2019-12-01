@@ -1,5 +1,14 @@
 const chalk = require('chalk');
 module.exports = {
+	fatalAndCrash(message, exitCode)
+	{
+		if(exitCode == undefined)
+		{
+			exitCode = 5;
+		}
+		this.fatal(message);
+		process.exit(exitCode);
+	},
 	fatal: function(message)
 	{
 		console.log(chalk.bold.red('[FATAL ERROR] ') + message);
