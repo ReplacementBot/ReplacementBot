@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const ReplacementsEmbed = require('./replacementsEmbed');
+const ReplacementsEmbed = require('../util/replacementsEmbed');
 module.exports = {
 	updateAllChannels: function(bot, isUpdateScheduled)
 	{
