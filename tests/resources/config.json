@@ -1,0 +1,15 @@
+{
+    "prefix": "tt!",
+    "class": "1",
+    "replacementsUrl": "",
+	"botOwners": 
+	[
+    ],
+	"intervals": 
+	{
+        "replacementsChannelsUpdate": "0,30 * * * *"
+    },
+	"replacementsChannels": 
+	[
+    ]
+}
