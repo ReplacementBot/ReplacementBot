@@ -17,6 +17,7 @@ class ReplacementBot extends Client
 {
 	constructor()
 	{
+		Logger.printLogo();
 		Logger.info('Initialling ReplacementBot...');
 
 		super();
@@ -31,7 +32,8 @@ class ReplacementBot extends Client
 				this.scheduleManager.scheduleDefaultJobs(this);
 				this.on('message', this.commandsManager.executeCommand);
 				global.config.validateAfterBotLaunch(this);
-				Logger.info('ReplacementBot successfully launched');
+				Logger.info('ReplacementBot successfully launched!');
+				Logger.info('Bot user is: ' + this.user.tag);
 			});
 	}
 }

@@ -1,4 +1,6 @@
 const chalk = require('chalk');
+const figlet = require('figlet');
+
 module.exports = {
 	fatalAndCrash(message, exitCode)
 	{
@@ -24,5 +26,11 @@ module.exports = {
 	info: function(message)
 	{
 		console.log(chalk.bold.white('[INFO] ') + message);
+	},
+	printLogo: async function()
+	{
+		console.log();
+		console.log(chalk.magenta(figlet.textSync('Replacement Bot')));
+		console.log();
 	},
 };
