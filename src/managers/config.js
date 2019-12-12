@@ -32,16 +32,24 @@ class Config
 {
 	constructor(settings)
 	{
-		if(settings.source == ConfigSources.FILE)
+		try
 		{
-			const content = fs.readFileSync(appRoot + '/' + settings.args);
-			const json = JSON.parse(content);
-			this.data = json;
+			if(settings.source == ConfigSources.FILE)
+			{
+				const content = fs.readFileSync(appRoot + '/' + settings.args);
+				const json = JSON.parse(content);
+				this.data = json;
+			}
+			else if(settings.source == ConfigSources.ENVIRONMENT)
+			{
+				this.data = JSON.parse(process.env.REPLACEMENT_BOT_CONFIG);
+			}
 		}
-		else if(settings.source == ConfigSources.ENVIRONMENT)
+		catch (error)
 		{
-			this.data = JSON.parse(process.env.REPLACEMENT_BOT_CONFIG);
+			Logger.fatalAndCrash('Failed to load configuration: ' + error.message);
 		}
+
 	}
 }
 Config.prototype.contains = function(key)
