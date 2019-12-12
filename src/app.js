@@ -1,9 +1,3 @@
-process.on('unhandledRejection', function(reason, promise)
-{
-	console.log(promise);
-	Logger.fatalAndCrash('Unhandled Promise Rejection');
-});
-
 const { Client } = require('discord.js');
 const Logger = require('./managers/logger');
 const CommandsManager = require('./managers/commandManager');
@@ -38,6 +32,12 @@ class ReplacementBot extends Client
 			});
 	}
 }
+
+process.on('unhandledRejection', function(reason, promise)
+{
+	console.log(promise);
+	Logger.fatalAndCrash('Unhandled Promise Rejection');
+});
 
 // Run bot
 new ReplacementBot();
