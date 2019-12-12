@@ -9,7 +9,14 @@ module.exports = {
 			exitCode = 5;
 		}
 		this.fatal(message);
-		process.exit(exitCode);
+		if(runningInTest())
+		{
+			throw Error(message);
+		}
+		else
+		{
+			process.exit(exitCode);
+		}
 	},
 	fatal: function(message)
 	{
@@ -34,3 +41,7 @@ module.exports = {
 		console.log();
 	},
 };
+function runningInTest()
+{
+	return process.env.JEST_WORKER_ID !== undefined;
+}

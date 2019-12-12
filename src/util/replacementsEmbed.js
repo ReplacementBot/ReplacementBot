@@ -15,7 +15,7 @@ module.exports = {
 			staticEmbedFooter ? 'Updated on: ' : 'Generated on: ')
 			+ daysOfWeek[footerDate.getDay()] + ' '
 			+ (footerDate.getHours() < 10 ? '0' : '') + footerDate.getHours() + ':'
-			+ (footerDate.getMinutes() < 10 ? '0' : '') + footerDate.getMinutes()
+			+ (footerDate.getMinutes() < 10 ? '0' : '') + footerDate.getMinutes(),
 		);
 		for (let daysIndex = 0; daysIndex < daysCount; daysIndex++)
 		{
@@ -36,7 +36,7 @@ module.exports = {
 					}
 					if(result == '')
 					{
-						result = 'No replacements for this class on this day';
+						result = ':x: No replacements for this class on this day';
 					}
 					embed.addField('Replacements for ' + daysOfWeek[date.getDay()], result);
 				})
@@ -44,7 +44,7 @@ module.exports = {
 				{
 					if(error == 404)
 					{
-						embed.addField('Replacements for ' + daysOfWeek[date.getDay()], '*Replacements not uploaded yet*');
+						embed.addField('Replacements for ' + daysOfWeek[date.getDay()], ':grey_question: *Replacements not uploaded yet*');
 					}
 					else
 					{
