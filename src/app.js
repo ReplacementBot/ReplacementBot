@@ -15,7 +15,7 @@ class ReplacementBot extends Client
 		Logger.info('Initialling ReplacementBot...');
 
 		super();
-		global.config = new Config(configSettings);
+		new Config(configSettings).loadToGlobal();
 		this.commandsManager = new CommandsManager();
 		this.scheduleManager = new ScheduleManager();
 
