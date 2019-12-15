@@ -2,7 +2,7 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const iso88592 = require('iso-8859-2');
 const Replacement = require('../types/replacement');
-
+const ReplacemeentsList = require('../types/replacementsList');
 class VulcanFetcher
 { }
 
@@ -27,6 +27,27 @@ VulcanFetcher.prototype.fetchReplacements = function(date)
 					reject(`Failed to fetch Vulcan Replacement | Code: Unknown | URL: ${url} | Error: ${error}`);
 				}
 			});
+	});
+};
+VulcanFetcher.prototype.fetchMultipleDays = function(dateArray)
+{
+	return new Promise((resolve, reject) =>
+	{
+		const result = new ReplacemeentsList();
+		let index = 0;
+		for (const date of dateArray)
+		{
+			this.fetchReplacements(date)
+				.then(response =>
+				{
+					index++;
+					result.addDay(date, response);
+					if(index === dateArray.length)
+					{
+						resolve(result);
+					}
+				});
+		}
 	});
 };
 function validURL(str)
