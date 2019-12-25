@@ -1,8 +1,8 @@
 class Replacement
 {
-	constructor(lesson, description, teacher, comments)
+	constructor(lessonName, description, teacher, comments)
 	{
-		this.lesson = lesson;
+		this.lessonName = lessonName;
 		this.description = description;
 		this.teacher = teacher;
 		this.comments = comments;
@@ -10,7 +10,7 @@ class Replacement
 }
 Replacement.prototype.toString = function()
 {
-	let result = '**[' + this.lesson + ']** ' + this.description;
+	let result = '**[' + this.lessonName + ']** ' + this.description;
 	if(this.teacher != undefined)
 	{
 		result += ' | ' + this.teacher;

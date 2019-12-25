@@ -14,9 +14,9 @@
   },
   "main": "src/app.js",
   "scripts": {
-    "test": "jest",
-    "lint": "eslint .",
-    "start": "node ."
+    "test": "jest --verbose",
+    "start": "node .",
+    "lint": "eslint ."
   },
   "dependencies": {
     "app-root-path": "^3.0.0",

@@ -2,7 +2,7 @@ const { CronJob, CronTime } = require('cron');
 const Logger = require('./logger');
 const Moment = require('moment');
 
-const ReplacementsChannelUpdate = require('../util/replacementsChannelUpdate');
+const ReplacementsManager = require('./replacementsManager');
 
 class ScheduleManager
 {
@@ -21,7 +21,7 @@ ScheduleManager.prototype.scheduleDefaultJobs = function(bot)
 {
 	this.AddJob(new ScheduledJob('Update Embeds', global.config.get('intervals').replacementsChannelsUpdate, function()
 	{
-		return ReplacementsChannelUpdate.updateAllChannels(bot, true);
+		return ReplacementsManager.updateAllChannels(true);
 	}));
 };
 
