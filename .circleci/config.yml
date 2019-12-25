@@ -22,5 +22,5 @@ jobs: # a collection of steps
           name: test
           command: npm test
       - run: # run eslint
-          name: test
-          command: npm lint
+          name: lint
+          command: eslint .
