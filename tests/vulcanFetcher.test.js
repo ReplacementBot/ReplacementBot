@@ -1,5 +1,5 @@
-const VulcanFetcher = require('../src/replacements/fetchers/vulcanFetcher');
-const Replacement = require('../src/replacements/types/replacement');
+const VulcanFetcher = require('../src/replacements/vulcanFetcher');
+const Replacement = require('../src/classes/replacement');
 const { Config, ConfigSettings, ConfigSources } = require('../src/managers/config');
 describe('VulcanFetcher', () =>
 {
@@ -12,7 +12,7 @@ describe('VulcanFetcher', () =>
 		{
 			new Config(new ConfigSettings(ConfigSources.FILE, global.testConfigFilePatch)).loadToGlobal();
 
-			await expect(vulcanFetcher.fetchReplacements(testReplacemetsUrl)).resolves.toStrictEqual(
+			await expect(vulcanFetcher.fetchSingleDay(testReplacemetsUrl)).resolves.toStrictEqual(
 				[
 					new Replacement('1', '1 - Example Lesson', '\xa0', '\xa0'),
 					new Replacement('3', '1 - Example Lesson', '\xa0', '\xa0'),
@@ -23,13 +23,13 @@ describe('VulcanFetcher', () =>
 		test('should return empty array when no replacements', async () =>
 		{
 			new Config(new ConfigSettings(ConfigSources.FILE, 'tests/resources/configClass3.json')).loadToGlobal();
-			await expect(vulcanFetcher.fetchReplacements(testReplacemetsUrl)).resolves.toHaveLength(0);
+			await expect(vulcanFetcher.fetchSingleDay(testReplacemetsUrl)).resolves.toHaveLength(0);
 		});
 		test('should fail on 404', async () =>
 		{
 			new Config(new ConfigSettings(ConfigSources.FILE, global.testConfigFilePatch)).loadToGlobal();
 
-			await expect(vulcanFetcher.fetchReplacements('http://httpstat.us/404')).rejects.toEqual(
+			await expect(vulcanFetcher.fetchSingleDay('http://httpstat.us/404')).rejects.toEqual(
 				'Failed to fetch Vulcan Replacement | Code: 404 | URL: http://httpstat.us/404 | Error: Error: Request failed with status code 404');
 		});
 	});
@@ -38,7 +38,6 @@ describe('VulcanFetcher', () =>
 		const testReplacemetsUrl = 'https://pastebin.com/raw/quyruEy6';
 		const daysArray = [testReplacemetsUrl, testReplacemetsUrl, testReplacemetsUrl];
 		const vulcanFetcher = new VulcanFetcher();
-
 		test('should fetch multiple days', async () =>
 		{
 			new Config(new ConfigSettings(ConfigSources.FILE, global.testConfigFilePatch)).loadToGlobal();

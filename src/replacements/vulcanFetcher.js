@@ -1,12 +1,12 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 const iso88592 = require('iso-8859-2');
-const Replacement = require('../types/replacement');
-const ReplacemeentsList = require('../types/replacementsList');
+const Replacement = require('../classes/replacement');
+const ReplacemeentsList = require('../classes/replacementsList');
 class VulcanFetcher
 { }
 
-VulcanFetcher.prototype.fetchReplacements = function(date)
+VulcanFetcher.prototype.fetchSingleDay = function(date)
 {
 	return new Promise(function(resolve, reject)
 	{
@@ -37,7 +37,7 @@ VulcanFetcher.prototype.fetchMultipleDays = function(dateArray)
 		let index = 0;
 		for (const date of dateArray)
 		{
-			this.fetchReplacements(date)
+			this.fetchSingleDay(date)
 				.then(response =>
 				{
 					index++;
@@ -114,7 +114,7 @@ function praseDate(date)
 		const month = date.getMonth() + 1 < 10 ? '0' + date.getMonth() + 1 : date.getMonth() + 1;
 		const day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
 
-		return global.config.get('replacementsUrl') + year + '_' + month + '_' + day + '.html';
+		return year + '_' + month + '_' + day + '.html';
 	}
 	else
 	{

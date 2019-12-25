@@ -1,4 +1,4 @@
-const ReplacementsChannelUpdate = require('../util/replacementsChannelUpdate');
+const ReplacementsManager = require('../managers/replacementsManager');
 
 module.exports = {
 	name: 'update',
@@ -6,7 +6,7 @@ module.exports = {
 	ownerOnly: true,
 	execute(message, args)
 	{
-		ReplacementsChannelUpdate.updateAllChannels(message.client, false)
+		ReplacementsManager.updateReplacementChannels(false)
 			.then(function()
 			{
 				message.reply('Command Executed Successfully');

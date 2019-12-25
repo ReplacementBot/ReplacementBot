@@ -15,13 +15,14 @@ class ReplacementBot extends Client
 		Logger.info('Initialling ReplacementBot...');
 
 		super();
+		global.bot = this;
 		new Config(configSettings).loadToGlobal();
 		this.commandsManager = new CommandsManager();
 		this.scheduleManager = new ScheduleManager();
 
 		this.login(process.env.REPLACEMENT_BOT_TOKEN)
 			.catch((error) => Logger.fatal('Failed to launch ReplacementBot ' + error.message))
-			.then(() =>
+			.then(async ()=>
 			{
 				this.scheduleManager.scheduleDefaultJobs(this);
 				this.on('message', this.commandsManager.executeCommand);
