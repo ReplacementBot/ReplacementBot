@@ -4,24 +4,6 @@ const Moment = require('moment');
 
 const ReplacementsManager = require('./replacementsManager');
 
-class ScheduledJob
-{
-	constructor(name, interval, job)
-	{
-		this.name = name;
-		this.cornJob = new CronJob(interval, function()
-		{
-			job()
-				.then(Logger.info('CronJob "' + this.name + '" Executed'))
-				.catch((error) => Logger.error('CronJob "' + this.name + '" Failed to execute cause: ' + error));
-		});
-	}
-}
-ScheduledJob.prototype.getNextExecutionRemaining = function()
-{
-	return Moment(this.cornJob.nextDates()).fromNow();
-};
-
 class ScheduleManager
 {
 	constructor()
@@ -51,6 +33,24 @@ ScheduleManager.prototype.getJobByName = function(name)
 	})[0];
 };
 
-
 module.exports.ScheduleManager = ScheduleManager;
+
+class ScheduledJob
+{
+	constructor(name, interval, job)
+	{
+		this.name = name;
+		this.cornJob = new CronJob(interval, function()
+		{
+			job()
+				.then(Logger.info('CronJob "' + name + '" executed sucesfully'))
+				.catch((error) => Logger.error('CronJob "' + this.name + '" Failed to execute cause: ' + error));
+		}, null, true);
+	}
+}
+ScheduledJob.prototype.getNextExecutionRemaining = function()
+{
+	return Moment(this.cornJob.nextDates()).fromNow();
+};
+
 module.exports.ScheduledJob = ScheduledJob;
