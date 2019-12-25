@@ -14,7 +14,7 @@
   },
   "main": "src/app.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --verbose",
     "start": "node .",
     "lint": "eslint ."
   },

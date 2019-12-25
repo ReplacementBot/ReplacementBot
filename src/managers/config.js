@@ -52,6 +52,10 @@ class Config
 
 	}
 }
+Config.prototype.loadToGlobal = function()
+{
+	global.config = this;
+};
 Config.prototype.contains = function(key)
 {
 	if(this.data == undefined)

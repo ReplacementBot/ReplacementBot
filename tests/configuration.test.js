@@ -11,9 +11,15 @@ describe('Configuration Settings', () =>
 
 describe('Configuration', () =>
 {
+	const testConfigFile = new ConfigSettings(ConfigSources.FILE, global.testConfigFilePatch);
 	test('should load from file', () =>
 	{
-		const config = new Config(new ConfigSettings(ConfigSources.FILE, 'tests/resources/config.json'));
+		const config = new Config(testConfigFile);
 		expect(config.get('prefix')).toBe('tt!');
+	});
+	test('should load to global', () =>
+	{
+		new Config(testConfigFile).loadToGlobal();
+		expect(global.config.get('prefix')).toBe('tt!');
 	});
 });
