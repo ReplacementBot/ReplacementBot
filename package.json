@@ -15,7 +15,8 @@
   "main": "src/app.js",
   "scripts": {
     "test": "jest --verbose",
-    "start": "node .",
+    "build": "node_modules/.bin/tsc",
+    "start": "node build/src/app.js",
     "lint": "eslint ."
   },
   "dependencies": {
@@ -31,6 +32,7 @@
     "moment": "^2.24.0"
   },
   "devDependencies": {
-    "jest": "^24.9.0"
+    "jest": "^24.9.0",
+    "typescript": "^3.7.5"
   }
 }
