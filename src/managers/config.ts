@@ -1,114 +1,121 @@
 const fs = require('fs');
 const appRoot = require('app-root-path');
-const Logger = require('./logger');
-const ConfigSources =
-{
-	AUTO: 0,
-	FILE: 1,
-	ENVIRONMENT: 2,
-};
+import Logger from "./logger"
+import ConfigValidator from "../util/configValidator";
+import { CommandoClient } from "discord.js-commando";
 
-class ConfigSettings
+const DEFAULT_CONFIG_PATH = "config/default.json";
+
+export enum ConfigSources { AUTO, FILE, ENVIRONMENT }
+
+export class Config
 {
-	constructor(source, args)
+	data: object;
+	validator: ConfigValidator;
+	constructor(settings: ConfigSettings)
 	{
-		this.source = source;
-		this.args = args;
+		switch (settings.source) {
+			case ConfigSources.ENVIRONMENT:
+				this.ENVIRONMENT_Setup();
+				break;
+			case ConfigSources.FILE:
+				this.FILE_Setup(settings.args);
+				break;
+			default:
+				Logger.fatalAndCrash(`Config setup function for source: "${settings.source}" is not implemented`)
+				break;
+		}
+	}
+		
+	private FILE_Setup(path: string)
+	{
+		const content = fs.readFileSync(appRoot + '/' + path);
+		const json = JSON.parse(content);
+		this.data = json;
+	}
+	private ENVIRONMENT_Setup()
+	{
+		this.data = JSON.parse(process.env.REPLACEMENT_BOT_CONFIG);
+	}
+
+	public loadToGlobal()
+	{
+		if((global as any).config == undefined)
+		{
+			(global as any).config = this;
+		}
+		else
+		{
+			Logger.fatalAndCrash("Failed to load Configuration to Global Scope cause some Configuration is already loaded to it")
+		}
+	}
+	public contains(key: string)
+	{
+		if(this.data == undefined)
+		{
+			return undefined;
+		}
+		else
+		{
+			return Object.prototype.hasOwnProperty.call(this.data, key);
+		}
+	}
+	public get(key: string)
+	{
+		if(this.data == undefined)
+		{
+			return undefined;
+		}
+		else if(this.contains(key))
+		{
+			return (this.data as IIndexable)[key] as any;
+		}
+		else
+		{
+			return undefined;
+		}
+	}
+	public async validate(client : CommandoClient)
+	{
+		await new ConfigValidator(client, this).validate();
+	}
+}
+
+export class ConfigSettings
+{
+	source: ConfigSources;
+	args: any;
+	constructor(source: ConfigSources, args?: any)
+	{
 		if(source == ConfigSources.AUTO)
 		{
-			if(isRunningOnHeroku())
-			{
-				this.source = ConfigSources.ENVIRONMENT;
-			}
-			else
-			{
-				this.source = ConfigSources.FILE;
-				this.args = 'config/default.json';
-			}
+			this.detectConfigSource()
+		}
+		else
+		{
+			this.source = source;
+			this.args = args;
 		}
 	}
-}
-class Config
-{
-	constructor(settings)
+	private detectConfigSource()
 	{
-		try
+		if(fs.existsSync(DEFAULT_CONFIG_PATH))
 		{
-			if(settings.source == ConfigSources.FILE)
-			{
-				const content = fs.readFileSync(appRoot + '/' + settings.args);
-				const json = JSON.parse(content);
-				this.data = json;
-			}
-			else if(settings.source == ConfigSources.ENVIRONMENT)
-			{
-				this.data = JSON.parse(process.env.REPLACEMENT_BOT_CONFIG);
-			}
+			this.source = ConfigSources.FILE;
+			this.args = DEFAULT_CONFIG_PATH;
 		}
-		catch (error)
+		else if(process.env.REPLACEMENT_BOT_CONFIG)
 		{
-			Logger.fatalAndCrash('Failed to load configuration: ' + error.message);
+			this.source = ConfigSources.ENVIRONMENT;
+			this.args = null;
 		}
-
-	}
-}
-Config.prototype.loadToGlobal = function()
-{
-	global.config = this;
-};
-Config.prototype.contains = function(key)
-{
-	if(this.data == undefined)
-	{
-		return undefined;
-	}
-	else
-	{
-		return Object.prototype.hasOwnProperty.call(this.data, key);
-	}
-};
-Config.prototype.get = function(key)
-{
-	if(this.data == undefined)
-	{
-		return undefined;
-	}
-	else if(this.contains(key))
-	{
-		return this.data[key];
-	}
-	else
-	{
-		return undefined;
-	}
-};
-Config.prototype.validateAfterBotLaunch = function(bot)
-{
-	verifyOwnersIds(bot);
-};
-async function verifyOwnersIds(bot)
-{
-	if(!global.config.contains('botOwners') ||
-		!Array.isArray(global.config.get('botOwners')) ||
-		global.config.get('botOwners').length == 0)
-	{
-		Logger.warn('No owners specified in config, some commands will be inaccessible');
-		return;
-	}
-	for await(const ownerId of global.config.get('botOwners'))
-	{
-		await bot.fetchUser(ownerId).catch(function(error)
+		else
 		{
-			Logger.warn('Unknown owner id, check config, id: ' + ownerId + ', error: ' + error.message);
-		});
+			Logger.fatalAndCrash("Config source has been set to AUTO, but it failed to detect automatically")
+		}	
 	}
 }
 
-function isRunningOnHeroku()
-{
-	return (process.env._ && process.env._.indexOf('heroku'));
+interface IIndexable {
+	[key: string]: any;
 }
-
-module.exports.ConfigSources = ConfigSources;
-module.exports.ConfigSettings = ConfigSettings;
-module.exports.Config = Config;

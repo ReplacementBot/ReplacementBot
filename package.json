@@ -16,16 +16,18 @@
   "scripts": {
     "test": "jest --verbose",
     "build": "node_modules/.bin/tsc",
-    "start": "node build/src/app.js",
+    "start": "node build/src/index.js",
     "lint": "eslint ."
   },
   "dependencies": {
+    "@types/figlet": "^1.2.0",
     "app-root-path": "^3.0.0",
     "axios": "^0.19.0",
     "chalk": "^2.4.2",
     "cheerio": "^1.0.0-rc.3",
     "cron": "^1.7.2",
     "discord.js": "^11.5.1",
+    "discord.js-commando": "^0.10.0",
     "eslint": "^6.7.2",
     "figlet": "^1.2.4",
     "iso-8859-2": "^1.0.0",

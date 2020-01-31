@@ -1,15 +1,16 @@
-const chalk = require('chalk');
-const figlet = require('figlet');
+import chalk from "chalk";
+import figlet from "figlet";
 
-module.exports = {
-	fatalAndCrash(message, exitCode)
+export default class Logger
+{
+	public static fatalAndCrash(message: string, exitCode?: number)
 	{
 		if(exitCode == undefined)
 		{
 			exitCode = 5;
 		}
 		this.fatal(message);
-		if(runningInTest())
+		if(this.runningInTest())
 		{
 			throw Error(message);
 		}
@@ -17,31 +18,31 @@ module.exports = {
 		{
 			process.exit(exitCode);
 		}
-	},
-	fatal: function(message)
+	}
+	public static fatal(message: string)
 	{
 		console.log(chalk.bold.red('[FATAL ERROR] ') + message);
-	},
-	error: function(message)
+	}
+	public static error(message: string)
 	{
 		console.log(chalk.bold.red('[ERROR] ') + message);
-	},
-	warn: function(message)
+	}
+	public static warn(message: string)
 	{
 		console.log(chalk.bold.yellow('[WARN] ') + message);
-	},
-	info: function(message)
+	}
+	public static info(message: string)
 	{
 		console.log(chalk.bold.white('[INFO] ') + message);
-	},
-	printLogo: async function()
+	}
+	public static printLogo()
 	{
 		console.log();
 		console.log(chalk.magenta(figlet.textSync('Replacement Bot')));
 		console.log();
-	},
-};
-function runningInTest()
-{
-	return process.env.JEST_WORKER_ID !== undefined;
+	}
+	private static runningInTest()
+	{
+		return process.env.JEST_WORKER_ID !== undefined;
+	}
 }
