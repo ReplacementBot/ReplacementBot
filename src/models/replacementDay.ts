@@ -4,9 +4,9 @@ import { Moment } from 'moment';
 export default class ReplacementDay
 {
 	replacements: Replacement[];
-	date: Moment
+	date: Moment;
 
-	constructor(date: Moment, replacements: Replacement[])
+	constructor(date: Moment, replacements?: Replacement[])
 	{
 		this.date = date;
 		this.replacements = replacements;

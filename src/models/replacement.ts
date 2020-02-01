@@ -7,7 +7,7 @@ export default class Replacement
 	description: string;
 	teacher: Teacher;
 	comments: string;
-	constructor(lesson: Lesson, description: string, teacher: Teacher, comments: string)
+	constructor(lesson: Lesson, description: string, teacher?: Teacher, comments?: string)
 	{
 		this.lesson = lesson;
 		this.description = description;
