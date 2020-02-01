@@ -17,10 +17,10 @@ export class Config
 		switch (settings.source)
 		{
 		case ConfigSources.ENVIRONMENT:
-			this.ENVIRONMENT_Setup();
+			this.environmentSetup();
 			break;
 		case ConfigSources.FILE:
-			this.FILE_Setup(settings.args);
+			this.fileSetup(settings.args);
 			break;
 		default:
 			Logger.fatalAndCrash(`Config setup function for source: "${settings.source}" is not implemented`);
@@ -28,13 +28,13 @@ export class Config
 		}
 	}
 
-	private FILE_Setup(path: string): void
+	private fileSetup(path: string): void
 	{
 		const content = fs.readFileSync(appRoot + '/' + path);
-		const json = JSON.parse(content);
+		const json = JSON.parse(content.toString());
 		this.data = json;
 	}
-	private ENVIRONMENT_Setup(): void
+	private environmentSetup(): void
 	{
 		this.data = JSON.parse(process.env.REPLACEMENT_BOT_CONFIG);
 	}
