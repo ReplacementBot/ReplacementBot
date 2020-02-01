@@ -12,7 +12,7 @@
   "bugs": {
     "url": "https://github.com/MrBartusek/ReplacementBot/issues"
   },
-  "main": "src/app.js",
+  "main": "build/src/index.js",
   "scripts": {
     "test": "jest --verbose",
     "build": "node_modules/.bin/tsc",
@@ -20,6 +20,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@types/common-tags": "^1.8.0",
     "@types/figlet": "^1.2.0",
     "app-root-path": "^3.0.0",
     "axios": "^0.19.0",
