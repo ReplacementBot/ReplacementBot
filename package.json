@@ -20,6 +20,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@types/app-root-path": "^1.2.4",
     "@types/common-tags": "^1.8.0",
     "@types/figlet": "^1.2.0",
     "app-root-path": "^3.0.0",
@@ -29,12 +30,14 @@
     "cron": "^1.7.2",
     "discord.js": "^11.5.1",
     "discord.js-commando": "^0.10.0",
-    "eslint": "^6.7.2",
     "figlet": "^1.2.4",
     "iso-8859-2": "^1.0.0",
     "moment": "^2.24.0"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.18.0",
+    "@typescript-eslint/parser": "^2.18.0",
+    "eslint": "^6.8.0",
     "jest": "^24.9.0",
     "typescript": "^3.7.5"
   }

@@ -1,5 +1,5 @@
-import Teacher from "./teacher";
-import Lesson from "./lesson";
+import Teacher from './teacher';
+import Lesson from './lesson';
 
 export default class Replacement
 {
@@ -14,7 +14,7 @@ export default class Replacement
 		this.teacher = teacher;
 		this.comments = comments;
 	}
-	public toString()
+	public toString(): string
 	{
 		let result = '**[' + this.lesson + ']** ' + this.description;
 		if(this.teacher != undefined)

@@ -1,5 +1,5 @@
-import Replacement from "./replacement";
-import { Moment } from "moment"
+import Replacement from './replacement';
+import { Moment } from 'moment';
 
 export default class ReplacementDay
 {
@@ -12,21 +12,21 @@ export default class ReplacementDay
 		this.replacements = replacements;
 	}
 
-	addReplacement(replacement: Replacement)
+	addReplacement(replacement: Replacement): void
 	{
 		this.replacements.push(replacement);
 	}
 
-	addReplacements(replacements: Replacement[])
+	addReplacements(replacements: Replacement[]): void
 	{
 		for(const replacement of replacements)
 		{
 			this.replacements.push(replacement);
 		}
 	}
-	
-	getWeekDay(): String
+
+	getWeekDay(): string
 	{
-		return this.date.format('dddd');;
+		return this.date.format('dddd');
 	}
 }

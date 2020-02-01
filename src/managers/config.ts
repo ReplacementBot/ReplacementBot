@@ -1,10 +1,10 @@
-const fs = require('fs');
-const appRoot = require('app-root-path');
-import Logger from "./logger"
-import ConfigValidator from "../util/configValidator";
-import { CommandoClient } from "discord.js-commando";
+import fs from 'fs';
+import appRoot from 'app-root-path';
+import Logger from './logger';
+import ConfigValidator from '../util/configValidator';
+import { CommandoClient } from 'discord.js-commando';
 
-const DEFAULT_CONFIG_PATH = "config/default.json";
+const DEFAULT_CONFIG_PATH = 'config/default.json';
 
 export enum ConfigSources { AUTO, FILE, ENVIRONMENT }
 
@@ -14,31 +14,32 @@ export class Config
 	validator: ConfigValidator;
 	constructor(settings: ConfigSettings)
 	{
-		switch (settings.source) {
-			case ConfigSources.ENVIRONMENT:
-				this.ENVIRONMENT_Setup();
-				break;
-			case ConfigSources.FILE:
-				this.FILE_Setup(settings.args);
-				break;
-			default:
-				Logger.fatalAndCrash(`Config setup function for source: "${settings.source}" is not implemented`)
-				break;
+		switch (settings.source)
+		{
+		case ConfigSources.ENVIRONMENT:
+			this.ENVIRONMENT_Setup();
+			break;
+		case ConfigSources.FILE:
+			this.FILE_Setup(settings.args);
+			break;
+		default:
+			Logger.fatalAndCrash(`Config setup function for source: "${settings.source}" is not implemented`);
+			break;
 		}
 	}
-		
-	private FILE_Setup(path: string)
+
+	private FILE_Setup(path: string): void
 	{
 		const content = fs.readFileSync(appRoot + '/' + path);
 		const json = JSON.parse(content);
 		this.data = json;
 	}
-	private ENVIRONMENT_Setup()
+	private ENVIRONMENT_Setup(): void
 	{
 		this.data = JSON.parse(process.env.REPLACEMENT_BOT_CONFIG);
 	}
 
-	public loadToGlobal()
+	public loadToGlobal(): void
 	{
 		if((global as any).config == undefined)
 		{
@@ -46,10 +47,10 @@ export class Config
 		}
 		else
 		{
-			Logger.fatalAndCrash("Failed to load Configuration to Global Scope cause some Configuration is already loaded to it")
+			Logger.fatalAndCrash('Failed to load Configuration to Global Scope cause some Configuration is already loaded to it');
 		}
 	}
-	public contains(key: string)
+	public contains(key: string): boolean
 	{
 		if(this.data == undefined)
 		{
@@ -60,7 +61,7 @@ export class Config
 			return Object.prototype.hasOwnProperty.call(this.data, key);
 		}
 	}
-	public get(key: string)
+	public get(key: string): any
 	{
 		if(this.data == undefined)
 		{
@@ -68,14 +69,14 @@ export class Config
 		}
 		else if(this.contains(key))
 		{
-			return (this.data as IIndexable)[key] as any;
+			return (this.data as Indexable)[key] as any;
 		}
 		else
 		{
 			return undefined;
 		}
 	}
-	public async validate(client : CommandoClient)
+	public async validate(client: CommandoClient): Promise<void>
 	{
 		await new ConfigValidator(client, this).validate();
 	}
@@ -89,7 +90,7 @@ export class ConfigSettings
 	{
 		if(source == ConfigSources.AUTO)
 		{
-			this.detectConfigSource()
+			this.detectConfigSource();
 		}
 		else
 		{
@@ -97,7 +98,7 @@ export class ConfigSettings
 			this.args = args;
 		}
 	}
-	private detectConfigSource()
+	private detectConfigSource(): void
 	{
 		if(fs.existsSync(DEFAULT_CONFIG_PATH))
 		{
@@ -111,11 +112,12 @@ export class ConfigSettings
 		}
 		else
 		{
-			Logger.fatalAndCrash("Config source has been set to AUTO, but it failed to detect automatically")
-		}	
+			Logger.fatalAndCrash('Config source has been set to AUTO, but it failed to detect automatically');
+		}
 	}
 }
 
-interface IIndexable {
+// Small cheat to index objects in typescript
+interface Indexable {
 	[key: string]: any;
 }

@@ -1,13 +1,18 @@
 {
-	"extends": "eslint:recommended",
+	"extends": [ "eslint:recommended", "plugin:@typescript-eslint/recommended"],
 	"env": {
 		"node": true,
 		"es6": true,
 		"jest": true
 	},
 	"parserOptions": {
-		"ecmaVersion": 2019
+		"ecmaVersion": 2019,
+		"sourceType": "module"
 	},
+	"parser": "@typescript-eslint/parser",
+	"plugins": [
+		"@typescript-eslint/eslint-plugin"
+	  ],
 	"rules": {
 		"brace-style": ["error", "allman", { "allowSingleLine": false }],
 		"comma-dangle": ["error", "always-multiline"],
@@ -44,6 +49,7 @@
 		"space-unary-ops": "error",
 		"spaced-comment": "error",
         "yoda": "error",
-        "no-unused-vars": "off"
+		"no-unused-vars": "off",
+		"@typescript-eslint/no-explicit-any": "off"
 	}
 }
