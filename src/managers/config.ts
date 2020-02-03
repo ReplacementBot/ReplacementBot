@@ -3,8 +3,9 @@ import appRoot from 'app-root-path';
 import Logger from './logger';
 import ConfigValidator from '../util/configValidator';
 import { CommandoClient } from 'discord.js-commando';
+import yaml from 'js-yaml';
 
-const DEFAULT_CONFIG_PATH = 'config/default.json';
+const DEFAULT_CONFIG_PATH = 'config/default.yaml';
 
 export enum ConfigSources { AUTO, FILE, ENVIRONMENT }
 
@@ -31,12 +32,12 @@ export class Config
 	private fileSetup(path: string): void
 	{
 		const content = fs.readFileSync(appRoot + '/' + path);
-		const json = JSON.parse(content.toString());
+		const json = yaml.safeLoad(content.toString());
 		this.data = json;
 	}
 	private environmentSetup(): void
 	{
-		this.data = JSON.parse(process.env.REPLACEMENT_BOT_CONFIG);
+		this.data = yaml.safeLoad(process.env.REPLACEMENT_BOT_CONFIG);
 	}
 
 	public loadToGlobal(): void

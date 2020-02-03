@@ -32,7 +32,7 @@ typings/
 
 # config files
 config/*
-!config/templates
+!config/*.example.*
 
 # builds
 build/

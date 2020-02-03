@@ -1,0 +1,18 @@
+---
+# prefix that need to be inserted before every command
+prefix: r!
+
+# list of user's ids with special permissions, only thrusted people
+botOwners:
+  - '212988300137463809' # MrBartusek
+
+# configuration for cron tasks
+intervals:
+  # how often will replacements channel be updated
+  replacementsChannelsUpdate: 0 * * * *
+
+# list of channels that will be updated with replacements
+replacementsChannels:
+
+# configuration for replacement fetchers
+fetchersConfiguration:
