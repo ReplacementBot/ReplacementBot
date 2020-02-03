@@ -8,5 +8,5 @@ export interface ReplacementsFetcher
 {
     readonly type: FetcherType;
 
-	fetchReplacements(date?: moment.Moment): Promise<ReplacementDay> | Promise<Replacement[]>;
+	fetchReplacements(date?: moment.Moment): Promise<ReplacementDay>;
 }
