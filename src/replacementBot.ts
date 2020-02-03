@@ -5,7 +5,7 @@ import { ConfigSettings, Config } from './managers/config';
 
 export default class ReplacementBot extends CommandoClient
 {
-	config: Config
+	config: Config;
 	constructor(configSettings: ConfigSettings)
 	{
 		Logger.printLogo();
@@ -44,4 +44,3 @@ export default class ReplacementBot extends CommandoClient
 			.registerCommandsIn(path.join(__dirname, 'commands'));
 	}
 }
-
