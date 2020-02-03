@@ -12,7 +12,7 @@ export default class ReplacementBot extends CommandoClient
 		Logger.info('Initialling ReplacementBot...');
 
 		const config = new Config(configSettings);
-		config.loadToGlobal();
+		config.makeStatic();
 
 		super({
 			commandPrefix: config.get('prefix'),
@@ -39,6 +39,7 @@ export default class ReplacementBot extends CommandoClient
 		this.registry
 			.registerDefaultTypes()
 			.registerGroups([
+				['replacements', 'Replacements'],
 				['util', 'Utilities'],
 			])
 			.registerCommandsIn(path.join(__dirname, 'commands'));

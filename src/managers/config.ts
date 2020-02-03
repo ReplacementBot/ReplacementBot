@@ -11,6 +11,8 @@ export enum ConfigSources { AUTO, FILE, ENVIRONMENT }
 
 export class Config
 {
+	static instance: Config;
+
 	data: object;
 	validator: ConfigValidator;
 	constructor(settings: ConfigSettings)
@@ -40,16 +42,21 @@ export class Config
 		this.data = yaml.safeLoad(process.env.REPLACEMENT_BOT_CONFIG);
 	}
 
-	public loadToGlobal(): void
+	public static getInstance(): Config
 	{
-		if((global as any).config == undefined)
+		if(Config.instance == undefined)
 		{
-			(global as any).config = this;
+			Logger.fatalAndCrash('Failed to get Static Config Instance because it isn\'t set');
 		}
-		else
+		return Config.instance;
+	}
+	public makeStatic(): void
+	{
+		if(Config.instance != undefined)
 		{
-			Logger.fatalAndCrash('Failed to load Configuration to Global Scope cause some Configuration is already loaded to it');
+			Logger.fatalAndCrash('Failed to set Static Config Instance because one is already set');
 		}
+		Config.instance = this;
 	}
 	public contains(key: string): boolean
 	{
