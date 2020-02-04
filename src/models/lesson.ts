@@ -1,10 +1,30 @@
 export default class Lesson
 {
-	lessonNumber: number;
-	lessonName: string;
-	constructor(lessonName: string, lessonNumber?: number)
+	number: number;
+	name: string;
+	constructor(name?: string, number?: number)
 	{
-		this.lessonName = lessonName;
-		this.lessonNumber = lessonNumber;
+		this.name = name;
+		this.number = number;
+	}
+
+	public toString(): string
+	{
+		if(this.name && this.number)
+		{
+			return this.number.toString() + ' - ' + this.name;
+		}
+		else if(this.number)
+		{
+			return this.number.toString();
+		}
+		else if(this.name)
+		{
+			return this.name;
+		}
+		else
+		{
+			return '';
+		}
 	}
 }

@@ -12,12 +12,12 @@ export default class ReplacementDay
 		this.replacements = replacements;
 	}
 
-	addReplacement(replacement: Replacement): void
+	public addReplacement(replacement: Replacement): void
 	{
 		this.replacements.push(replacement);
 	}
 
-	addReplacements(replacements: Replacement[]): void
+	public addReplacements(replacements: Replacement[]): void
 	{
 		for(const replacement of replacements)
 		{
@@ -25,8 +25,18 @@ export default class ReplacementDay
 		}
 	}
 
-	getWeekDay(): string
+	public getWeekDay(): string
 	{
 		return this.date.format('dddd');
+	}
+
+	public toString(): string
+	{
+		let result = `**Replacements for: ${this.getWeekDay()}**`;
+		for(const replacement of this.replacements)
+		{
+			result += '\r' + replacement.toString();
+		}
+		return result;
 	}
 }

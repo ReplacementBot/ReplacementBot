@@ -16,10 +16,10 @@ export default class Replacement
 	}
 	public toString(): string
 	{
-		let result = '**[' + this.lesson + ']** ' + this.description;
+		let result = `[${this.lesson.toString()}] ${this.description}`;
 		if(this.teacher != undefined)
 		{
-			result += ' | ' + this.teacher;
+			result += ' | ' + this.teacher.toString();
 		}
 		if(this.comments != undefined)
 		{
