@@ -15,4 +15,5 @@ intervals:
 replacementsChannels:
 
 # configuration for replacement fetchers
+fetcherName: 'dummyFetcher'
 fetchersConfiguration:

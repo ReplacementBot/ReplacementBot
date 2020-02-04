@@ -2,17 +2,19 @@ import Logger from './managers/logger';
 import { CommandoClient } from 'discord.js-commando';
 import path from 'path';
 import { ConfigSettings, Config } from './managers/config';
+import ReplacementsManager from './managers/replacementsManager';
 
 export default class ReplacementBot extends CommandoClient
 {
 	config: Config;
+	replacementsManager: ReplacementsManager;
+
 	constructor(configSettings: ConfigSettings)
 	{
 		Logger.printLogo();
 		Logger.info('Initialling ReplacementBot...');
 
-		const config = new Config(configSettings);
-		config.makeStatic();
+		const config = new Config(configSettings).makeStatic();
 
 		super({
 			commandPrefix: config.get('prefix'),
@@ -20,10 +22,14 @@ export default class ReplacementBot extends CommandoClient
 		});
 
 		this.config = config;
+		this.replacementsManager = new ReplacementsManager();
+
 		this.setupCommandsRegistry();
 	}
 	public async start(): Promise<void>
 	{
+		await this.replacementsManager.initialize(this.config.get('fetcherName'));
+
 		this.login(process.env.REPLACEMENT_BOT_TOKEN)
 			.catch((error) => Logger.fatal('Failed to launch ReplacementBot ' + error.message))
 			.then(async ()=>

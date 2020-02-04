@@ -50,13 +50,14 @@ export class Config
 		}
 		return Config.instance;
 	}
-	public makeStatic(): void
+	public makeStatic(): Config
 	{
 		if(Config.instance != undefined)
 		{
 			Logger.fatalAndCrash('Failed to set Static Config Instance because one is already set');
 		}
 		Config.instance = this;
+		return this;
 	}
 	public contains(key: string): boolean
 	{
