@@ -19,6 +19,7 @@ export default class ReplacementBot extends CommandoClient
 		super({
 			commandPrefix: config.get('prefix'),
 			owner: config.get('botOwners'),
+			unknownCommandResponse: false,
 		});
 
 		this.config = config;
