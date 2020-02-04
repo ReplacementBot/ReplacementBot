@@ -30,9 +30,9 @@ export default class ReplacementDay
 		return this.date.format('dddd');
 	}
 
-	public toString(): string
+	public toString(title = true): string
 	{
-		let result = `**Replacements for: ${this.getWeekDay()}**`;
+		let result = title ? `**Replacements for: ${this.getWeekDay()}**` : '';
 		for(const replacement of this.replacements)
 		{
 			result += '\r' + replacement.toString();

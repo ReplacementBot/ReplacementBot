@@ -1,89 +1,60 @@
-// const { RichEmbed } = require('discord.js');
-// const ReplacementsList = require('../models/replacementDay');
-// const Replacement = require('../models/replacement');
-// const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+import { RichEmbed } from 'discord.js';
+import moment = require('moment');
+import Logger from '../managers/logger';
+import ReplacementDay from './replacementDay';
 
-// class ReplacementsEmbed extends RichEmbed
-// {
-// 	constructor(replacementsData, IsStaticEmbed)
-// 	{
-// 		super();
-// 		this._createEmbedBase(IsStaticEmbed);
+export enum ReplacementsEmbedFooterType { NONE, GENERATED_ON, UPDATED_ON}
+export class ReplacementsEmbed
+{
+	data: ReplacementDay[];
+	constructor(data: ReplacementDay[] | ReplacementDay)
+	{
+		if(data instanceof ReplacementDay)
+		{
+			data = [ data ];
+		}
+		this.data = data;
+	}
 
-// 		if(replacementsData instanceof ReplacementsList)
-// 		{
-// 			this._createFieldsFromList(replacementsData);
-// 		}
-// 		else if(replacementsData instanceof Array && isReplacementsArray(replacementsData))
-// 		{
-// 			this._createFieldsFromList(replacementsData);
-// 		}
-// 	}
-// 	static isEmbedUpdateNeeded(embedA, embedB)
-// 	{
-// 		for (let index = 0; index < embedA.fields.length; index++)
-// 		{
-// 			if(embedA.fields[index].name != embedB.fields[index].name) return false;
-// 			if(embedA.fields[index].value != embedB.fields[index].value) return false;
-// 		}
+	public addDays(data: ReplacementDay): void
+	{
+		this.data.push(data);
+	}
 
-// 		if(embedA.author == embedB.author &&
-// 				embedA.color == embedB.color &&
-// 				embedA.description == embedB.description &&
-// 				embedA.title == embedB.title)
-// 		{
-// 			return true;
-// 		}
-// 		else
-// 		{
-// 			return false;
-// 		}
-// 	}
-// }
+	public build(title: string, footerType: ReplacementsEmbedFooterType): RichEmbed
+	{
+		const richEmbed = new RichEmbed();
 
-// ReplacementsEmbed.prototype._createEmbedBase = function(IsStaticEmbed)
-// {
-// 	this.setColor('DARK_VIVID_PINK');
-// 	this.setThumbnail('https://cdn.pixabay.com/photo/2019/08/11/18/50/icon-4399684_960_720.png');
+		richEmbed.setTitle(title)
+			.setColor('DARK_VIVID_PINK')
+			.setThumbnail('https://cdn.pixabay.com/photo/2019/08/11/18/50/icon-4399684_960_720.png')
+			.setFooter(this.getFooter(footerType, moment()));
 
-// 	const footerDate = new Date();
-// 	this.setFooter((
-// 		IsStaticEmbed ? 'Updated on: ' : 'Generated on: ')
-// 	+ daysOfWeek[footerDate.getDay()] + ' '
-// 	+ (footerDate.getHours() < 10 ? '0' : '') + footerDate.getHours() + ':'
-// 	+ (footerDate.getMinutes() < 10 ? '0' : '') + footerDate.getMinutes(),
-// 	);
-// };
-// ReplacementsEmbed.prototype._createFieldsFromList = function(list)
-// {
-// 	this.setTitle('Replacements for class ' + global.config.get('class'));
-// 	for (const day of list.getList())
-// 	{
-// 		const replacements = day.replacements;
-// 		let replacementsList = '';
-// 		for (let replacementsIndex = 0; replacementsIndex < replacements.length; replacementsIndex++)
-// 		{
-// 			if(replacementsIndex > 0)
-// 			{
-// 				replacementsList += '\n';
-// 			}
-// 			replacementsList += replacements[replacementsIndex].toString();
-// 		}
-// 		if(replacementsList == '')
-// 		{
-// 			replacementsList = ':x: No replacements for this class on this day';
-// 		}
-// 		this.addField('Replacements for ' + daysOfWeek[day.date.getDay()], replacementsList);
-// 	}
-// };
-// ReplacementsEmbed.prototype._createFieldFromArray = function(array)
-// {
-// 	this.setTitle('Replacements for class ' + global.config.get('class'));
-// };
+		for(const replacementDay of this.data)
+		{
+			richEmbed.addField(
+				this.data.length > 1 ? `Replacements for: ${replacementDay.getWeekDay()}` : 'Replacements list:',
+				replacementDay.replacements.length > 0 ? replacementDay.toString(false) : ':x: No replacements');
+		}
 
-// function isReplacementsArray(array)
-// {
-// 	array.every((element) => typeof element === Replacement);
-// }
+		return richEmbed;
+	}
 
-// module.exports = ReplacementsEmbed;
+	private getFooter(type: ReplacementsEmbedFooterType, date?: moment.Moment): string
+	{
+		if(!date && type != ReplacementsEmbedFooterType.NONE)
+		{
+			Logger.error('Cannot generate embed footer without date');
+			return '';
+		}
+		switch(type)
+		{
+		case ReplacementsEmbedFooterType.NONE:
+			return null;
+		case ReplacementsEmbedFooterType.GENERATED_ON:
+			return 'Generated on: ' + date.format('dddd h:mm');
+		case ReplacementsEmbedFooterType.UPDATED_ON:
+			return 'Updated on: ' + date.format('dddd h:mm');
+		}
+	}
+}
