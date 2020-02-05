@@ -1,5 +1,5 @@
-const Logger = require('../src/managers/logger');
-const chalk = require('chalk');
+import Logger from '../src/managers/logger';
+import chalk from 'chalk';
 describe('Logger', () =>
 {
 	test('should info', () =>
