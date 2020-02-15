@@ -6,7 +6,7 @@ export enum FetcherType { ONE_DAY, MULTIPLE_DAYS}
 
 export interface ReplacementsFetcher
 {
-    readonly type: FetcherType;
+    type: FetcherType;
 
 	fetchReplacements(date?: moment.Moment): Promise<ReplacementDay>;
 }
