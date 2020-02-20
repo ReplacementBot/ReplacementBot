@@ -1,134 +1,158 @@
-// const axios = require('axios');
-// const cheerio = require('cheerio');
-// const iso88592 = require('iso-8859-2');
-// const Replacement = require('../models/replacement');
-// const ReplacemeentsList = require('../models/replacementDay');
-// class VulcanFetcher
-// { }
+import { ReplacementsFetcher, FetchError, ResponseParseError } from '../models/replacementsFetcher';
+import { Config } from '../managers/config';
+import ReplacementDay from '../models/replacementDay';
+import moment = require('moment');
+import WebFetcher, { HTTPResponse } from '../util/webFetcher';
+import cheerio from 'cheerio';
+import FetchersHelper from '../util/fetcherHelper';
+import Replacement from '../models/replacement';
+import Logger from '../managers/logger';
+import Lesson from '../models/lesson';
+import Teacher from '../models/teacher';
 
-// VulcanFetcher.prototype.fetchSingleDay = function(date)
-// {
-// 	return new Promise(function(resolve, reject)
-// 	{
-// 		const url = validURL(date) ? date : getRequestURL(date);
-// 		axios.get(url, { responseType: 'arraybuffer', responseEncoding: 'binary' })
-// 			.then(response =>
-// 			{
-// 				resolve(convertTableToReplacements(praseResult(response)));
-// 			})
-// 			.catch(error =>
-// 			{
-// 				if(error.response)
-// 				{
-// 					reject(`Failed to fetch Vulcan Replacement | Code: ${error.response.status} | URL: ${url} | Error: ${error}`);
-// 				}
-// 				else
-// 				{
-// 					reject(`Failed to fetch Vulcan Replacement | Code: Unknown | URL: ${url} | Error: ${error}`);
-// 				}
-// 			});
-// 	});
-// };
-// VulcanFetcher.prototype.fetchMultipleDays = function(dateArray)
-// {
-// 	return new Promise((resolve, reject) =>
-// 	{
-// 		const result = new ReplacemeentsList();
-// 		let index = 0;
-// 		for (const date of dateArray)
-// 		{
-// 			this.fetchSingleDay(date)
-// 				.then(response =>
-// 				{
-// 					index++;
-// 					result.addDay(date, response);
-// 					if(index === dateArray.length)
-// 					{
-// 						resolve(result);
-// 					}
-// 				});
-// 		}
-// 	});
-// };
-// function validURL(str)
-// {
-// 	const pattern = new RegExp('^(https?:\\/\\/)?' +
-// 		'((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' +
-// 		'((\\d{1,3}\\.){3}\\d{1,3}))' +
-// 		'(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' +
-// 		'(\\?[;&a-z\\d%_.~+=-]*)?' +
-// 		'(\\#[-a-z\\d_]*)?$', 'i');
-// 	return !!pattern.test(str);
-// }
-// function convertTableToReplacements(parsedData)
-// {
-// 	const replacements = [];
-// 	parsedData('tr').each(function()
-// 	{
-// 		let lesson, description, teacher, comments;
-// 		const row = parsedData(this);
-// 		if(!isValidRow(row)) return true;
-// 		if(!isGoodClassRow(row)) return true;
+enum RowFieldType
+{
+	LESSON,
+	DESCRIPTION,
+	NEW_TEACHER,
+	COMMENTS,
+}
+export default class VulcanFetcher implements ReplacementsFetcher
+{
+	webFetcher: WebFetcher;
 
-// 		row.children('td').each(function(index)
-// 		{
-// 			const cell = parsedData(this);
-// 			const text = removeEndlineFromText(cell.text());
-// 			switch(index)
-// 			{
-// 			case 0:
-// 				lesson = text;
-// 				break;
-// 			case 1:
-// 				description = text;
-// 				break;
-// 			case 2:
-// 				teacher = text;
-// 				break;
-// 			case 3:
-// 				comments = text;
-// 				break;
-// 			}
-// 		});
-// 		replacements.push(new Replacement(lesson, description, teacher, comments));
-// 	});
-// 	return replacements;
-// }
-// function removeEndlineFromText(text)
-// {
-// 	return text.replace(/\r?\n|\r/g, '');
-// }
-// function isValidRow(row)
-// {
-// 	return row.children().length > 1;
-// }
-// function isGoodClassRow(row)
-// {
-// 	return row.children('td').eq(1).text().includes(global.config.get('class'));
-// }
-// function praseDate(date)
-// {
-// 	if(date instanceof Date)
-// 	{
-// 		const year = date.getFullYear();
-// 		const month = date.getMonth() + 1 < 10 ? '0' + date.getMonth() + 1 : date.getMonth() + 1;
-// 		const day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+	constructor()
+	{
+		this.webFetcher = new WebFetcher();
+	}
 
-// 		return year + '_' + month + '_' + day + '.html';
-// 	}
-// 	else
-// 	{
-// 		return date;
-// 	}
-// }
-// function getRequestURL(date)
-// {
-// 	return global.config.get('replacementsUrl') + praseDate(date);
-// }
-// function praseResult(response)
-// {
-// 	response.data = iso88592.decode(response.data.toString('binary'));
-// 	return cheerio.load(response.data);
-// }
+	fetchReplacements(date?: moment.Moment): Promise<ReplacementDay | FetchError | ResponseParseError>
+	{
+		return new Promise((resolve, reject) =>
+		{
+			const config = Config.getInstance().get('fetchersConfiguration')['vulcanFetcher'];
+			const url = FetchersHelper.formatURL(config, date);
+			this.webFetcher.request(url, 'ISO-8859-2')
+				.then((requestResult: HTTPResponse) =>
+				{
+					const data = cheerio.load(requestResult.result.replace(/\r?\n|\r/g, ''));
+					const result = this.praseResult(data);
+					if(result instanceof ResponseParseError)
+					{
+						reject(result);
+					}
+					else
+					{
+						resolve(new ReplacementDay(date, result));
+					}
 
-// module.exports = VulcanFetcher;
+				})
+				.catch((error: HTTPResponse) =>
+				{
+					if(error.statusCode == 404)
+					{
+						resolve(new ReplacementDay(date));
+					}
+					else
+					{
+						reject(new FetchError(error));
+					}
+				});
+		});
+	}
+
+	private praseResult(data: CheerioStatic): Replacement[] | ResponseParseError
+	{
+		const result: Replacement[] = [];
+		let currentTeacher: string;
+		data('tr').each((index, row) =>
+		{
+			if(this.isPageTitleRow(index)) return true;
+			if(this.isCategoryTitleRow(data, row))
+			{
+				if(this.isNotImportantCategoryTitleRow(data, row))
+				{
+					currentTeacher = undefined;
+				}
+				else
+				{
+					currentTeacher = data(row).children('td').first().text();
+				}
+			}
+
+			if(currentTeacher == undefined) return true;
+			if(this.isCaptionRow(data, row)) return true;
+
+			const lesson = new Lesson(Number(this.getFieldFromRow(data, row, RowFieldType.LESSON)));
+			const description = this.getFieldFromRow(data, row, RowFieldType.DESCRIPTION);
+			const replacedTeacher = new Teacher(currentTeacher);
+			let comments: string;
+			let newTeacher: Teacher;
+			if(this.getFieldFromRow(data, row, RowFieldType.NEW_TEACHER).trim())
+			{
+				newTeacher = new Teacher(this.getFieldFromRow(data, row, RowFieldType.NEW_TEACHER));
+			}
+			if(this.getFieldFromRow(data, row, RowFieldType.COMMENTS).trim())
+			{
+				comments = this.getFieldFromRow(data, row, RowFieldType.COMMENTS);
+			}
+
+			result.push(new Replacement(lesson, description, replacedTeacher, newTeacher, comments));
+		});
+		return result;
+	}
+
+	private isPageTitleRow(index: number): boolean
+	{
+		return index === 0;
+	}
+	private isCategoryTitleRow(data: CheerioStatic, row: CheerioElement): boolean
+	{
+		return data(row).children('td').length === 1;
+	}
+	private isNotImportantCategoryTitleRow(data: CheerioStatic, row: CheerioElement): boolean
+	{
+		return data(row).children('td').first().text().includes('dyżury');
+	}
+	private isCaptionRow(data: CheerioStatic, row: CheerioElement): boolean
+	{
+		// First cell of every non-caption row is always number
+		const firstCell = data(row).children('td').first().text().trim();
+		if(isNaN(Number(firstCell)) || firstCell == '')
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	private getFieldFromRow(data: CheerioStatic, row: CheerioElement, fieldType: RowFieldType): string
+	{
+		let result: string;
+		switch(fieldType)
+		{
+		case RowFieldType.LESSON:
+			result = data(row).children('td').eq(0).text();
+			break;
+		case RowFieldType.DESCRIPTION:
+			result = data(row).children('td').eq(1).text();
+			break;
+		case RowFieldType.NEW_TEACHER:
+			result = data(row).children('td').eq(2).text();
+			break;
+		case RowFieldType.COMMENTS:
+			result = data(row).children('td').eq(3).text();
+			break;
+		}
+		if(result == '/&nbsp')
+		{
+			return undefined;
+		}
+		else
+		{
+			return result;
+		}
+	}
+}
