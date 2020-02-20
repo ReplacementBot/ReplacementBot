@@ -6,12 +6,12 @@ import Logger from '../managers/logger';
 export class HTTPResponse
 {
 	type: HTTPResponseType;
-	details: string;
+	result: string;
 	statusCode: number;
 	constructor(type: HTTPResponseType, details?: string, statusCode?: number)
 	{
 		this.type = type;
-		this.details = details;
+		this.result = details;
 		this.statusCode = statusCode;
 		if(statusCode === undefined)
 		{
@@ -22,7 +22,7 @@ export class HTTPResponse
 
 export enum HTTPResponseType
 {
-	SUCCESSFULLY,
+	SUCCESSFUL,
 	BAD_CODE,
 	NO_RESPONSE,
 	FAILED,
@@ -38,7 +38,8 @@ export default class WebFetcher
 				{
 					responseType: 'arraybuffer',
 					headers: { 'User-Agent': 'Replacementbot' },
-					timeout: 5000,
+					// 10 seconds
+					timeout: 10000,
 				})
 				.then((response: AxiosResponse<Buffer>) =>
 				{
@@ -46,24 +47,20 @@ export default class WebFetcher
 					{
 						reject(new HTTPResponse(HTTPResponseType.FAILED, `WebFetcher Error: "${encoding}" encoding don't exist`));
 					}
-					resolve(new HTTPResponse(HTTPResponseType.SUCCESSFULLY, iconov.decode(response.data, encoding), response.status));
+					resolve(new HTTPResponse(HTTPResponseType.SUCCESSFUL, iconov.decode(response.data, encoding), response.status));
 				})
 				.catch((error: any) =>
 				{
 					if (error.response)
 					{
-						// The request was made and the server responded with a status code
-						// that falls out of the range of 2xx
 						reject(new HTTPResponse(HTTPResponseType.BAD_CODE, undefined, error.response.status));
 					}
 					else if (error.request)
 					{
-						// The request was made but no response was received
 						reject(new HTTPResponse(HTTPResponseType.NO_RESPONSE, error.request));
 					}
 					else
 					{
-						// Something happened in setting up the request that triggered an Error
 						reject(new HTTPResponse(HTTPResponseType.FAILED, error.message));
 					}
 				});
