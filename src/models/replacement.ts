@@ -5,25 +5,27 @@ export default class Replacement
 {
 	lesson: Lesson;
 	description: string;
-	teacher: Teacher;
+	newTeacher: Teacher;
+	replacedTeacher: Teacher;
 	comments: string;
-	constructor(lesson: Lesson, description: string, teacher?: Teacher, comments?: string)
+	constructor(lesson: Lesson, description: string, newTeacher?: Teacher, replacedTeacher?: Teacher, comments?: string)
 	{
 		this.lesson = lesson;
 		this.description = description;
-		this.teacher = teacher;
+		this.newTeacher = newTeacher;
+		this.replacedTeacher = replacedTeacher;
 		this.comments = comments;
 	}
 	public toString(): string
 	{
 		let result = `[${this.lesson.toString()}] ${this.description}`;
-		if(this.teacher != undefined)
+		if(this.newTeacher && this.replacedTeacher)
 		{
-			result += ' | ' + this.teacher.toString();
+			result += ` - ${this.newTeacher} :arrow_right: ${this.replacedTeacher}`;
 		}
 		if(this.comments != undefined)
 		{
-			result += ' | ' + this.comments;
+			result += `  :closed_book: _${this.comments}_`;
 		}
 		return result;
 	}

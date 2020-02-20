@@ -2,7 +2,7 @@ export default class Lesson
 {
 	number: number;
 	name: string;
-	constructor(name?: string, number?: number)
+	constructor(number?: number, name?: string)
 	{
 		this.name = name;
 		this.number = number;
@@ -24,7 +24,7 @@ export default class Lesson
 		}
 		else
 		{
-			return '';
+			return '0';
 		}
 	}
 }

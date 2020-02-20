@@ -1,8 +1,9 @@
-import { ReplacementsFetcher, FetcherType } from '../models/replacementsFetcher';
+import { ReplacementsFetcher, FetchError, ResponseParseError } from '../models/replacementsFetcher';
 import Logger from './logger';
 import Replacement from '../models/replacement';
 import ReplacementDay from '../models/replacementDay';
 import { Moment } from 'moment';
+import moment = require('moment');
 
 export default class ReplacementsManager
 {
@@ -44,24 +45,8 @@ export default class ReplacementsManager
 	{
 		return this.fetcher.constructor.name;
 	}
-
-	private fetchFromFetcher(requiredFetcherType: FetcherType, callerName: string, date?: Moment): Promise<ReplacementDay>
+	public fetchReplacements(date: Moment): Promise<ReplacementDay | FetchError | ResponseParseError>
 	{
-		if(this.fetcher.type != requiredFetcherType)
-		{
-			return Promise.reject(`${this.getFetcherName()} not support "${callerName}" function`);
-		}
-		else
-		{
-			return this.fetcher.fetchReplacements(date);
-		}
-	}
-	public fetchReplacements(): Promise<ReplacementDay>
-	{
-		return this.fetchFromFetcher(FetcherType.ONE_DAY, 'fetchReplacements');
-	}
-	public fetchSpecificDay(date?: Moment): Promise<ReplacementDay>
-	{
-		return this.fetchFromFetcher(FetcherType.MULTIPLE_DAYS, 'fetchSpecificDay');
+		return this.fetcher.fetchReplacements(date);
 	}
 }
