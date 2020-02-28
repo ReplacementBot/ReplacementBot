@@ -6,6 +6,10 @@ prefix: r!
 botOwners:
   - '212988300137463809' # MrBartusek
 
+# on what hour replacements for next day (instead of today) will be fetched on !fetch
+# set to false to disable
+daySwitchHour: 16-00 # HH-MM
+
 # configuration for cron tasks
 intervals:
   # how often will replacements channel be updated
@@ -16,4 +20,5 @@ replacementsChannels:
 
 # configuration for replacement fetchers
 fetcherName: 'dummyFetcher'
+
 fetchersConfiguration:
