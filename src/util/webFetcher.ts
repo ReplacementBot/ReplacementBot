@@ -3,6 +3,14 @@ import http from 'http';
 import iconov from 'iconv-lite';
 import Logger from '../managers/logger';
 
+export enum HTTPResponseType
+{
+	SUCCESSFUL,
+	BAD_CODE,
+	NO_RESPONSE,
+	FAILED,
+}
+
 export class HTTPResponse
 {
 	type: HTTPResponseType;
@@ -18,14 +26,20 @@ export class HTTPResponse
 			statusCode = 0;
 		}
 	}
-}
-
-export enum HTTPResponseType
-{
-	SUCCESSFUL,
-	BAD_CODE,
-	NO_RESPONSE,
-	FAILED,
+	public toString(): string
+	{
+		switch(this.type)
+		{
+		case HTTPResponseType.SUCCESSFUL:
+			return 'Request Successfully';
+		case HTTPResponseType.BAD_CODE:
+			return `Server returned bad code (${this.statusCode}`;
+		case HTTPResponseType.NO_RESPONSE:
+			return 'Server didn\'t send any response in time';
+		case HTTPResponseType.FAILED:
+			return `Failed to send response $(${this.result})`;
+		}
+	}
 }
 
 export default class WebFetcher
@@ -38,8 +52,6 @@ export default class WebFetcher
 				{
 					responseType: 'arraybuffer',
 					headers: { 'User-Agent': 'Replacementbot' },
-					// 10 seconds
-					timeout: 10000,
 				})
 				.then((response: AxiosResponse<Buffer>) =>
 				{
@@ -66,5 +78,4 @@ export default class WebFetcher
 				});
 		});
 	}
-
 }

@@ -55,7 +55,7 @@ export default class VulcanFetcher implements ReplacementsFetcher
 					}
 					else
 					{
-						reject(new FetchError(error));
+						reject(new FetchError(error.toString()));
 					}
 				});
 		});
