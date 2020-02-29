@@ -16,10 +16,10 @@ export class HTTPResponse
 	type: HTTPResponseType;
 	result: string;
 	statusCode: number;
-	constructor(type: HTTPResponseType, details?: string, statusCode?: number)
+	constructor(type: HTTPResponseType, result?: string, statusCode?: number)
 	{
 		this.type = type;
-		this.result = details;
+		this.result = result;
 		this.statusCode = statusCode;
 		if(statusCode === undefined)
 		{

@@ -8,15 +8,15 @@ describe('WebFetcher', () =>
 	{
 		await expect(new WebFetcher().request(TEST_URL, 'UTF-8')).resolves.toEqual(
 			expect.objectContaining({
-				details: expect.stringContaining('Table playground'),
+				result: expect.stringContaining('Table playground'),
 			}),
 		);
 	});
 
 	test('should fail on 404', async () =>
 	{
-		await expect(new WebFetcher().request('https://httpstat.us/404', 'UTF-8')).rejects.toBe(
-			new HTTPResponse(HTTPResponseType.NO_RESPONSE),
+		await expect(new WebFetcher().request('https://httpstat.us/404', 'UTF-8')).rejects.toStrictEqual(
+			new HTTPResponse(HTTPResponseType.BAD_CODE, undefined, 404),
 		);
 	});
 
