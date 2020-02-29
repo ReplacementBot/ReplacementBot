@@ -85,7 +85,7 @@ export class Config
 			return undefined;
 		}
 	}
-	public async validate(client: CommandoClient): Promise<void>
+	public async validate(client: CommandoClient | false): Promise<void>
 	{
 		await new ConfigValidator(client, this).validate();
 	}
