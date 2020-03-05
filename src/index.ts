@@ -6,6 +6,7 @@ new ReplacementBot(configSettings).start();
 
 process.on('unhandledRejection', function(reason, promise)
 {
+	Logger.fatal('Unhandled Promise Rejection');
 	console.log(promise);
-	Logger.fatalAndCrash('Unhandled Promise Rejection');
+	process.exit(5);
 });

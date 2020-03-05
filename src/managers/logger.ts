@@ -21,15 +21,15 @@ export default class Logger
 	}
 	public static fatal(message: string): void
 	{
-		console.log(chalk.bold.red('[FATAL ERROR] ') + message);
+		console.log(chalk.bold.red('[FATAL ERROR] ') + chalk.redBright(message));
 	}
 	public static error(message: string): void
 	{
-		console.log(chalk.bold.red('[ERROR] ') + message);
+		console.log(chalk.bold.red('[ERROR] ') + chalk.redBright(message));
 	}
 	public static warn(message: string): void
 	{
-		console.log(chalk.bold.yellow('[WARN] ') + message);
+		console.log(chalk.bold.yellow('[WARN] ') + chalk.yellowBright(message));
 	}
 	public static info(message: string): void
 	{
