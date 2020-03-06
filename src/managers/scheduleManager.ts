@@ -1,56 +1,68 @@
-// const { CronJob, CronTime } = require('cron');
-// const Logger = require('./logger');
-// const Moment = require('moment');
+import { CronJob, CronTime, CronJobParameters, job } from 'cron';
+import { Moment } from 'moment';
+import Logger from './logger';
 
-// const ReplacementsManager = require('./replacementsManager');
+export class ScheduledJob extends CronJob
+{
+	private jobFunction: () => Promise<void | string>;
+	private name: string;
 
-// class ScheduleManager
-// {
-// 	constructor()
-// 	{
-// 		this.jobs = [];
-// 	}
-// }
+	constructor(jobTime: string, name: string, jobFunction: () => Promise<void | string>, start = true)
+	{
+		const options: CronJobParameters = {
+			cronTime: jobTime,
+			onTick: undefined,
+		};
+		super(options);
+		this.jobFunction = jobFunction;
+		this.name = name;
+		this.addCallback(this.onTick);
 
-// ScheduleManager.prototype.AddJob = function(job)
-// {
-// 	this.jobs.push(job);
-// };
+		if(start) this.start();
+		this.onTick();
+	}
 
-// ScheduleManager.prototype.scheduleDefaultJobs = function(bot)
-// {
-// 	this.AddJob(new ScheduledJob('Update Embeds', global.config.get('intervals').replacementsChannelsUpdate, function()
-// 	{
-// 		return ReplacementsManager.updateAllChannels(true);
-// 	}));
-// };
+	private async onTick(): Promise<void>
+	{
+		try
+		{
+			await this.jobFunction()
+				.then((promiseResult: void | string) =>
+				{
+					if(promiseResult != undefined)
+					{
+						Logger.warn('ScheduledJob shouldn\'t return anything when they are successfully executed, job returned string: ' + promiseResult);
+					}
+					Logger.info(`Successfully executed ${this.name} job`);
+				})
+				.catch((error: void | string) =>
+				{
+					if(error == undefined)
+					{
+						error = 'No error provide';
+					}
+					Logger.error(`Job failed "${this.name}" reason: ` + error);
 
-// ScheduleManager.prototype.getJobByName = function(name)
-// {
-// 	return this.jobs.filter(function(job)
-// 	{
-// 		return job.name == name;
-// 	})[0];
-// };
+				});
+		}
+		catch (error)
+		{
+			Logger.error(`System encountered error while executing "${this.name}" Job: ` + error);
+		}
+	}
 
-// module.exports.ScheduleManager = ScheduleManager;
+	public fire(): Promise<void>
+	{
+		return this.onTick();
+	}
+}
 
-// class ScheduledJob
-// {
-// 	constructor(name, interval, job)
-// 	{
-// 		this.name = name;
-// 		this.cornJob = new CronJob(interval, function()
-// 		{
-// 			job()
-// 				.then(Logger.info('CronJob "' + name + '" executed sucesfully'))
-// 				.catch((error) => Logger.error('CronJob "' + this.name + '" Failed to execute cause: ' + error));
-// 		}, null, true);
-// 	}
-// }
-// ScheduledJob.prototype.getNextExecutionRemaining = function()
-// {
-// 	return Moment(this.cornJob.nextDates()).fromNow();
-// };
+export default class ScheduleManager
+{
+	jobs: ScheduledJob[] = [];
 
-// module.exports.ScheduledJob = ScheduledJob;
+	public addJob(newJob: ScheduledJob): number
+	{
+		return this.jobs.push(newJob);
+	}
+}
