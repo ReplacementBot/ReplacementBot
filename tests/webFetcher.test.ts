@@ -32,7 +32,7 @@ describe('WebFetcher', () =>
 	test('should use fake data', async () =>
 	{
 		TestUtilities.allowWebFetcherFakeData(true);
-		const FAKE_DATA_FILE = RootPath.path + '\\tests\\webFetcherFakeData\\testData.txt';
+		const FAKE_DATA_FILE = RootPath.path + '\\tests\\resources\\webFetcherFakeData\\testData.txt';
 		await expect(new WebFetcher().request(FAKE_DATA_FILE, undefined)).resolves.toEqual(
 			expect.objectContaining({
 				result: expect.stringContaining('Fake data for Unit Tests!'),
