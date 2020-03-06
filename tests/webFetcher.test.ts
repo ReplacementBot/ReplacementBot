@@ -1,4 +1,6 @@
 import WebFetcher, { HTTPResponse, HTTPResponseType } from '../src/util/webFetcher';
+import TestUtilities from './util';
+import RootPath = require('app-root-path');
 
 const TEST_URL = 'https://webscraper.io/test-sites/tables';
 
@@ -24,6 +26,17 @@ describe('WebFetcher', () =>
 	{
 		await expect(new WebFetcher().request(TEST_URL, 'Lorem ipsum')).rejects.toEqual(
 			new HTTPResponse(HTTPResponseType.FAILED, 'WebFetcher Error: "Lorem ipsum" encoding don\'t exist'),
+		);
+	});
+
+	test('should use fake data', async () =>
+	{
+		TestUtilities.allowWebFetcherFakeData(true);
+		const FAKE_DATA_FILE = RootPath.path + '\\tests\\webFetcherFakeData\\testData.txt';
+		await expect(new WebFetcher().request(FAKE_DATA_FILE, undefined)).resolves.toEqual(
+			expect.objectContaining({
+				result: expect.stringContaining('Fake data for Unit Tests!'),
+			}),
 		);
 	});
 });
