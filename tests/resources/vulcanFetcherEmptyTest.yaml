@@ -1,0 +1,6 @@
+---
+# file for testing purposes, do not edit
+
+fetchersConfiguration:
+  vulcanFetcher:
+    url: 'http://mrbartusek.000webhostapp.com/ReplacementBot/VulcanEmptyUnitTest.html'

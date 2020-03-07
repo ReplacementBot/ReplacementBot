@@ -54,7 +54,7 @@ export class Config
 	{
 		if(Config.instance != undefined)
 		{
-			Logger.fatalAndCrash('Failed to set Static Config Instance because one is already set');
+			Logger.warn('Config has been set static when another instance is static too');
 		}
 		Config.instance = this;
 		return this;
