@@ -76,7 +76,7 @@ export default class VulcanFetcher implements ReplacementsFetcher
 				}
 				else
 				{
-					currentTeacher = data(row).children('td').first().text();
+					currentTeacher = data(row).children('td').first().text().trim();
 				}
 			}
 
@@ -152,7 +152,7 @@ export default class VulcanFetcher implements ReplacementsFetcher
 		}
 		else
 		{
-			return result;
+			return result.trim();
 		}
 	}
 }
