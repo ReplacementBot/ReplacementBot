@@ -26,18 +26,4 @@ describe('WebFetcher', () =>
 			new HTTPResponse(HTTPResponseType.FAILED, 'WebFetcher Error: "Lorem ipsum" encoding don\'t exist'),
 		);
 	});
-<<<<<<< HEAD
-
-	test('should use fake data', async () =>
-	{
-		TestUtilities.allowWebFetcherFakeData(true);
-		const FAKE_DATA_FILE = RootPath.path + '\\tests\\resources\\webFetcherFakeData\\testData.txt';
-		await expect(new WebFetcher().request(FAKE_DATA_FILE, undefined)).resolves.toEqual(
-			expect.objectContaining({
-				result: expect.stringContaining('Fake data for Unit Tests!'),
-			}),
-		);
-	});
-=======
->>>>>>> parent of ff6b0f4... Added option to use fake data in `WebFetcher` for further tests
 });
