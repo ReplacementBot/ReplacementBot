@@ -1,6 +1,4 @@
 import WebFetcher, { HTTPResponse, HTTPResponseType } from '../src/util/webFetcher';
-import TestUtilities from './util';
-import RootPath = require('app-root-path');
 
 const TEST_URL = 'https://webscraper.io/test-sites/tables';
 
@@ -28,6 +26,7 @@ describe('WebFetcher', () =>
 			new HTTPResponse(HTTPResponseType.FAILED, 'WebFetcher Error: "Lorem ipsum" encoding don\'t exist'),
 		);
 	});
+<<<<<<< HEAD
 
 	test('should use fake data', async () =>
 	{
@@ -39,4 +38,6 @@ describe('WebFetcher', () =>
 			}),
 		);
 	});
+=======
+>>>>>>> parent of ff6b0f4... Added option to use fake data in `WebFetcher` for further tests
 });

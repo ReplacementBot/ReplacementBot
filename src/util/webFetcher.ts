@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import fs from 'fs';
+import http from 'http';
 import iconov from 'iconv-lite';
 import Logger from '../managers/logger';
 
@@ -46,10 +46,6 @@ export default class WebFetcher
 {
 	public request(url: string, encoding: string): Promise<HTTPResponse>
 	{
-		if(this.shouldUseFakeData())
-		{
-			return this.getFakeData(url);
-		}
 		return new Promise((resolve, reject) =>
 		{
 			axios.get(url,
@@ -81,40 +77,5 @@ export default class WebFetcher
 					}
 				});
 		});
-	}
-
-	private shouldUseFakeData(): boolean
-	{
-		if(process.env.WEB_FETCHER_USE_FAKE_DATA == 'true')
-		{
-			if(WebFetcher.runningInTest())
-			{
-				return true;
-			}
-			else
-			{
-				Logger.warn('Using fake WebFetcher data outside the tests is prohibited');
-				return false;
-			}
-		}
-		else
-		{
-			return false;
-		}
-	}
-
-	private getFakeData(path: string): Promise<HTTPResponse>
-	{
-		if(!this.shouldUseFakeData())
-		{
-			throw Error('getFakeData requested when shouldUseFakeData returns false');
-		}
-
-		return Promise.resolve(new HTTPResponse(HTTPResponseType.SUCCESSFUL, fs.readFileSync(path).toString()));
-	}
-
-	private static runningInTest(): boolean
-	{
-		return process.env.JEST_WORKER_ID !== undefined;
 	}
 }
