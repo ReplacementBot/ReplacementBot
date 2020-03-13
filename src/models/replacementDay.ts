@@ -37,7 +37,7 @@ export default class ReplacementDay
 
 	public getWeekDay(): string
 	{
-		return this.date.format('dddd');
+		return this.date ? this.date.format('dddd') : 'Unknown Day';
 	}
 
 	public toString(title = true, safe = false): string

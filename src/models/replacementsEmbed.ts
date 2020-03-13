@@ -52,9 +52,9 @@ export class ReplacementsEmbed
 		case ReplacementsEmbedFooterType.NONE:
 			return null;
 		case ReplacementsEmbedFooterType.GENERATED_ON:
-			return 'Generated on: ' + date.format('dddd h:mm');
+			return 'Generated on: ' + date.format('dddd HH:mm');
 		case ReplacementsEmbedFooterType.UPDATED_ON:
-			return 'Updated on: ' + date.format('dddd h:mm');
+			return 'Updated on: ' + date.format('dddd HH:mm');
 		}
 	}
 }

@@ -10,14 +10,14 @@ export default class FetchersHelper
 			Logger.error('FormatURL function has been called with "fetcherConfig" argument which is not object');
 			return '';
 		}
-		const urlConfigured = Object.prototype.hasOwnProperty.call(fetcherConfig, 'url');
-		const argumentConfigured = Object.prototype.hasOwnProperty.call(fetcherConfig, 'argument');
+		const urlConfigured = fetcherConfig.url != undefined;
+		const argumentConfigured = fetcherConfig.argument != undefined;
 		if(!urlConfigured)
 		{
 			Logger.error('FormatURL function has been called but fetcher don\'t have url property');
 			return '';
 		}
-		if(argumentConfigured)
+		if(argumentConfigured && date != undefined)
 		{
 			return fetcherConfig.url.replace('{0}', date.format(fetcherConfig.argument));
 		}

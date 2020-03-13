@@ -29,17 +29,13 @@ export class ScheduledJob extends CronJob
 			await this.jobFunction()
 				.then((promiseResult: void | string) =>
 				{
-					if(promiseResult != undefined)
-					{
-						Logger.warn('ScheduledJob shouldn\'t return anything when they are successfully executed, job returned string: ' + promiseResult);
-					}
-					Logger.info(`Successfully executed ${this.name} job`);
+					Logger.info(`Successfully executed ${this.name} job` + (promiseResult ? `(${promiseResult})` : ''));
 				})
 				.catch((error: void | string) =>
 				{
 					if(error == undefined)
 					{
-						error = 'No error provide';
+						error = 'No error provided';
 					}
 					Logger.error(`Job failed "${this.name}" reason: ` + error);
 

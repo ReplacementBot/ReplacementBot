@@ -20,5 +20,5 @@ export class ResponseParseError extends Error
 
 export interface ReplacementsFetcher
 {
-	fetchReplacements(date?: moment.Moment): Promise<ReplacementDay | FetchError | ResponseParseError>;
+	fetchReplacements(date: moment.Moment): Promise<ReplacementDay | FetchError | ResponseParseError>;
 }

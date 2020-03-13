@@ -15,8 +15,8 @@ intervals:
   # how often will replacements channel be updated
   replacementsChannelsUpdate: 0 * * * *
 
-# list of channels that will be updated with replacements
-replacementsChannels:
+# emoji that need to be detected in the replacements channel topic
+replacementsChannelsTopicEmoji: "🗓️"
 
 # configuration for replacement fetchers
 fetcherName: 'dummyFetcher'

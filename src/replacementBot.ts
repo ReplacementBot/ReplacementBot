@@ -3,11 +3,13 @@ import { CommandoClient } from 'discord.js-commando';
 import path from 'path';
 import { ConfigSettings, Config } from './managers/config';
 import ReplacementsManager from './managers/replacementsManager';
+import StaticEmbedManager from './managers/staticEmbedManager';
 
 export default class ReplacementBot extends CommandoClient
 {
 	config: Config;
 	replacementsManager: ReplacementsManager;
+	staticEmbedManager: StaticEmbedManager;
 
 	constructor(configSettings: ConfigSettings)
 	{
@@ -24,6 +26,7 @@ export default class ReplacementBot extends CommandoClient
 
 		this.config = config;
 		this.replacementsManager = new ReplacementsManager();
+		this.staticEmbedManager = new StaticEmbedManager(this);
 
 		this.setupCommandsRegistry();
 	}

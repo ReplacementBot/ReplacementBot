@@ -6,7 +6,7 @@ import moment from 'moment';
 
 export default class DummyFetcher implements ReplacementsFetcher
 {
-	public fetchReplacements(date?: moment.Moment): Promise<ReplacementDay>
+	public fetchReplacements(date: moment.Moment): Promise<ReplacementDay>
 	{
 		return new Promise((resolve, reject) =>
 		{

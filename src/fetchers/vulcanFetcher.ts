@@ -26,7 +26,7 @@ export default class VulcanFetcher implements ReplacementsFetcher
 		this.webFetcher = new WebFetcher();
 	}
 
-	fetchReplacements(date?: moment.Moment): Promise<ReplacementDay | FetchError | ResponseParseError>
+	fetchReplacements(date: moment.Moment): Promise<ReplacementDay | FetchError | ResponseParseError>
 	{
 		return new Promise((resolve, reject) =>
 		{

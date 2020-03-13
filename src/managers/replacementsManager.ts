@@ -4,6 +4,7 @@ import Replacement from '../models/replacement';
 import ReplacementDay from '../models/replacementDay';
 import { Moment } from 'moment';
 import moment = require('moment');
+import { Config } from './config';
 
 export default class ReplacementsManager
 {
@@ -45,8 +46,34 @@ export default class ReplacementsManager
 	{
 		return this.fetcher.constructor.name;
 	}
-	public fetchReplacements(date: Moment): Promise<ReplacementDay | FetchError | ResponseParseError>
+	public fetchReplacements(date?: Moment): Promise<ReplacementDay | FetchError | ResponseParseError>
 	{
+		if(date == undefined)
+		{
+			date = this.getDefaultDate();
+		}
 		return this.fetcher.fetchReplacements(date);
+	}
+
+	private getDefaultDate(): moment.Moment
+	{
+		const switchHour = Config.getInstance().get('daySwitchHour');
+		if(switchHour == undefined)
+		{
+			return moment();
+		}
+		const switchHourMoment = moment(switchHour, 'k-m');
+		if(!switchHourMoment.isValid())
+		{
+			return moment();
+		}
+		if(moment().diff(switchHourMoment, 'minutes') >= 0)
+		{
+			return moment().add(1, 'days');
+		}
+		else
+		{
+			return moment();
+		}
 	}
 }
