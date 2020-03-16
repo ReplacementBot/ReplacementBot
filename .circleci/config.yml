@@ -19,8 +19,8 @@ jobs:
             - ./node_modules
 
       - run: 
-        name: Build
-        command: npm build
+          name: Build
+          command: npm build
       - run:
           name: Check Tests
           command: npm test
