@@ -1,4 +1,4 @@
-# ReplacementBot - School Replacement Discord Bot
+# ReplacementBot 📅
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg" />
   <a href="https://github.com/MrBartusek/ReplacementBot/graphs/commit-activity" target="_blank">
@@ -9,35 +9,38 @@
   </a>
 </p>
 
-Simple Discord bot using [Discord.js](https://github.com/discordjs/discord.js) for fetching school replacements generated via Vulcan's Software
+![Presentation Image](https://i.imgur.com/SR7pGcu.png)
 
-## My Goal - Make Life Easier
-My school replacements site is inconvenient. You need to search in a huge list of all replacement for your class. So, I created this bot to make replacements checking easier for me and my colleagues.
-Cause that we don't need to check replacement for every in a while cause bot will send us notification when anything changes.
+ReplacementBot is a Discord bot made to make your life easier. The Bot automatically fetches replacement from your school website and shows them right on your discord server!
 
-## Features
-- Fetching replacement for provided day `r!fetch 2019 01 01`
-- Getting Embed with a replacement for the next couple of days `r!embed`
-- Updating embed on specified channel `r!update` *or automatic every 30 mins*
-- Highly Configurable
+## ✨ Feature Rich
 
-![Presentation Image](https://i.imgur.com/VkOw4BI.png)
+### ⌚️ Keep up with your replacement
 
-## Running Locally
-Make sure you have [Node.js](https://nodejs.org/en/download) installed.
+ReplacementBot by the default, constantly updates one of the channels from your guild with freshest replacements. Forget about spamming with commands!
 
-```sh
-$ git clone https://github.com/MrBartusek/ReplacementBot.git # or clone your own fork
-$ cd ReplacementBot
-$ npm install
-$ npm start
+### 💻 Setup Custom Source
+
+ReplacementBot is build to support custom data sources or, as we call it, `fetchers`. Creating your very own fetcher is easy. Here, look at that fetcher:
+```ts
+export default class MyOwnFetcher implements ReplacementsFetcher
+{
+  public fetchReplacements(date: moment.Moment): Promise<ReplacementDay>
+  {
+    // Any of your fetching action here
+    return Promise.resolve(result)
+  }
+}
 ```
+Put that file in `src\fetchers` and we handle other things by ourselves
 
-## Contributing
+---
+## 🚀 Running Locally
 
-Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/MrBartusek/ReplacementBot/issues).
+_TODO_
 
-## License
+## 👥 Contributing
 
-Copyright © 2019 [MrBartusek](https://github.com/MrBartusek)<br />
-This project is [MIT](https://github.com/MrBartusek/ReplacementBot/blob/master/LICENSE) licensed
+We greatly appreciate any work contributed, no matter how small!  Contributions, issues and feature requests are welcome!
+
+Read more about contributing in [CONTRIBUTING.md](https://github.com/MrBartusek/ReplacementBot/blob/master/CONTRIBUTING.md)
