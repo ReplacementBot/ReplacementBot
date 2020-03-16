@@ -17,13 +17,17 @@ jobs:
           key: dependency-cache-{{ checksum "package-lock.json" }}
           paths:
             - ./node_modules
-
       - run: 
-          name: Build
+          name: Build TSC
           command: npm run build
-      - run:
-          name: Check Tests
-          command: npm test
       - run:
           name: Check Code Styling
           command: npm run lint
+      - run:
+          name: Run tests with JUnit as reporter
+          command: jest --ci --runInBand --reporters=default --reporters=jest-junit
+          environment:
+            JEST_JUNIT_OUTPUT_DIR: "reports/junit/js-test-results.xml"
+      - store_test_results:
+          path: reports/junit/js-test-results.xml
+      
