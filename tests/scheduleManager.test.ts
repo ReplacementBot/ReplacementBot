@@ -7,10 +7,10 @@ describe('ScheduleManager', () =>
 		test('should be called on #fire', async () =>
 		{
 			Logger.info = jest.fn();
-			await new ScheduledJob('* * * * *', 'Test', async () =>
+			const job = await new ScheduledJob('* * * * *', 'Test', async () =>
 			{
 				Promise.resolve();
-			}).fire();
+			}, false).fire();
 			expect(Logger.info).toHaveBeenCalledWith('Successfully executed Test job');
 		});
 
@@ -20,7 +20,7 @@ describe('ScheduleManager', () =>
 			new ScheduledJob('* * * * *', 'Test', () =>
 			{
 				throw Error('Test');
-			}).fire();
+			}, false).fire();
 			expect(Logger.error).toHaveBeenCalledWith('System encountered error while executing "Test" Job: Error: Test');
 		});
 
@@ -30,7 +30,7 @@ describe('ScheduleManager', () =>
 			await new ScheduledJob('* * * * *', 'Test', () =>
 			{
 				return Promise.reject('Test');
-			}).fire();
+			}, false).fire();
 			expect(Logger.error).toHaveBeenCalledWith('Job failed "Test" reason: Test');
 		});
 	});
