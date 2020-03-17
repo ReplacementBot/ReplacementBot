@@ -1,5 +1,6 @@
 import chalk from 'chalk';
 import figlet from 'figlet';
+import MiscHelpers from '../util/miscHelpers';
 
 export default class Logger
 {
@@ -10,7 +11,7 @@ export default class Logger
 			exitCode = 5;
 		}
 		this.fatal(message);
-		if(this.runningInTest())
+		if(MiscHelpers.isRunningInTest())
 		{
 			throw Error(message);
 		}
@@ -40,9 +41,5 @@ export default class Logger
 		console.log();
 		console.log(chalk.magenta(figlet.textSync('Replacement Bot')));
 		console.log();
-	}
-	private static runningInTest(): boolean
-	{
-		return process.env.JEST_WORKER_ID !== undefined;
 	}
 }

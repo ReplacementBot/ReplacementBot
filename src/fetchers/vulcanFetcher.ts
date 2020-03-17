@@ -4,7 +4,7 @@ import ReplacementDay from '../models/replacementDay';
 import moment = require('moment');
 import WebFetcher, { HTTPResponse } from '../util/webFetcher';
 import cheerio from 'cheerio';
-import FetchersHelper from '../util/fetcherHelper';
+import FetchersHelpers from '../util/fetcherHelpers';
 import Replacement from '../models/replacement';
 import Logger from '../managers/logger';
 import Lesson from '../models/lesson';
@@ -31,7 +31,7 @@ export default class VulcanFetcher implements ReplacementsFetcher
 		return new Promise((resolve, reject) =>
 		{
 			const config = Config.getInstance().get('fetchersConfiguration')['vulcanFetcher'];
-			const url = FetchersHelper.formatURL(config, date);
+			const url = FetchersHelpers.formatURL(config, date);
 			this.webFetcher.request(url, 'ISO-8859-2')
 				.then((requestResult: HTTPResponse) =>
 				{

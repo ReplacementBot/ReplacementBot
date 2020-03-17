@@ -23,12 +23,10 @@ export default class UpdateCommand extends Command
 			(this.client as ReplacementBot).staticEmbedManager.updateGuild(message.guild)
 				.catch((reason: string) =>
 				{
-					console.log('reject');
 					reject(new FriendlyError(reason));
 				})
 				.then(() =>
 				{
-					console.log('resolve');
 					resolve(message.reply('Successfully updated this guild') as Promise<Message>);
 				});
 		});

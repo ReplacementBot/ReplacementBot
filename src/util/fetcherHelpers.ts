@@ -1,7 +1,7 @@
 import Logger from '../managers/logger';
 import moment = require('moment');
 
-export default class FetchersHelper
+export default class FetchersHelpers
 {
 	public static formatURL(fetcherConfig: any, date: moment.Moment): string
 	{

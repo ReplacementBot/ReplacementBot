@@ -4,6 +4,8 @@ import path from 'path';
 import { ConfigSettings, Config } from './managers/config';
 import ReplacementsManager from './managers/replacementsManager';
 import StaticEmbedManager from './managers/staticEmbedManager';
+import MiscHelpers from './util/miscHelpers';
+import UnitTestDispatcher from './util/commandoCustomDispatcher';
 
 export default class ReplacementBot extends CommandoClient
 {
@@ -23,6 +25,13 @@ export default class ReplacementBot extends CommandoClient
 			owner: config.get('botOwners'),
 			unknownCommandResponse: false,
 		});
+		if(MiscHelpers.isRunningInTest())
+		{
+			// Commando Dispatcher have some problems with importing
+			// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+			// @ts-ignore
+			this.dispatcher = new UnitTestDispatcher(this, this.registry);
+		}
 
 		this.config = config;
 		this.replacementsManager = new ReplacementsManager();
@@ -30,19 +39,31 @@ export default class ReplacementBot extends CommandoClient
 
 		this.setupCommandsRegistry();
 	}
-	public async start(): Promise<void>
+	public async start(): Promise<string>
 	{
-		await this.replacementsManager.initialize(this.config.get('fetcherName'));
+		return new Promise((resolve, reject) =>
+		{
+			this.replacementsManager.initialize(this.config.get('fetcherName'));
 
-		this.login(process.env.REPLACEMENT_BOT_TOKEN)
-			.catch((error) => Logger.fatal('Failed to launch ReplacementBot ' + error.message))
-			.then(async ()=>
-			{
-				await this.config.validate(this);
-				Logger.info('ReplacementBot successfully launched!');
-				Logger.info('Bot user is: ' + this.user.tag + ' in ' + this.user.client.guilds.size + ' guilds');
-				Logger.info('Next embed update: not implemented');
-			});
+			this.login(MiscHelpers.getBotToken())
+				.catch((error) =>
+				{
+					Logger.fatal('Failed to launch ReplacementBot ' + error.message);
+					reject(`Failed to launch ReplacementBot ${error.message}`);
+				})
+				.then(async ()=>
+				{
+					await this.config.validate(this);
+					Logger.info('ReplacementBot successfully launched!');
+					Logger.info('Bot user is: ' + this.user.tag + ' in ' + this.user.client.guilds.size + ' guilds');
+					Logger.info('Next embed update: not implemented');
+					resolve();
+				});
+		});
+	}
+	public stop(): Promise<void>
+	{
+		return this.destroy();
 	}
 	private setupCommandsRegistry(): void
 	{
@@ -52,6 +73,9 @@ export default class ReplacementBot extends CommandoClient
 				['replacements', 'Replacements'],
 				['util', 'Utilities'],
 			])
-			.registerCommandsIn(path.join(__dirname, 'commands'));
+			.registerCommandsIn({
+				filter: /^([^.].*)\.(js|ts)$/,
+				dirname: path.join(__dirname, 'commands'),
+			});
 	}
 }

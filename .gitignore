@@ -36,3 +36,6 @@ config/*
 
 # builds
 build/
+
+# test report
+junit.xml
