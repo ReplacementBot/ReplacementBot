@@ -3,7 +3,6 @@ import { ConfigSettings, ConfigSources } from '../src/managers/config';
 import TestUtilities from './util';
 import { Message, MessageCollector } from 'discord.js';
 import WebFetcher from '../src/util/webFetcher';
-import waitForExpect from 'wait-for-expect';
 import Logger from '../src/managers/logger';
 declare function fail(error?: any): never;
 
@@ -11,7 +10,7 @@ process.argv.push('--trace-warnings');
 
 describe('Ping Command', () =>
 {
-	test('should ping bot', async done =>
+	test('should ping bot', async (done) =>
 	{
 		const bot = new ReplacementBot(TestUtilities.defaultConfigSettings);
 		await expect(bot.start()).resolves.toBe(undefined);
@@ -19,7 +18,7 @@ describe('Ping Command', () =>
 		{
 			await expect(channel.send(TestUtilities.commandPrefix + 'ping')).resolves.toBeInstanceOf(Message);
 
-			const collector = new MessageCollector(channel, m => m.author.id === bot.user.id, { time: 5000 });
+			const collector = new MessageCollector(channel, m => m.author.id === bot.user.id);
 			collector.on('collect', async message =>
 			{
 				expect(message.content).toBe('Pinging...');
