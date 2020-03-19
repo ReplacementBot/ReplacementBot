@@ -6,8 +6,6 @@ import WebFetcher from '../src/util/webFetcher';
 import Logger from '../src/managers/logger';
 declare function fail(error?: any): never;
 
-process.argv.push('--trace-warnings');
-
 describe('Ping Command', () =>
 {
 	test('should ping bot', async (done) =>
