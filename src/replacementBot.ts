@@ -12,8 +12,11 @@ export default class ReplacementBot extends CommandoClient
 	config: Config;
 	replacementsManager: ReplacementsManager;
 	staticEmbedManager: StaticEmbedManager;
+	startupOptions: StartupOptions;
 
-	constructor(configSettings: ConfigSettings)
+	public ready: boolean;
+
+	constructor(configSettings: ConfigSettings, options: StartupOptions = {})
 	{
 		Logger.printLogo();
 		Logger.info('Initialling ReplacementBot...');
@@ -25,26 +28,26 @@ export default class ReplacementBot extends CommandoClient
 			owner: config.get('botOwners'),
 			unknownCommandResponse: false,
 		});
-		if(MiscHelpers.isRunningInTest())
-		{
-			// Commando Dispatcher have some problems with importing
-			// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-			// @ts-ignore
-			this.dispatcher = new UnitTestDispatcher(this, this.registry);
-		}
+		this.ready = false;
+
+		if(!options.initializeReplacements) options.initializeReplacements = true;
+
+		// @ts-ignore dispatchers have import problems
+		if(options.useTestDispatcher) this.dispatcher = new UnitTestDispatcher(this, this.registry);
 
 		this.config = config;
 		this.replacementsManager = new ReplacementsManager();
 		this.staticEmbedManager = new StaticEmbedManager(this);
+		this.startupOptions = options;
 
 		this.setupCommandsRegistry();
 	}
+
 	public async start(): Promise<string>
 	{
 		return new Promise((resolve, reject) =>
 		{
-			this.replacementsManager.initialize(this.config.get('fetcherName'));
-
+			if(this.startupOptions.initializeReplacements) this.replacementsManager.initialize(this.config.get('fetcherName'));
 			this.login(MiscHelpers.getBotToken())
 				.catch((error) =>
 				{
@@ -57,14 +60,17 @@ export default class ReplacementBot extends CommandoClient
 					Logger.info('ReplacementBot successfully launched!');
 					Logger.info('Bot user is: ' + this.user.tag + ' in ' + this.user.client.guilds.size + ' guilds');
 					Logger.info('Next embed update: not implemented');
+					this.ready = true;
 					resolve();
 				});
 		});
 	}
 	public stop(): Promise<void>
 	{
+		this.ready = false;
 		return this.destroy();
 	}
+
 	private setupCommandsRegistry(): void
 	{
 		this.registry
@@ -79,3 +85,9 @@ export default class ReplacementBot extends CommandoClient
 			});
 	}
 }
+
+export type StartupOptions =
+{
+	useTestDispatcher?: boolean;
+	initializeReplacements?: boolean;
+};

@@ -2,7 +2,7 @@ export default class MiscHelpers
 {
 	public static isRunningInTest(): boolean
 	{
-		return process.env.JEST_WORKER_ID !== undefined;
+		return process.env.NODE_ENV === 'test';
 	}
 
 	public static getBotToken(): string
