@@ -19,6 +19,7 @@ module.exports = () =>
 					{
 						channel.delete().then(() =>
 						{
+							manager.clear();
 							client.stop().then(resolve);
 						});
 					});

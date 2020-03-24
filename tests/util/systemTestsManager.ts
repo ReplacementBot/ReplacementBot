@@ -68,8 +68,14 @@ export class SystemTestsManager
 
 	public clear(): void
 	{
-		fs.unlinkSync(path.join(this.DIR, 'replacementBotChannelId'));
-		fs.rmdirSync(this.DIR);
+		if(fs.existsSync(path.join(this.DIR, 'replacementBotChannelId')))
+		{
+			fs.unlinkSync(path.join(this.DIR, 'replacementBotChannelId'));
+		}
+		if(fs.existsSync(this.DIR))
+		{
+			fs.rmdirSync(this.DIR);
+		}
 	}
 
 	private createTestChannel(): Promise<TextChannel>
