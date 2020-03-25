@@ -1,6 +1,7 @@
 # ReplacementBot 📅
 ![CircleCI Master](https://img.shields.io/circleci/build/github/MrBartusek/ReplacementBot?label=master&logo=circleci&token=6bae64ae7a523f3f207804bf7818dc1d56f420a4)
 [![codecov](https://codecov.io/gh/MrBartusek/ReplacementBot/branch/master/graph/badge.svg?token=ONXF6BONI4)](https://codecov.io/gh/MrBartusek/ReplacementBot)
+[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=MrBartusek/ReplacementBot&identifier=222265419)](https://dependabot.com)
 
 ![Presentation Image](https://i.imgur.com/SR7pGcu.png)
 
