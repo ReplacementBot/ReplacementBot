@@ -11,8 +11,6 @@ export default class TestUtilities
 	static commandPrefix = 'replacement-test!';
 	public static getTestGuildId(): string
 	{
-		const content = fs.readFileSync(appRoot + '/config/test.yaml');
-		const data = yaml.safeLoad(content.toString());
-		return data.testGuildId;
+		return process.env.REPLACEMENT_BOT_TEST_GUILD;
 	}
 }

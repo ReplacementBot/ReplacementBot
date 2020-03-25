@@ -1,5 +1,0 @@
----
-# Config for unit tests
-# needed only when you are developing the bot
-
-testGuildId: 000000000000000000

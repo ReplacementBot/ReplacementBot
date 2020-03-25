@@ -10,6 +10,19 @@ You can locally run test via `npm test` command
 
 Additionally, every master commit and PRs are tested in the cloud by CircleCi
 
+### Configuration for Running Tests Locally
+
+To run test locally you need additional configuration
+1. Create second Bot in [Discord Developer Portal](https://discordapp.com/developers/applications/)
+2. Create new Guild that will be used only for Tests. 
+3. Add bot to Guild and give it `Administrator` permissions. You can use [Permissions Calculator](https://discordapi.com/permissions.html#8)
+4. Copy ID of the guild - [Guide](https://support.discordapp.com/hc/en-us/articles/206346498-Where-can-I-find-my-User-Server-Message-ID)
+5. Setup Environment Variables
+
+Environment Variables:
+- `REPLACEMENT_BOT_TEST_TOKEN` - Test Bot Token **Be sure to use Token of Test Version of the Bot!**
+-  `REPLACEMENT_BOT_TEST_GUILD` - Test Guild ID that you created
+
 ## Unit Tests
 
 ```ts
