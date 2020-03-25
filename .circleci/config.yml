@@ -1,4 +1,6 @@
 version: 2
+orbs:
+  codecov: codecov/codecov@1.0.2
 jobs:
   build: 
     docker:
@@ -17,17 +19,19 @@ jobs:
           key: dependency-cache-{{ checksum "package-lock.json" }}
           paths:
             - ./node_modules
-      - run: 
-          name: Build TSC
-          command: npm run build
       - run:
           name: Check Code Styling
           command: npm run lint
       - run:
-          name: Run tests with JUnit as reporter
-          command: node_modules/.bin/jest --verbose --silent --ci --runInBand --reporters=default --reporters=jest-junit
+          name: Run tests
+          command: node_modules/.bin/jest --verbose --silent --ci --runInBand --collectCoverage=true --reporters=default --reporters=jest-junit
           environment:
             JEST_JUNIT_OUTPUT_DIR: "reports/junit/js-test-results.xml"
       - store_test_results:
           path: reports/junit/js-test-results.xml
+      - store_artifacts:
+          path: coverage
+      - codecov/upload:
+          file: coverage/*.json
+
       

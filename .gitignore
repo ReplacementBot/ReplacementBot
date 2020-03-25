@@ -39,3 +39,4 @@ build/
 
 # test report
 junit.xml
+coverage
