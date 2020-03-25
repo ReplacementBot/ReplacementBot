@@ -1,6 +1,6 @@
 # ReplacementBot Testing ✅
 ![CircleCI Master](https://img.shields.io/circleci/build/github/MrBartusek/ReplacementBot?label=master&logo=circleci&token=6bae64ae7a523f3f207804bf7818dc1d56f420a4)
-![CircleCI Develop](https://img.shields.io/circleci/build/github/MrBartusek/ReplacementBot/develop?label=develop&logo=circleci&token=6bae64ae7a523f3f207804bf7818dc1d56f420a4)
+[![codecov](https://codecov.io/gh/MrBartusek/ReplacementBot/branch/master/graph/badge.svg?token=ONXF6BONI4)](https://codecov.io/gh/MrBartusek/ReplacementBot)
 
 ReplacementBot uses [Jest](https://jestjs.io) for Testing.
 
