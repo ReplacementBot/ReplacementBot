@@ -5,7 +5,7 @@ const configSettings = new ConfigSettings(ConfigSources.AUTO);
 new ReplacementBot(configSettings).start();
 
 process.on('unhandledRejection', function(reason, promise)
-	{
+{
 	Logger.fatal('Unhandled Promise Rejection');
 	console.log(promise);
 	process.exit(5);
