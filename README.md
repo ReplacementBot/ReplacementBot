@@ -1,11 +1,7 @@
 # ReplacementBot 📅
 <p>
-  <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg" />
-  <a href="https://github.com/MrBartusek/ReplacementBot/graphs/commit-activity" target="_blank">
-    <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" />
-  </a>
-  <a href="https://github.com/MrBartusek/ReplacementBot/blob/master/LICENSE" target="_blank">
-    <img alt="License: MIT" src="https://img.shields.io/github/license/MrBartusek/replacement-bot" />
+  <a href="https://app.circleci.com/pipelines/github/MrBartusek/ReplacementBot" target="_blank">
+    <img alt="Build" src="https://circleci.com/gh/MrBartusek/ReplacementBot.svg?style=shield" />
   </a>
 </p>
 
