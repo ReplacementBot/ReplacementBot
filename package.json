@@ -25,7 +25,7 @@
     "@types/common-tags": "^1.8.0",
     "@types/cron": "^1.7.2",
     "@types/figlet": "^1.2.0",
-    "@types/js-yaml": "^3.12.2",
+    "@types/js-yaml": "^3.12.3",
     "app-root-path": "^3.0.0",
     "axios": "^0.19.2",
     "chalk": "^3.0.0",
