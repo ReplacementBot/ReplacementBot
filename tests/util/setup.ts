@@ -1,6 +1,6 @@
 import { SystemTestsManager } from './systemTestsManager';
 
-module.exports = () =>
+module.exports = (): void =>
 {
 	new SystemTestsManager().clear();
 };

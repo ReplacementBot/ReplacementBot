@@ -3,7 +3,7 @@ import { SystemTestsManager } from './systemTestsManager';
 import ReplacementBot from '../../src/replacementBot';
 import Logger from '../../src/managers/logger';
 
-module.exports = () =>
+module.exports = (): Promise<void> =>
 {
 	Logger.mute();
 	return new Promise((resolve, reject) =>
