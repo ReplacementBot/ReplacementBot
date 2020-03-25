@@ -8,7 +8,7 @@ ReplacementBot uses [Jest](https://jestjs.io) for Testing.
 
 You can locally run test via `npm test` command
 
-Additonaly, every master commit and PRs are tested in the cloud by CircleCi
+Additionally, every master commit and PRs are tested in the cloud by CircleCi
 
 ## Unit Tests
 
@@ -35,5 +35,5 @@ describe('Ping Command', () =>
 });
 ```
 
-System test framework
+System test framework custom made to match ReplacementBot need to check bot's responses to commands. Use of that framework simplifies system testing to write that small constructor in every system test.
 

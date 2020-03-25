@@ -1,6 +1,6 @@
 # ReplacementBot 📅
 ![CircleCI Master](https://img.shields.io/circleci/build/github/MrBartusek/ReplacementBot?label=master&logo=circleci&token=6bae64ae7a523f3f207804bf7818dc1d56f420a4)
-![CircleCI Devlop](https://img.shields.io/circleci/build/github/MrBartusek/ReplacementBot/develop?label=develop&logo=circleci&token=6bae64ae7a523f3f207804bf7818dc1d56f420a4)
+![CircleCI Develop](https://img.shields.io/circleci/build/github/MrBartusek/ReplacementBot/develop?label=develop&logo=circleci&token=6bae64ae7a523f3f207804bf7818dc1d56f420a4)
 
 ![Presentation Image](https://i.imgur.com/SR7pGcu.png)
 
