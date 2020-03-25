@@ -1,0 +1,16 @@
+---
+prefix: replacement-test!
+
+botOwners:
+  - '212988300137463809' # MrBartusek
+
+daySwitchHour: 16-00
+
+intervals:
+  replacementsChannelsUpdate: 0 * * * *
+
+replacementsChannelsTopicEmoji: "🗓️"
+
+fetcherName: 'dummyFetcher'
+
+fetchersConfiguration:
