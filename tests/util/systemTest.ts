@@ -11,26 +11,33 @@ export class SystemTest
 {
 	constructor(command: string, expectedResponse: string, doneCallback: jest.DoneCallback)
 	{
-		const manager = this.getManager();
+		if(TestUtilities.getRunType().isDry())
+		{
+			doneCallback();
+		}
+		else
+		{
+			const manager = this.getManager();
 
-		manager.setupClient()
-			.catch(doneCallback.fail)
-			.then((client: ReplacementBot) =>
-			{
-				manager.getTestChannel().then((channel: TextChannel) =>
+			manager.setupClient()
+				.catch(doneCallback.fail)
+				.then((client: ReplacementBot) =>
 				{
-					channel.send(TestUtilities.commandPrefix + command);
-					const collector = new MessageCollector(channel, m => m.author.id === client.user.id);
-					collector.on('collect', async message =>
+					manager.getTestChannel().then((channel: TextChannel) =>
 					{
-						if(message.content == expectedResponse)
+						channel.send(TestUtilities.commandPrefix + command);
+						const collector = new MessageCollector(channel, m => m.author.id === client.user.id);
+						collector.on('collect', async message =>
 						{
-							collector.stop();
-							client.stop().then(doneCallback);
-						}
+							if(message.content == expectedResponse)
+							{
+								collector.stop();
+								client.stop().then(doneCallback);
+							}
+						});
 					});
 				});
-			});
+		}
 	}
 
 	private getManager(): SystemTestsManager

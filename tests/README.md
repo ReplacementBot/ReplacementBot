@@ -2,17 +2,17 @@
 ![CircleCI Master](https://img.shields.io/circleci/build/github/MrBartusek/ReplacementBot?label=master&logo=circleci&token=6bae64ae7a523f3f207804bf7818dc1d56f420a4)
 [![codecov](https://codecov.io/gh/MrBartusek/ReplacementBot/branch/master/graph/badge.svg?token=ONXF6BONI4)](https://codecov.io/gh/MrBartusek/ReplacementBot)
 
-ReplacementBot uses [Jest](https://jestjs.io) for Testing.
+ReplacementBot uses [Jest](https://jestjs.io) for Testing and, [CircleCi](https://circleci.com) for Cloud Testing.
 
-### Running tests
+## Running tests
 
-You can locally run test via `npm test` command
+You can locally run test via `npm test` command after ReplacementBot Setup. If you want test to run in full mode (recommended) please read [Configuration Guide](#configuration-for-running-system-tests-locally)
 
-Additionally, every master commit and PRs are tested in the cloud by CircleCi
+Additionally, every commit and PRs are tested in the cloud by CircleCi. Hoverer, PRs from Forked Repositories are build in [Dry Mode](dry-and-full-mode)
 
-### Configuration for Running Tests Locally
+## Configuration for Running System Tests Locally
 
-To run test locally you need additional configuration
+To run test system tests locally you need additional configuration
 1. Create second Bot in [Discord Developer Portal](https://discordapp.com/developers/applications/)
 2. Create new Guild that will be used only for Tests. 
 3. Add bot to Guild and give it `Administrator` permissions. You can use [Permissions Calculator](https://discordapi.com/permissions.html#8)
@@ -22,6 +22,15 @@ To run test locally you need additional configuration
 Environment Variables:
 - `REPLACEMENT_BOT_TEST_TOKEN` - Test Bot Token **Be sure to use Token of Test Version of the Bot!**
 -  `REPLACEMENT_BOT_TEST_GUILD` - Test Guild ID that you created
+
+## Dry and Full mode
+
+In this project we are using 2 modes for building `DRY` and `FULL`. If possible, every test run should be full. Full mode runs all Unit Tests and System Tests. Dry mode runs only Unit Tests. 
+
+The reason for that modes is CI Security. We cannot run System Tests on Untrusted PRs because, they are connecting to our Testing Bot Instancie.
+
+To ensure that your PR will pass tests you should run it locally on your own Testing Bot Instancie, local tests should always be Full.
+ 
 
 ## Unit Tests
 

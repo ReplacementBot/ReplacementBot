@@ -2,6 +2,7 @@ import chalk from 'chalk';
 import { SystemTestsManager } from './systemTestsManager';
 import ReplacementBot from '../../src/replacementBot';
 import Logger from '../../src/managers/logger';
+import TestUtilities from './util';
 
 module.exports = (): Promise<void> =>
 {
@@ -20,7 +21,11 @@ module.exports = (): Promise<void> =>
 						channel.delete().then(() =>
 						{
 							manager.clear();
-							client.stop().then(resolve);
+							client.stop().then(() =>
+							{
+								console.log('\r\n' + TestUtilities.getRunType().toString());
+								resolve();
+							});
 						});
 					});
 			});
