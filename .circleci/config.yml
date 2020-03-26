@@ -43,11 +43,11 @@ jobs:
         path: ~/replacementBot
 
       - attach_workspace:
-          at: ~/replacementBot
+        at: ~/replacementBot
 
       - run:
-          name: Check Code Styling
-          command: npm run lint
+        name: Check Code Styling
+        command: npm run lint
 
   test:
     executor: node-executor
