@@ -1,10 +1,16 @@
 version: 2.1
 orbs:
   codecov: codecov/codecov@1.0.2
-jobs:
-  build: 
+
+executors:
+  node-executor:
     docker:
       - image: circleci/node:latest
+    working_directory: /tmp
+
+jobs:
+  build: 
+    executor: node-executor
     steps:
       - checkout
       - run:
@@ -20,16 +26,14 @@ jobs:
           paths:
             - ./node_modules
   lint:
-    docker:
-      - image: circleci/node:latest
+    executor: node-executor
     steps:
       - checkout
       - run:
           name: Check Code Styling
           command: npm run lint
   test:
-    docker:
-      - image: circleci/node:latest
+    executor: node-executor
     steps:
     - checkout
     - run:
