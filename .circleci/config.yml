@@ -40,21 +40,21 @@ jobs:
     executor: node-executor
     steps:
       - checkout:
-        path: ~/replacementBot
+          path: ~/replacementBot
 
       - attach_workspace:
-        at: ~/replacementBot
+          at: ~/replacementBot
 
       - run:
-        name: Check Code Styling
-        command: npm run lint
+          name: Check Code Styling
+          command: npm run lint
 
   test:
     executor: node-executor
     steps:
 
     - checkout:
-      path: ~/replacementBot
+        path: ~/replacementBot
 
     - attach_workspace:
         at: ~/replacementBot
