@@ -1,6 +1,5 @@
 import { Command, CommandoClient, CommandMessage } from 'discord.js-commando';
 import { Message } from 'discord.js';
-import DummyFetcher from '../../fetchers/dummyFetcher';
 import MiscHelpers from '../../util/miscHelpers';
 
 export default class PingCommand extends Command

@@ -1,10 +1,6 @@
-import chalk from 'chalk';
 import TestUtilities from './util';
 import ReplacementBot from '../../src/replacementBot';
-import { Client, TextChannel, ChannelData, MessageCollector } from 'discord.js';
-import fs from 'fs';
-import path from 'path';
-import os from 'os';
+import { TextChannel, MessageCollector } from 'discord.js';
 import { SystemTestsManager } from './systemTestsManager';
 
 export class SystemTest

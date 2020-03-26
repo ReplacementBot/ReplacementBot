@@ -11,7 +11,8 @@
 	},
 	"parser": "@typescript-eslint/parser",
 	"plugins": [
-		"@typescript-eslint/eslint-plugin"
+		"@typescript-eslint/eslint-plugin",
+		"unused-imports"
 	  ],
 	"rules": {
 		"brace-style": ["error", "allman", { "allowSingleLine": false }],
@@ -54,6 +55,7 @@
 		"eol-last": ["error", "always"],
 		"@typescript-eslint/no-namespace": "off",
 		"@typescript-eslint/ban-ts-ignore": "off",
-		"@typescript-eslint/no-use-before-define": "off"
+		"@typescript-eslint/no-use-before-define": "off",
+		"unused-imports/no-unused-imports-ts": "warn"
 	}
 }

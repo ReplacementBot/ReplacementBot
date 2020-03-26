@@ -1,8 +1,3 @@
-import * as fs from 'fs';
-import * as yaml from 'js-yaml';
-import appRoot from 'app-root-path';
-import { Channel, TextChannel, Client, ChannelData, Guild } from 'discord.js';
-import Logger from '../../src/managers/logger';
 import { ConfigSettings, ConfigSources } from '../../src/managers/config';
 import chalk from 'chalk';
 

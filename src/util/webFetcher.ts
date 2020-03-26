@@ -1,7 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import http from 'http';
 import iconov from 'iconv-lite';
-import Logger from '../managers/logger';
 
 export enum HTTPResponseType
 {

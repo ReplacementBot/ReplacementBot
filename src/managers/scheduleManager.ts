@@ -1,5 +1,4 @@
-import { CronJob, CronTime, CronJobParameters, job } from 'cron';
-import { Moment } from 'moment';
+import { CronJob, CronJobParameters } from 'cron';
 import Logger from './logger';
 
 export class ScheduledJob extends CronJob

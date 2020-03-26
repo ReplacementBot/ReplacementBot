@@ -1,6 +1,5 @@
 import { ReplacementsFetcher, FetchError, ResponseParseError } from '../models/replacementsFetcher';
 import Logger from './logger';
-import Replacement from '../models/replacement';
 import ReplacementDay from '../models/replacementDay';
 import { Moment } from 'moment';
 import moment = require('moment');

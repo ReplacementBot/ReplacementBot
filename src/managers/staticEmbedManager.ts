@@ -1,5 +1,4 @@
-import { TextChannel, MessageEmbed, Collection, Channel, Message, RichEmbed, Guild } from 'discord.js';
-import chalk from 'chalk';
+import { TextChannel, MessageEmbed, Collection, Message, RichEmbed, Guild } from 'discord.js';
 import Logger from './logger';
 import ReplacementBot from '../replacementBot';
 import { Config } from './config';

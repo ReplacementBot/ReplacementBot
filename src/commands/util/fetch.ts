@@ -1,13 +1,10 @@
 import { Command, CommandoClient, CommandMessage, FriendlyError } from 'discord.js-commando';
 import { Message } from 'discord.js';
-import DummyFetcher from '../../fetchers/dummyFetcher';
 import ReplacementBot from '../../replacementBot';
 import { ReplacementsEmbed, ReplacementsEmbedFooterType } from '../../models/replacementsEmbed';
 import ReplacementDay from '../../models/replacementDay';
-import moment = require('moment');
 import { FetchError, ResponseParseError } from '../../models/replacementsFetcher';
 import Logger from '../../managers/logger';
-import { Config } from '../../managers/config';
 
 export default class FetchReplacementsCommand extends Command
 {

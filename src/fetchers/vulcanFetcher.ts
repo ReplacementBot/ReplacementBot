@@ -6,7 +6,6 @@ import WebFetcher, { HTTPResponse } from '../util/webFetcher';
 import cheerio from 'cheerio';
 import FetchersHelpers from '../util/fetcherHelpers';
 import Replacement from '../models/replacement';
-import Logger from '../managers/logger';
 import Lesson from '../models/lesson';
 import Teacher from '../models/teacher';
 

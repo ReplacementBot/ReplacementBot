@@ -1,4 +1,4 @@
-import { CommandoClient, Command, CommandMessage, FriendlyError } from 'discord.js-commando';
+import { Command, CommandMessage, FriendlyError } from 'discord.js-commando';
 import { Message } from 'discord.js';
 import ReplacementBot from '../../replacementBot';
 

@@ -4,7 +4,6 @@ import TestUtilities from './util';
 import fs from 'fs';
 import path from 'path';
 import os from 'os';
-import chalk from 'chalk';
 
 export class SystemTestsManager
 {

@@ -1,6 +1,5 @@
 import ReplacementDay from './replacementDay';
 import moment = require('moment');
-import Replacement from './replacement';
 
 export class FetchError extends Error
 {
