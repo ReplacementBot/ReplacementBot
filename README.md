@@ -37,4 +37,4 @@ _TODO_
 
 We greatly appreciate any work contributed, no matter how small!  Contributions, issues and feature requests are welcome!
 
-Read more about contributing in [CONTRIBUTING.md](https://github.com/MrBartusek/ReplacementBot/blob/master/CONTRIBUTING.md)
+Read more about contributing in [CONTRIBUTING.md](CONTRIBUTING.md)
