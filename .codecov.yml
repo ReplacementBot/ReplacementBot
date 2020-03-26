@@ -1,0 +1,10 @@
+codecov:
+  require_ci_to_pass: yes
+
+comment:
+  layout: "files"
+  behavior: new
+
+status:
+    project: off
+    patch: off
