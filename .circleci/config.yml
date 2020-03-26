@@ -23,7 +23,7 @@ jobs:
       - save_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
           paths:
-            - ./node_modules
+            - node_modules
   lint:
     executor: node-executor
     steps:
@@ -37,7 +37,7 @@ jobs:
     - checkout
     - run:
         name: Run tests
-        command: node_modules/.bin/jest --verbose --silent --ci --runInBand --collectCoverage=true --reporters=default --reporters=jest-junit
+        command: ./node_modules/.bin/jest --verbose --silent --ci --runInBand --collectCoverage=true --reporters=default --reporters=jest-junit
         environment:
           JEST_JUNIT_OUTPUT_DIR: "reports/junit/js-test-results.xml"
     - store_test_results:
