@@ -12,11 +12,11 @@ export default class ReplacementBot extends CommandoClient
 	config: Config;
 	replacementsManager: ReplacementsManager;
 	staticEmbedManager: StaticEmbedManager;
-	startupOptions: StartupOptions;
+	startupOptions: SpecialStartupOptions;
 
 	public ready: boolean;
 
-	constructor(configSettings: ConfigSettings, options: StartupOptions = {})
+	constructor(configSettings: ConfigSettings, options: SpecialStartupOptions = {})
 	{
 		Logger.printLogo();
 		Logger.info('Initialling ReplacementBot...');
@@ -30,7 +30,7 @@ export default class ReplacementBot extends CommandoClient
 		});
 		this.ready = false;
 
-		if(!options.initializeReplacements) options.initializeReplacements = true;
+		if(options.initializeReplacements === undefined) options.initializeReplacements = true;
 
 		// @ts-ignore dispatchers have import problems
 		if(options.useTestDispatcher) this.dispatcher = new UnitTestDispatcher(this, this.registry);
@@ -47,7 +47,6 @@ export default class ReplacementBot extends CommandoClient
 	{
 		return new Promise((resolve, reject) =>
 		{
-			if(this.startupOptions.initializeReplacements) this.replacementsManager.initialize(this.config.get('fetcherName'));
 			this.login(MiscHelpers.getBotToken())
 				.catch((error) =>
 				{
@@ -57,6 +56,10 @@ export default class ReplacementBot extends CommandoClient
 				.then(async ()=>
 				{
 					await this.config.validate(this);
+					if(this.startupOptions.initializeReplacements)
+					{
+						await this.replacementsManager.initialize(this.config.get('fetcherName'));
+					}
 					Logger.info('ReplacementBot successfully launched!');
 					Logger.info('Bot user is: ' + this.user.tag + ' in ' + this.user.client.guilds.size + ' guilds');
 					Logger.info('Next embed update: not implemented');
@@ -86,7 +89,10 @@ export default class ReplacementBot extends CommandoClient
 	}
 }
 
-export type StartupOptions =
+// Set of special options to config deep elements of the bot
+// Not intended for the end-user
+// Primarily for SystemTests
+export type SpecialStartupOptions =
 {
 	useTestDispatcher?: boolean;
 	initializeReplacements?: boolean;

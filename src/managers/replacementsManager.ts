@@ -4,20 +4,12 @@ import ReplacementDay from '../models/replacementDay';
 import { Moment } from 'moment';
 import moment = require('moment');
 import { Config } from './config';
-import MiscHelpers from '../util/miscHelpers';
 
 export default class ReplacementsManager
 {
 	fetcher: ReplacementsFetcher;
 	public initialize(fetcherFileName: string): Promise<void>
 	{
-		// ReplacementsManager is currently disabled inside tests
-		// because it is not working :)
-		if(MiscHelpers.isRunningInTest())
-		{
-			return Promise.resolve();
-		}
-
 		if(this.fetcher != undefined)
 		{
 			Logger.fatalAndCrash('ReplacementsManager cannot be initialized twice');

@@ -12,14 +12,14 @@ export class SystemTestsManager
 	private client: ReplacementBot;
 	private channel: TextChannel;
 
-	public setupClient(): Promise<ReplacementBot>
+	public setupClient(initializeReplacements = true): Promise<ReplacementBot>
 	{
 		return new Promise((resolve, reject) =>
 		{
 			const client = new ReplacementBot(TestUtilities.defaultConfigSettings,
 				{
 					useTestDispatcher: true,
-					initializeReplacements: false,
+					initializeReplacements: initializeReplacements,
 				});
 			client.start()
 				.catch(reject)
