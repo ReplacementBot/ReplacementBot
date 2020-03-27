@@ -53,9 +53,15 @@ These tests are used to test behavior of specific classes of the bot without nee
 // pingCommand.test.ts
 describe('Ping Command', () =>
 {
-	test('should ping bot', (done) => new SystemTest('ping', 'Pinging...', done));
+	test('should ping bot', () =>
+	{
+		// Skip test if running in DRY mode
+		if(SystemTest.shouldSkip()) return;
+
+		return expect(new SystemTest().runTest('ping', SystemTestType.EXPECT_EDIT)).resolves.toContain('The average heartbeat ping is');
+	});
 });
 ```
 
-System test framework custom made to match ReplacementBot need to check bot's responses to commands. Use of that framework simplifies system testing to write that small constructor in every system test.
+System test framework custom made to match ReplacementBot need to check bot's responses to commands. Use of that framework simplifies system testing to write tests that small
 
