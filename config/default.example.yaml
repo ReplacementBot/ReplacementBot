@@ -10,6 +10,9 @@ botOwners:
 # set to false to disable
 daySwitchHour: 16-00 # HH-MM
 
+# all replacements that don't contain this string won't be shown
+# replacementsFilter: '1'
+
 # configuration for cron tasks
 intervals:
   # how often will replacements channel be updated

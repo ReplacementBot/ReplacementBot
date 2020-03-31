@@ -9,17 +9,6 @@ export default class ReplacementDay
 	constructor(date: Moment, replacements?: Replacement[])
 	{
 		this.date = date;
-		if(replacements)
-		{
-			// FIXME
-			for(const replacement of replacements)
-			{
-				if(replacement.description.includes('1'))
-				{
-					this.replacements.push(replacement);
-				}
-			}
-		}
 	}
 
 	public addReplacement(replacement: Replacement): void

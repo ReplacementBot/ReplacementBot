@@ -8,12 +8,14 @@ import { Config } from './config';
 export default class ReplacementsManager
 {
 	fetcher: ReplacementsFetcher;
+
 	public initialize(fetcherFileName: string): Promise<void>
 	{
 		if(this.fetcher != undefined)
 		{
 			Logger.fatalAndCrash('ReplacementsManager cannot be initialized twice');
 		}
+
 		return new Promise((resolve, reject) =>
 		{
 			import('../fetchers/' + fetcherFileName)
@@ -35,29 +37,82 @@ export default class ReplacementsManager
 				});
 		});
 	}
+
 	private isFetcher(object: any): boolean
 	{
 		// fetcher constructor
 		const testObject = new object.default();
 		return testObject.fetchReplacements != undefined;
 	}
+
 	private getFetcherName(): string | undefined
 	{
 		return this.fetcher.constructor.name;
 	}
+
 	public fetchReplacements(date?: Moment): Promise<ReplacementDay | FetchError | ResponseParseError>
 	{
-		if(date == undefined)
+		if(!date) date = this.getDefaultDate();
+		return new Promise((resolve, reject) =>
 		{
-			date = this.getDefaultDate();
+			this.fetcher.fetchReplacements(date)
+				.catch((error) =>
+				{
+					if(this.verifyFetcherResponse(error, 'reject'))
+					{
+						Logger.warn(`Fetcher produced illegal response(${typeof error} whiled rejected`);
+						resolve(this.filterReplacement(error));
+					}
+					else
+					{
+						reject(error);
+					}
+				})
+				.then((result) =>
+				{
+					if(this.verifyFetcherResponse(result, 'resolve'))
+					{
+						Logger.warn(`Fetcher produced illegal response(${typeof result} whiled resolved`);
+						reject(result);
+					}
+					else
+					{
+						resolve(this.filterReplacement(result as ReplacementDay));
+					}
+				});
+		});
+	}
+
+	private verifyFetcherResponse(response: void | ReplacementDay | FetchError | ResponseParseError, method: 'resolve' | 'reject'): boolean
+	{
+		if(method == 'resolve')
+		{
+			return typeof response == typeof ReplacementDay;
 		}
-		return this.fetcher.fetchReplacements(date);
+		else
+		{
+			typeof response != typeof ReplacementDay;
+		}
+	}
+
+	private filterReplacement(replacementDay: ReplacementDay): ReplacementDay
+	{
+		if(!Config.getInstance().contains('replacementsFilter')) return replacementDay;
+
+		const result = new ReplacementDay(replacementDay.date);
+		for(const replacement of replacementDay.replacements)
+		{
+			if(replacement.description.includes(Config.getInstance().get('replacementsFilter')))
+			{
+				result.addReplacement(replacement);
+			}
+		}
 	}
 
 	private getDefaultDate(): moment.Moment
 	{
 		const switchHour = Config.getInstance().get('daySwitchHour');
-		if(switchHour == undefined)
+		if(!switchHour)
 		{
 			return moment();
 		}
