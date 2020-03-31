@@ -1,10 +1,11 @@
 codecov:
-  require_ci_to_pass: yes
+  require_ci_to_pass: no
 
 comment:
-  layout: "files"
+  layout: "files,diff"
   behavior: new
+  require_changes: true
 
 status:
-    project: off
-    patch: off
+  project: off
+  patch: off
