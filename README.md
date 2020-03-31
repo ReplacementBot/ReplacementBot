@@ -3,6 +3,8 @@
 [![Codecov](https://codecov.io/gh/MrBartusek/ReplacementBot/branch/master/graph/badge.svg?token=ONXF6BONI4)](https://codecov.io/gh/MrBartusek/ReplacementBot)
 [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=MrBartusek/ReplacementBot&identifier=222265419)](https://dependabot.com)
 
+🌱 **Beta Phase** - bot is working but, expect problems bugs and breaking changes
+
 ![Presentation Image](https://i.imgur.com/SR7pGcu.png)
 
 ReplacementBot is a Discord bot made to make your life easier. The Bot automatically fetches replacement from your school website and shows them right on your discord server!
@@ -13,7 +15,7 @@ ReplacementBot is a Discord bot made to make your life easier. The Bot automatic
 
 ReplacementBot by the default, constantly updates one of the channels from your guild with freshest replacements. Forget about spamming with commands!
 
-### 💻 Setup Custom Source
+### 📕 Setup Custom Source
 
 ReplacementBot is build to support custom data sources or, as we call it, `fetchers`. Creating your very own fetcher is easy. Here, look at that fetcher:
 ```ts
@@ -29,9 +31,14 @@ export default class MyOwnFetcher implements ReplacementsFetcher
 Put that file in `src\fetchers` and we handle other things by ourselves
 
 ---
+
+## 💻 Public Instance
+
+Unfortunately, Currently Public Instance isn't available 😞 Check Out: [Public Instance Milestone](https://github.com/MrBartusek/ReplacementBot/milestone/3)
+
 ## 🚀 Running Locally
 
-_TODO_
+Check [SETUP.MD](SETUP.MD) for setup instructions!
 
 ## 👥 Contributing
 
