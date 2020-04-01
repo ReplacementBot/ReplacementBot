@@ -1,4 +1,4 @@
-import WebFetcher, { HTTPResponse, HTTPResponseType } from '../src/util/webFetcher';
+import WebFetcher, { HTTPResponse, HTTPResponseType } from '../../src/util/webFetcher';
 
 const TEST_URL = 'https://webscraper.io/test-sites/tables';
 

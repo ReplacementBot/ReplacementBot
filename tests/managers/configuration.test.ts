@@ -1,4 +1,4 @@
-import { Config, ConfigSettings, ConfigSources } from '../src/managers/config';
+import { Config, ConfigSettings, ConfigSources } from '../../src/managers/config';
 
 describe('Configuration', () =>
 {

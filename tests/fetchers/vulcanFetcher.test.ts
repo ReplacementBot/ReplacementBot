@@ -1,10 +1,10 @@
-import VulcanFetcher from '../src/fetchers/vulcanFetcher';
-import { Config, ConfigSettings, ConfigSources } from '../src/managers/config';
-import ReplacementDay from '../src/models/replacementDay';
-import Replacement from '../src/models/replacement';
-import Lesson from '../src/models/lesson';
-import Teacher from '../src/models/teacher';
-import { FetchError } from '../src/models/replacementsFetcher';
+import VulcanFetcher from '../../src/fetchers/vulcanFetcher';
+import { Config, ConfigSettings, ConfigSources } from '../../src/managers/config';
+import ReplacementDay from '../../src/models/replacementDay';
+import Replacement from '../../src/models/replacement';
+import Lesson from '../../src/models/lesson';
+import Teacher from '../../src/models/teacher';
+import { FetchError } from '../../src/models/replacementsFetcher';
 import moment from 'moment';
 
 describe('Vulcan Fetcher', () =>

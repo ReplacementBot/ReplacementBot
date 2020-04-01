@@ -1,4 +1,4 @@
-import { SystemTest, SystemTestType } from '../util/systemTest';
+import { SystemTest, SystemTestType } from '../testUtil/systemTest';
 
 describe('Ping Command', () =>
 {

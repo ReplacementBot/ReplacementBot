@@ -1,5 +1,5 @@
-import Logger from '../src/managers/logger';
-import { ScheduledJob } from '../src/managers/scheduleManager';
+import Logger from '../../src/managers/logger';
+import { ScheduledJob } from '../../src/managers/scheduleManager';
 describe('ScheduleManager', () =>
 {
 	describe('ScheduledJob', () =>

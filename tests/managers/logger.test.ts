@@ -1,4 +1,4 @@
-import Logger from '../src/managers/logger';
+import Logger from '../../src/managers/logger';
 import chalk from 'chalk';
 describe('Logger', () =>
 {
