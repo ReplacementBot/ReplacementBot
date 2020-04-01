@@ -6,6 +6,7 @@ comment:
   behavior: new
   require_changes: true
 
-status:
-  project: off
-  patch: off
+coverage:
+  status:
+    project: off
+    patch: off
