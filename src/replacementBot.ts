@@ -12,11 +12,10 @@ export default class ReplacementBot extends CommandoClient
 	config: Config;
 	replacementsManager: ReplacementsManager;
 	staticEmbedManager: StaticEmbedManager;
-	startupOptions: SpecialStartupOptions;
 
 	public ready: boolean;
 
-	constructor(configSettings: ConfigSettings, options: SpecialStartupOptions = {})
+	constructor(configSettings: ConfigSettings)
 	{
 		Logger.printLogo();
 		Logger.info('Initialling ReplacementBot...');
@@ -30,15 +29,12 @@ export default class ReplacementBot extends CommandoClient
 		});
 		this.ready = false;
 
-		if(options.initializeReplacements === undefined) options.initializeReplacements = true;
-
 		// @ts-ignore dispatchers have import problems
-		if(options.useTestDispatcher) this.dispatcher = new UnitTestDispatcher(this, this.registry);
+		if(MiscHelpers.isRunningInTest()) this.dispatcher = new UnitTestDispatcher(this, this.registry);
 
 		this.config = config;
 		this.replacementsManager = new ReplacementsManager();
 		this.staticEmbedManager = new StaticEmbedManager(this);
-		this.startupOptions = options;
 
 		this.setupCommandsRegistry();
 	}
@@ -56,7 +52,7 @@ export default class ReplacementBot extends CommandoClient
 				.then(async ()=>
 				{
 					await this.config.validate(this);
-					if(this.startupOptions.initializeReplacements)
+					if(!MiscHelpers.isRunningInTest())
 					{
 						await this.replacementsManager.initialize(this.config.get('fetcherName'));
 					}
@@ -88,12 +84,3 @@ export default class ReplacementBot extends CommandoClient
 			});
 	}
 }
-
-// Set of special options to config deep elements of the bot
-// Not intended for the end-user
-// Primarily for SystemTests
-export type SpecialStartupOptions =
-{
-	useTestDispatcher?: boolean;
-	initializeReplacements?: boolean;
-};

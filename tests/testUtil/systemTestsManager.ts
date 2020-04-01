@@ -16,11 +16,7 @@ export class SystemTestsManager
 	{
 		return new Promise((resolve, reject) =>
 		{
-			const client = new ReplacementBot(TestUtilities.defaultConfigSettings,
-				{
-					useTestDispatcher: true,
-					initializeReplacements: initializeReplacements,
-				});
+			const client = new ReplacementBot(TestUtilities.defaultConfigSettings);
 			client.start()
 				.catch(reject)
 				.then(() =>
