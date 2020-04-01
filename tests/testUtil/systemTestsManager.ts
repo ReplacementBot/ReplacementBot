@@ -12,7 +12,7 @@ export class SystemTestsManager
 	private client: ReplacementBot;
 	private channel: TextChannel;
 
-	public setupClient(initializeReplacements = true): Promise<ReplacementBot>
+	public setupClient(): Promise<ReplacementBot>
 	{
 		return new Promise((resolve, reject) =>
 		{
