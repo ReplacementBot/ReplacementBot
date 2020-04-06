@@ -11,7 +11,7 @@ module.exports = (): Promise<void> =>
 	{
 		console.log(chalk.green('Delete test channel'));
 		const manager = new SystemTestsManager();
-		manager.setupClient(false)
+		manager.setupClient()
 			.catch(reject)
 			.then((client: ReplacementBot) =>
 			{
