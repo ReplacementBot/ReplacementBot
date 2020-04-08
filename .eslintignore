@@ -1,3 +1,4 @@
 build/*
 *.md
 *.yaml
+*.json
