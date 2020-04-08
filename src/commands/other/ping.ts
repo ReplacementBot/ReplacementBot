@@ -7,7 +7,7 @@ export default class PingCommand extends Command
 	{
 		super(client, {
 			name: 'ping',
-			group: 'util',
+			group: 'other',
 			memberName: 'ping',
 			description: 'Checks the bot\'s ping to the Discord server.',
 		});

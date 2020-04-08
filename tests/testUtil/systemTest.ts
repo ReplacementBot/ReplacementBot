@@ -5,6 +5,7 @@ import { SystemTestsManager } from './systemTestsManager';
 
 export class SystemTest
 {
+	public static timeout = 15 * 1000;
 	public static shouldSkip(): boolean
 	{
 		return TestUtilities.getRunType().isDry();

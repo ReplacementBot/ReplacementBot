@@ -6,6 +6,6 @@ describe('Ping Command', () =>
 	{
 		if(SystemTest.shouldSkip()) return;
 		return expect(new SystemTest().runTest('ping', SystemTestType.EXPECT_EDIT)).resolves.toContain('The average heartbeat ping is');
-	});
+	}, SystemTest.timeout);
 });
 
