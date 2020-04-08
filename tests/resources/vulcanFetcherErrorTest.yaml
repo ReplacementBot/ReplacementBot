@@ -1,6 +1,0 @@
----
-# file for testing purposes, do not edit
-
-fetchersConfiguration:
-  vulcanFetcher:
-    url: 'https://httpstat.us/500'

@@ -16,7 +16,8 @@ export class SystemTestsManager
 	{
 		return new Promise((resolve, reject) =>
 		{
-			const client = new ReplacementBot(TestUtilities.defaultConfigSettings);
+			process.env.REPLACEMENT_BOT_CONFIG = `{ "prefix":"${TestUtilities.commandPrefix}" }`;
+			const client = new ReplacementBot();
 			client.start()
 				.catch(reject)
 				.then(() =>

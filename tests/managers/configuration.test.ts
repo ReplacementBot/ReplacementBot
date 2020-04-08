@@ -1,25 +1,18 @@
-import { Config, ConfigSettings, ConfigSources } from '../../src/managers/config';
+import Config from '../../src/managers/config';
 
 describe('Configuration', () =>
 {
-	const configSettings = new ConfigSettings(ConfigSources.FILE, 'tests/resources/loadTest.yaml');
-	test('should load from file', () =>
+	test('should load directly', () =>
 	{
-		const config = new Config(configSettings);
-		expect(config.get('prefix')).toBe('r!');
+		process.env.REPLACEMENT_BOT_CONFIG = '';
+		Config.initialize('{ "prefix":"test" }');
+		expect(Config.get('prefix')).toBe('test');
 	});
 
-	test('#makeStatic', () =>
+	test('should load from ENV', () =>
 	{
-		new Config(configSettings).makeStatic();
-		expect(Config.getInstance().get('prefix')).toBe('r!');
-	});
-
-	test('should detect errors in config', () =>
-	{
-		const config = new Config(configSettings);
-		expect(config.contains('fetcherName')).toBe(false);
-
-		expect(config.validate(false)).rejects.toStrictEqual(new Error('Config missing crucial fetcherName value'));
+		process.env.REPLACEMENT_BOT_CONFIG = '{ "prefix":"test" }';
+		Config.initialize();
+		expect(Config.get('prefix')).toBe('test');
 	});
 });

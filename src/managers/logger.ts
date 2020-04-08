@@ -1,6 +1,6 @@
 import chalk from 'chalk';
 import figlet from 'figlet';
-import MiscHelpers from '../util/miscHelpers';
+import Helpers from '../util/helpers';
 
 export default class Logger
 {
@@ -13,7 +13,7 @@ export default class Logger
 			exitCode = 5;
 		}
 		this.fatal(message);
-		if(MiscHelpers.isRunningInTest())
+		if(Helpers.isRunningInTest())
 		{
 			throw Error(message);
 		}
@@ -24,27 +24,27 @@ export default class Logger
 	}
 	public static fatal(message: string): void
 	{
-		if(this.muted) return;
+		if(Logger.muted) return;
 		console.log(chalk.bold.red('[FATAL ERROR] ') + chalk.redBright(message));
 	}
 	public static error(message: string): void
 	{
-		if(this.muted) return;
+		if(Logger.muted) return;
 		console.log(chalk.bold.red('[ERROR] ') + chalk.redBright(message));
 	}
 	public static warn(message: string): void
 	{
-		if(this.muted) return;
+		if(Logger.muted) return;
 		console.log(chalk.bold.yellow('[WARN] ') + chalk.yellowBright(message));
 	}
 	public static info(message: string): void
 	{
-		if(this.muted) return;
+		if(Logger.muted) return;
 		console.log(chalk.bold.white('[INFO] ') + message);
 	}
 	public static printLogo(): void
 	{
-		if(this.muted) return;
+		if(Logger.muted) return;
 		console.log();
 		console.log(chalk.magenta(figlet.textSync('Replacement Bot')));
 		console.log();
@@ -53,6 +53,6 @@ export default class Logger
 	public static mute(): void
 	{
 		console.log(chalk.green('Logger has been muted'));
-		this.muted = true;
+		Logger.muted = true;
 	}
 }

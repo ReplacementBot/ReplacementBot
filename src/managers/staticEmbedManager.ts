@@ -1,7 +1,7 @@
 import { TextChannel, MessageEmbed, Collection, Message, RichEmbed, Guild } from 'discord.js';
 import Logger from './logger';
 import ReplacementBot from '../replacementBot';
-import { Config } from './config';
+import Config from './config';
 import { ReplacementsEmbed, ReplacementsEmbedFooterType } from '../models/replacementsEmbed';
 import ReplacementDay from '../models/replacementDay';
 
@@ -113,7 +113,7 @@ export default class StaticEmbedManager
 			if(channel.type == 'text')
 			{
 				const topic = channel.topic;
-				const emoji = Config.getInstance().get('replacementsChannelsTopicEmoji');
+				const emoji = Config.get('replacementsChannelsTopicEmoji');
 				if(topic && emoji)
 				{
 					return topic.includes(emoji);

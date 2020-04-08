@@ -1,38 +1,36 @@
 import Logger from './managers/logger';
 import { CommandoClient } from 'discord.js-commando';
 import path from 'path';
-import { ConfigSettings, Config } from './managers/config';
+import Config from './managers/config';
 import ReplacementsManager from './managers/replacementsManager';
 import StaticEmbedManager from './managers/staticEmbedManager';
-import MiscHelpers from './util/miscHelpers';
+import Helpers from './util/helpers';
 import UnitTestDispatcher from './util/commandoCustomDispatcher';
 
 export default class ReplacementBot extends CommandoClient
 {
-	config: Config;
 	replacementsManager: ReplacementsManager;
 	staticEmbedManager: StaticEmbedManager;
 
 	public ready: boolean;
 
-	constructor(configSettings: ConfigSettings)
+	constructor()
 	{
 		Logger.printLogo();
 		Logger.info('Initialling ReplacementBot...');
 
-		const config = new Config(configSettings).makeStatic();
+		Config.initialize();
 
 		super({
-			commandPrefix: config.get('prefix'),
-			owner: config.get('botOwners'),
+			commandPrefix: Config.get('prefix'),
+			owner: Config.get('botOwners'),
 			unknownCommandResponse: false,
 		});
 		this.ready = false;
 
 		// @ts-ignore dispatchers have import problems
-		if(MiscHelpers.isRunningInTest()) this.dispatcher = new UnitTestDispatcher(this, this.registry);
+		if(Helpers.isRunningInTest()) this.dispatcher = new UnitTestDispatcher(this, this.registry);
 
-		this.config = config;
 		this.replacementsManager = new ReplacementsManager();
 		this.staticEmbedManager = new StaticEmbedManager(this);
 
@@ -43,7 +41,7 @@ export default class ReplacementBot extends CommandoClient
 	{
 		return new Promise((resolve, reject) =>
 		{
-			this.login(MiscHelpers.getBotToken())
+			this.login(Helpers.getBotToken())
 				.catch((error) =>
 				{
 					Logger.fatal('Failed to launch ReplacementBot ' + error.message);
@@ -51,10 +49,9 @@ export default class ReplacementBot extends CommandoClient
 				})
 				.then(async ()=>
 				{
-					await this.config.validate(this);
-					if(!MiscHelpers.isRunningInTest())
+					if(!Helpers.isRunningInTest())
 					{
-						await this.replacementsManager.initialize(this.config.get('fetcherName'));
+						await this.replacementsManager.initialize(Config.get('fetcher').name);
 					}
 					Logger.info('ReplacementBot successfully launched!');
 					Logger.info('Bot user is: ' + this.user.tag + ' in ' + this.user.client.guilds.size + ' guilds');

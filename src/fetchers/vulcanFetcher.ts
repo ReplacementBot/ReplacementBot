@@ -1,10 +1,9 @@
 import { ReplacementsFetcher, FetchError, ResponseParseError } from '../models/replacementsFetcher';
-import { Config } from '../managers/config';
+import Config from '../managers/config';
 import ReplacementDay from '../models/replacementDay';
 import moment = require('moment');
 import WebFetcher, { HTTPResponse } from '../util/webFetcher';
 import cheerio from 'cheerio';
-import FetchersHelpers from '../util/fetcherHelpers';
 import Replacement from '../models/replacement';
 import Lesson from '../models/lesson';
 import Teacher from '../models/teacher';
@@ -29,9 +28,8 @@ export default class VulcanFetcher implements ReplacementsFetcher
 	{
 		return new Promise((resolve, reject) =>
 		{
-			const config = Config.getInstance().get('fetchersConfiguration')['vulcanFetcher'];
-			const url = FetchersHelpers.formatURL(config, date);
-			this.webFetcher.request(url, 'ISO-8859-2')
+			const config = Config.get('fetcher').config;
+			this.webFetcher.request(config.url, 'ISO-8859-2')
 				.then((requestResult: HTTPResponse) =>
 				{
 					const data = cheerio.load(requestResult.result.replace(/\r?\n|\r/g, ''));

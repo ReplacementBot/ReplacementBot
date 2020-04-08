@@ -1,4 +1,4 @@
-export default class MiscHelpers
+export default class Helpers
 {
 	public static isRunningInTest(): boolean
 	{

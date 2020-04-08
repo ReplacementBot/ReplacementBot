@@ -1,132 +1,93 @@
-import fs from 'fs';
-import appRoot from 'app-root-path';
 import Logger from './logger';
-import ConfigValidator from '../util/configValidator';
-import { CommandoClient } from 'discord.js-commando';
-import yaml from 'js-yaml';
+import fs from 'fs';
+import appDir from 'app-root-path';
+import convict from 'convict';
+import moment from 'moment';
+import chalk from 'chalk';
+import Helpers from '../util/helpers';
 
-const DEFAULT_CONFIG_PATH = 'config/default.yaml';
+const configSchema = {
+	botOwners: {
+		format: Array,
+		default: [ '212988300137463809' ],
+	},
+	prefix: {
+		format: String,
+		default: 'r!',
+	},
+	daySwitchHour: {
+		format: function check(val: any): void
+		{
+			if(!moment(val, 'k:m').isValid()) throw new TypeError(`daySwitchHour '${val}' is not in a hh:mm format`);
 
-export enum ConfigSources { AUTO, FILE, ENVIRONMENT }
+		},
+		default: '16:00',
+	},
+	replacementsFetching: {
+		filter: {
+			format: RegExp,
+			default: '(.*?)',
+		},
+	},
+	replacementsChannel:
+	{
+		updateCron: {
+			format: String,
+			default: '0,30 * * * *',
+		},
+		topicEmoji: {
+			format: String,
+			default: '🗓️',
+		},
+	},
+	fetcher: {
+		name: {
+			format: String,
+			default: 'dummyFetcher',
+		},
+		config: {
+			format: Object,
+			default: {},
+		},
+	},
+};
 
-export class Config
+export default class Config
 {
-	static instance: Config;
+	private static data: convict.Config<any>;
 
-	data: object;
-	validator: ConfigValidator;
-	constructor(settings: ConfigSettings)
+	public static initialize(data?: string): void
 	{
-		switch (settings.source)
-		{
-		case ConfigSources.ENVIRONMENT:
-			this.environmentSetup();
-			break;
-		case ConfigSources.FILE:
-			this.fileSetup(settings.args);
-			break;
-		default:
-			Logger.fatalAndCrash(`Config setup function for source: "${settings.source}" is not implemented`);
-			break;
-		}
+		const parsedJSONData = JSON.parse(data ? data : Config.getJSONData());
+		Config.data = convict(configSchema);
+		Config.data.load(parsedJSONData);
+
+		// Slightly hacky way to remove default convict prefix https://github.com/mozilla/node-convict/issues/363
+		// @ts-ignore types file is outdated
+		Config.data.validate({ allowed: 'warn', output: (warning: string) => Logger.warn('Configuration Warning: ' + warning.substr(20)) });
 	}
 
-	private fileSetup(path: string): void
+	private static getJSONData(): string
 	{
-		const content = fs.readFileSync(appRoot + '/' + path);
-		const json = yaml.safeLoad(content.toString());
-		this.data = json;
-	}
-	private environmentSetup(): void
-	{
-		this.data = yaml.safeLoad(process.env.REPLACEMENT_BOT_CONFIG);
-	}
-
-	public static getInstance(): Config
-	{
-		if(Config.instance == undefined)
+		if(fs.existsSync(appDir + '/config/config.json') && !Helpers.isRunningInTest())
 		{
-			Logger.fatalAndCrash('Failed to get Static Config Instance because it isn\'t set');
-		}
-		return Config.instance;
-	}
-	public makeStatic(): Config
-	{
-		if(Config.instance != undefined)
-		{
-			Logger.warn('Config has been set static when another instance is static too');
-		}
-		Config.instance = this;
-		return this;
-	}
-	public contains(key: string): boolean
-	{
-		if(this.data == undefined)
-		{
-			return undefined;
-		}
-		else
-		{
-			return Object.prototype.hasOwnProperty.call(this.data, key);
-		}
-	}
-	public get(key: string): any
-	{
-		if(this.data == undefined)
-		{
-			return undefined;
-		}
-		else if(this.contains(key))
-		{
-			return (this.data as Indexable)[key] as any;
-		}
-		else
-		{
-			return undefined;
-		}
-	}
-	public async validate(client: CommandoClient | false): Promise<void>
-	{
-		await new ConfigValidator(client, this).validate();
-	}
-}
-
-export class ConfigSettings
-{
-	source: ConfigSources;
-	args: any;
-	constructor(source: ConfigSources, args?: any)
-	{
-		if(source == ConfigSources.AUTO)
-		{
-			this.detectConfigSource();
-		}
-		else
-		{
-			this.source = source;
-			this.args = args;
-		}
-	}
-	private detectConfigSource(): void
-	{
-		if(fs.existsSync(DEFAULT_CONFIG_PATH))
-		{
-			this.source = ConfigSources.FILE;
-			this.args = DEFAULT_CONFIG_PATH;
+			return fs.readFileSync(appDir + '/config/config.json').toString();
 		}
 		else if(process.env.REPLACEMENT_BOT_CONFIG)
 		{
-			this.source = ConfigSources.ENVIRONMENT;
-			this.args = null;
+			return process.env.REPLACEMENT_BOT_CONFIG;
 		}
 		else
 		{
-			Logger.fatalAndCrash('Config source has been set to AUTO, but it failed to detect automatically');
+			Logger.warn('Configuration file or ENV not found ' + chalk.gray(appDir + '\\config\\config.json'));
+			return '{}';
 		}
 	}
-}
 
-// Small cheat to index objects in typescript
-interface Indexable {
-	[key: string]: any;
+	public static get(key: string): any
+	{
+		if(!Config.data) Logger.fatalAndCrash('Config is not initialized while something tried to get a value of it');
+		if(!Config.data.getSchema().properties[key]) Logger.fatalAndCrash(`'${key}' value don't exist in config schema while something tried to access it`);
+		return Config.data.get(key);
+	}
 }

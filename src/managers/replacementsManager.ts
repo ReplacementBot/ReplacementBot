@@ -3,7 +3,7 @@ import Logger from './logger';
 import ReplacementDay from '../models/replacementDay';
 import { Moment } from 'moment';
 import moment = require('moment');
-import { Config } from './config';
+import Config from './config';
 
 export default class ReplacementsManager
 {
@@ -97,12 +97,12 @@ export default class ReplacementsManager
 
 	private filterReplacement(replacementDay: ReplacementDay): ReplacementDay
 	{
-		if(!Config.getInstance().contains('replacementsFilter')) return replacementDay;
+		if(!Config.get('replacementsFilter')) return replacementDay;
 
 		const result = new ReplacementDay(replacementDay.date);
 		for(const replacement of replacementDay.replacements)
 		{
-			if(replacement.description.includes(Config.getInstance().get('replacementsFilter')))
+			if(replacement.description.includes(Config.get('replacementsFilter')))
 			{
 				result.addReplacement(replacement);
 			}
@@ -111,7 +111,7 @@ export default class ReplacementsManager
 
 	private getDefaultDate(): moment.Moment
 	{
-		const switchHour = Config.getInstance().get('daySwitchHour');
+		const switchHour = Config.get('daySwitchHour');
 		if(!switchHour)
 		{
 			return moment();

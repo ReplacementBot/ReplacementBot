@@ -1,9 +1,7 @@
-import { ConfigSettings, ConfigSources } from '../../src/managers/config';
 import chalk from 'chalk';
 
 export default class TestUtilities
 {
-	static defaultConfigSettings = new ConfigSettings(ConfigSources.FILE, 'tests/resources/default.yaml');
 	static commandPrefix = 'replacement-test!';
 
 	public static getTestGuildId(): string
@@ -35,7 +33,17 @@ export default class TestUtilities
 			return new TestRunType(TestRunTypeEnum.LOCAL_FULL);
 		}
 	}
+
+	public static generateFetcherConfig(fetcherName: string, config: object): string
+	{
+		const result = {} as any;
+		result.fetcher = {} as any;
+		result.fetcher.name = fetcherName;
+		result.fetcher.config = config;
+		return JSON.stringify(result);
+	}
 }
+
 export class TestRunType
 {
 	type: TestRunTypeEnum;
