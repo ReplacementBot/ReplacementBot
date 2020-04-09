@@ -10,6 +10,10 @@ export default class ReplacementDay
 	{
 		this.date = date;
 		this.replacements = replacements;
+		if(this.replacements === undefined)
+		{
+			this.replacements = [];
+		}
 	}
 
 	public addReplacement(replacement: Replacement): void

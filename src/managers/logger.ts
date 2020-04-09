@@ -1,6 +1,6 @@
 import chalk from 'chalk';
 import figlet from 'figlet';
-import Helpers from '../util/helpers';
+import TestUtilities from '../../tests/testUtil/util';
 
 export default class Logger
 {
@@ -13,7 +13,7 @@ export default class Logger
 			exitCode = 5;
 		}
 		this.fatal(message);
-		if(Helpers.isRunningInTest())
+		if(TestUtilities.isRunningInTest())
 		{
 			throw Error(message);
 		}

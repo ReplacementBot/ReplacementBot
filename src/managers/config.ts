@@ -4,7 +4,8 @@ import appDir from 'app-root-path';
 import convict from 'convict';
 import moment from 'moment';
 import chalk from 'chalk';
-import Helpers from '../util/helpers';
+
+import TestUtilities from '../../tests/testUtil/util';
 
 const configSchema = {
 	botOwners: {
@@ -69,7 +70,7 @@ export default class Config
 
 	private static getJSONData(): string
 	{
-		if(fs.existsSync(appDir + '/config/config.json') && !Helpers.isRunningInTest())
+		if(fs.existsSync(appDir + '/config/config.json') && !TestUtilities.isRunningInTest())
 		{
 			return fs.readFileSync(appDir + '/config/config.json').toString();
 		}

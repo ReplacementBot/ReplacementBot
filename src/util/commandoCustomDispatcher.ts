@@ -6,17 +6,16 @@
 */
 
 import { CommandoClient } from 'discord.js-commando';
-
 import { CommandRegistry } from 'discord.js-commando';
 import { Message } from 'discord.js';
 import Logger from '../managers/logger';
-import Helpers from './helpers';
+import TestUtilities from '../../tests/testUtil/util';
 
 export default class UnitTestDispatcher extends require('discord.js-commando/src/dispatcher')
 {
 	constructor(client: CommandoClient, registry: CommandRegistry)
 	{
-		if(!Helpers.isRunningInTest())
+		if(!TestUtilities.isRunningInTest())
 		{
 			Logger.error('UnitTestDispatcher has been initialized outside tests, that will create problems with executing commands');
 		}

@@ -11,7 +11,7 @@ export default class ReplacementsManager
 
 	public initialize(fetcherFileName: string): Promise<void>
 	{
-		if(this.fetcher != undefined)
+		if(this.fetcher !== undefined)
 		{
 			Logger.fatalAndCrash('ReplacementsManager cannot be initialized twice');
 		}
@@ -52,6 +52,7 @@ export default class ReplacementsManager
 
 	public fetchReplacements(date?: Moment): Promise<ReplacementDay | FetchError | ResponseParseError>
 	{
+		if(this.fetcher === undefined) throw new Error('fetchReplacements was called but ReplacementsManager hasn\'t been initialized');
 		if(!date) date = this.getDefaultDate();
 		return new Promise((resolve, reject) =>
 		{
@@ -97,16 +98,16 @@ export default class ReplacementsManager
 
 	private filterReplacement(replacementDay: ReplacementDay): ReplacementDay
 	{
-		if(!Config.get('replacementsFilter')) return replacementDay;
-
 		const result = new ReplacementDay(replacementDay.date);
+		const regex = new RegExp(Config.get('replacementsFetching').filter);
 		for(const replacement of replacementDay.replacements)
 		{
-			if(replacement.description.includes(Config.get('replacementsFilter')))
+			if(regex.test(replacement.description))
 			{
 				result.addReplacement(replacement);
 			}
 		}
+		return result;
 	}
 
 	private getDefaultDate(): moment.Moment

@@ -42,6 +42,11 @@ export default class TestUtilities
 		result.fetcher.config = config;
 		return JSON.stringify(result);
 	}
+
+	public static isRunningInTest(): boolean
+	{
+		return process.env.NODE_ENV === 'test';
+	}
 }
 
 export class TestRunType
