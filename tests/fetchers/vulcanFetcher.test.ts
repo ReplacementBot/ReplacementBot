@@ -15,7 +15,7 @@ describe('Vulcan Fetcher', () =>
 	{
 		Config.initialize(TestUtilities.generateFetcherConfig(
 			'vulcanFetcher',
-			{ url: 'http://mrbartusek.000webhostapp.com/ReplacementBot/VulcanEmptyUnitTest.html' },
+			{ url: 'http://mrbartusek.000webhostapp.com/ReplacementBot/VulcanUnitTest.html' },
 		));
 		await expect(new VulcanFetcher().fetchReplacements(fetchingTime)).resolves.toStrictEqual(
 			new ReplacementDay(fetchingTime, [

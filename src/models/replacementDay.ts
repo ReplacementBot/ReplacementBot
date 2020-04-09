@@ -9,6 +9,7 @@ export default class ReplacementDay
 	constructor(date: Moment, replacements?: Replacement[])
 	{
 		this.date = date;
+		this.replacements = replacements;
 	}
 
 	public addReplacement(replacement: Replacement): void
@@ -31,10 +32,11 @@ export default class ReplacementDay
 
 	public toString(title = true, safe = false): string
 	{
-		let result = title ? `**Replacements for: ${this.getWeekDay()}**` : '';
+		let result = title ? `**Replacements for: ${this.getWeekDay()}**\r\n` : '';
+		if(this.replacements.length == 0) return ':x: No Replacements';
 		for(const replacement of this.replacements)
 		{
-			result += '\r' + replacement.toString();
+			result += replacement.toString();
 		}
 		if(safe)
 		{

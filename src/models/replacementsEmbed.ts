@@ -34,7 +34,7 @@ export class ReplacementsEmbed
 		{
 			richEmbed.addField(
 				this.data.length > 1 ? `Replacements for: ${replacementDay.getWeekDay()}` : 'Replacements list:',
-				replacementDay.replacements.length > 0 ? replacementDay.toString(false) : ':x: No replacements');
+				replacementDay.toString(false));
 		}
 
 		return richEmbed;
