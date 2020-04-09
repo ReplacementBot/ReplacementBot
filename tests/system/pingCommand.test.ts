@@ -5,7 +5,13 @@ describe('Ping Command', () =>
 	test('should ping bot', () =>
 	{
 		if(SystemTest.shouldSkip()) return;
-		return expect(new SystemTest().runTest('ping', SystemTestType.EXPECT_EDIT)).resolves.toContain('The average heartbeat ping is');
+		return expect(new SystemTest().runTest('ping', SystemTestType.EXPECT_EDIT)).resolves.toStrictEqual(
+			expect.objectContaining(
+				{
+					'content': expect.stringContaining('The average heartbeat ping is'),
+				},
+			),
+		);
 	}, SystemTest.timeout);
 });
 

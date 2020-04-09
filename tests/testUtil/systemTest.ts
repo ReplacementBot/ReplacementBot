@@ -1,6 +1,6 @@
 import TestUtilities from './util';
 import ReplacementBot from '../../src/replacementBot';
-import { TextChannel, MessageCollector } from 'discord.js';
+import { TextChannel, MessageCollector, Message } from 'discord.js';
 import { SystemTestsManager } from './systemTestsManager';
 
 export class SystemTest
@@ -11,7 +11,7 @@ export class SystemTest
 		return TestUtilities.getRunType().isDry();
 	}
 
-	public runTest(command: string, type: SystemTestType): Promise<string>
+	public runTest(command: string, type: SystemTestType): Promise<Message>
 	{
 		return new Promise((resolve, reject) =>
 		{
@@ -37,7 +37,7 @@ export class SystemTest
 							collector.stop();
 							client.stop().then(() =>
 							{
-								resolve(message.content);
+								resolve(message);
 							});
 						});
 					}
@@ -48,7 +48,7 @@ export class SystemTest
 						{
 							client.stop().then(() =>
 							{
-								resolve(newMessage.content);
+								resolve(newMessage);
 							});
 						});
 					}
