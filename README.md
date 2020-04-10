@@ -1,5 +1,5 @@
 # ReplacementBot 📅
-![CircleCI Build](https://img.shields.io/circleci/build/github/MrBartusek/ReplacementBot?label=circleci&logo=circleci&token=6bae64ae7a523f3f207804bf7818dc1d56f420a4)
+[![CircleCI Build](https://img.shields.io/circleci/build/github/MrBartusek/ReplacementBot?label=circleci&logo=circleci&token=6bae64ae7a523f3f207804bf7818dc1d56f420a4)](https://circleci.com/gh/MrBartusek/ReplacementBot)
 [![Codecov](https://codecov.io/gh/MrBartusek/ReplacementBot/branch/master/graph/badge.svg?token=ONXF6BONI4)](https://codecov.io/gh/MrBartusek/ReplacementBot)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/MrBartusek/ReplacementBot?color=brightgreen&logo=github)
 [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=MrBartusek/ReplacementBot&identifier=222265419)](https://dependabot.com)
