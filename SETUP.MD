@@ -8,7 +8,7 @@ There is a detailed guild which guides you through the process: [Creating a Bot 
 ## ⚡️ Setup Bot
 
 ### Install Required Software:
-- [GIT](https://git-scm.com) or GUI such (GitHub Desktop)[https://desktop.github.com]
+- [GIT](https://git-scm.com) (GUI such [GitHub Desktop](https://desktop.github.com) can be helpful)
 - [Node.JS](https://nodejs.org)
 
 ### Clone The Repository
@@ -37,13 +37,7 @@ npm run build
 
 ## 🔧 Configure Bot
 
-**Note:** Configuration will be re-written #32
-
-Have you already set up everything? Cool, that step will allow you to set up bot's behaviour.
-
-Duplicate config file from `config\default.example.yaml` and rename it to `default.yaml` and change needed values.
-
-Set `REPLACEMENT_BOT_TOKEN` to your bot token.
+*TODO: Create wiki page for that*
 
 ## 🚀 Launch!
 
@@ -52,4 +46,4 @@ To run the bot type:
 npm start
 ```
 
-Enjoy!
+Enjoy! Be sure to report any issues or feature request on [issue page](https://github.com/MrBartusek/ReplacementBot/issues)
