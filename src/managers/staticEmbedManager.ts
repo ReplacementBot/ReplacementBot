@@ -18,24 +18,28 @@ export default class StaticEmbedManager
 		}
 	}
 
-	public async updateAllChannels(): Promise<number[]>
+	public async updateAllChannels(): Promise<string>
 	{
-		let updatedCount = 0;
-		const channels = this.findChannels();
-		for(const channel of channels.array())
+		return new Promise((resolve, reject) =>
 		{
+			const manager = this.bot.staticEmbedManager;
 
-			this.updateChannel(channel)
-				.then((x) =>
+			const channels = this.findChannels();
+			const promises = [];
+			for(const channel of channels.array())
+			{
+				promises.push(this.updateChannel(channel));
+			}
+			Promise.all(promises)
+				.then(() =>
 				{
-					updatedCount++;
+					resolve(`Updated ${this.getChannelsCount()} channels`);
 				})
 				.catch((error) =>
 				{
-					Logger.error('Failed to update replacements channel: ' + error);
+					reject('Failed to update replacements channel: ' + error);
 				});
-		}
-		return [channels.size, updatedCount];
+		});
 	}
 
 	public async updateChannel(channel: TextChannel): Promise<void>
@@ -113,8 +117,8 @@ export default class StaticEmbedManager
 			if(channel.type == 'text')
 			{
 				const topic = channel.topic;
-				const emoji = Config.get('replacementsChannelsTopicEmoji');
-				if(topic && emoji)
+				const emoji = Config.get('replacementsChannel').topicEmoji;
+				if(topic)
 				{
 					return topic.includes(emoji);
 				}

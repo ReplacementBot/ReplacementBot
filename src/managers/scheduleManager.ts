@@ -28,7 +28,7 @@ export class ScheduledJob extends CronJob
 			await this.jobFunction()
 				.then((promiseResult: void | string) =>
 				{
-					Logger.info(`Successfully executed ${this.name} job` + (promiseResult ? `(${promiseResult})` : ''));
+					Logger.info(`Successfully executed '${this.name}' job ` + (promiseResult ? `(${promiseResult})` : ''));
 				})
 				.catch((error: void | string) =>
 				{
@@ -54,10 +54,14 @@ export class ScheduledJob extends CronJob
 
 export default class ScheduleManager
 {
-	jobs: ScheduledJob[] = [];
+	private jobs: ScheduledJob[] = [];
 
 	public addJob(newJob: ScheduledJob): number
 	{
 		return this.jobs.push(newJob);
+	}
+	public getJobs(): ScheduledJob[]
+	{
+		return this.jobs;
 	}
 }

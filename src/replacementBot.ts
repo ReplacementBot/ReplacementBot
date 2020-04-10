@@ -4,11 +4,13 @@ import path from 'path';
 import Config from './managers/config';
 import ReplacementsManager from './managers/replacementsManager';
 import StaticEmbedManager from './managers/staticEmbedManager';
+import ScheduleManager, { ScheduledJob } from './managers/scheduleManager';
 
 export default class ReplacementBot extends CommandoClient
 {
 	replacementsManager: ReplacementsManager;
 	staticEmbedManager: StaticEmbedManager;
+	scheduleManager: ScheduleManager;
 
 	public ready: boolean;
 
@@ -28,8 +30,7 @@ export default class ReplacementBot extends CommandoClient
 
 		this.replacementsManager = new ReplacementsManager();
 		this.staticEmbedManager = new StaticEmbedManager(this);
-
-		this.setupCommandsRegistry();
+		this.scheduleManager = new ScheduleManager();
 	}
 
 	public async start(): Promise<string>
@@ -45,9 +46,11 @@ export default class ReplacementBot extends CommandoClient
 				.then(async ()=>
 				{
 					await this.replacementsManager.initialize(Config.get('fetcher').name);
+					this.setupCommandsRegistry();
+					this.setupScheduleManager();
 					Logger.info('ReplacementBot successfully launched!');
 					Logger.info('Bot user is: ' + this.user.tag + ' in ' + this.user.client.guilds.size + ' guilds');
-					Logger.info('Next embed update: not implemented');
+					Logger.info('Next embed update: ' + this.scheduleManager.getJobs()[0].nextDate().fromNow());
 					this.ready = true;
 					resolve();
 				});
@@ -71,5 +74,17 @@ export default class ReplacementBot extends CommandoClient
 				filter: /^([^.].*)\.(js|ts)$/,
 				dirname: path.join(__dirname, 'commands'),
 			});
+	}
+
+	private setupScheduleManager(): void
+	{
+		this.scheduleManager.addJob(new ScheduledJob(
+			Config.get('replacementsChannel').updateCron,
+			'Update Channels',
+			() =>
+			{
+				return this.staticEmbedManager.updateAllChannels();
+			},
+		));
 	}
 }
