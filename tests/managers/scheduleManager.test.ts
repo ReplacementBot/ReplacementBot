@@ -11,7 +11,7 @@ describe('ScheduleManager', () =>
 			{
 				Promise.resolve();
 			}, false).fire();
-			expect(Logger.info).toHaveBeenCalledWith('Successfully executed Test job');
+			expect(Logger.info).toHaveBeenCalledWith('Successfully executed \'Test\' job');
 		});
 
 		test('should catch errors', () =>
