@@ -50,10 +50,10 @@ export default class StaticEmbedManager
 				{
 					this.bot.replacementsManager.fetchReplacements()
 						.catch(reject)
-						.then(async (replacements) =>
+						.then((replacements: ReplacementDay) =>
 						{
-							const embed = new ReplacementsEmbed(replacements as ReplacementDay).build(
-								`Replacements for ${(replacements as ReplacementDay).getWeekDay()}`,
+							const embed = new ReplacementsEmbed(replacements).build(
+								`Replacements for ${replacements.getWeekDay()}`,
 								ReplacementsEmbedFooterType.UPDATED_ON);
 							if(botMessage == undefined || botMessage.embeds.length == 0)
 							{
