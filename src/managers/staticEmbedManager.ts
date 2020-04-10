@@ -22,8 +22,6 @@ export default class StaticEmbedManager
 	{
 		return new Promise((resolve, reject) =>
 		{
-			const manager = this.bot.staticEmbedManager;
-
 			const channels = this.findChannels();
 			const promises = [];
 			for(const channel of channels.array())
