@@ -43,7 +43,7 @@ Have you already set up everything? Cool, that step will allow you to set up bot
 
 Duplicate config file from `config\default.example.yaml` and rename it to `default.yaml` and change needed values.
 
-Set `REPLACEMENT_BOT_TEST_TOKEN` to your bot token.
+Set `REPLACEMENT_BOT_TOKEN` to your bot token.
 
 ## 🚀 Launch!
 

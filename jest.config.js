@@ -6,9 +6,6 @@ module.exports = {
 
 	clearMocks: true,
 
-	globalSetup: './tests/testUtil/setup.ts',
-	globalTeardown: './tests/testUtil/teardown.ts',
-
 	reporters: ['default', 'jest-junit'],
 
 	testEnvironment: 'node',

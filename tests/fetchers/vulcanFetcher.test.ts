@@ -6,7 +6,7 @@ import Lesson from '../../src/models/lesson';
 import Teacher from '../../src/models/teacher';
 import { FetchError } from '../../src/models/replacementsFetcher';
 import moment from 'moment';
-import TestUtilities from '../testUtil/util';
+import TestUtilities from '../util';
 
 describe('Vulcan Fetcher', () =>
 {

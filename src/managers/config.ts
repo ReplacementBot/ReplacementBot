@@ -5,7 +5,7 @@ import convict from 'convict';
 import moment from 'moment';
 import chalk from 'chalk';
 
-import TestUtilities from '../../tests/testUtil/util';
+import TestUtilities from '../../tests/util';
 
 const configSchema = {
 	botOwners: {

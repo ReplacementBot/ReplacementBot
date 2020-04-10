@@ -1,6 +1,6 @@
 import chalk from 'chalk';
 import figlet from 'figlet';
-import TestUtilities from '../../tests/testUtil/util';
+import TestUtilities from '../../tests/util';
 
 export default class Logger
 {
