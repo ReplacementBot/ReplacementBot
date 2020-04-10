@@ -28,7 +28,7 @@ export class ScheduledJob extends CronJob
 			await this.jobFunction()
 				.then((promiseResult: void | string) =>
 				{
-					Logger.info(`Successfully executed '${this.name}' job ` + (promiseResult ? `(${promiseResult})` : ''));
+					Logger.info(`Successfully executed '${this.name}' job` + (promiseResult ? ` (${promiseResult})` : ''));
 				})
 				.catch((error: void | string) =>
 				{
