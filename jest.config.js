@@ -3,10 +3,8 @@
 
 module.exports = {
 	preset: 'ts-jest',
-
 	clearMocks: true,
-
 	reporters: ['default', 'jest-junit'],
-
 	testEnvironment: 'node',
+	coveragePathIgnorePatterns: ['/node_modules/', '/tests/'],
 };
