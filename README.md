@@ -3,6 +3,7 @@
 [![Codecov](https://codecov.io/gh/MrBartusek/ReplacementBot/branch/master/graph/badge.svg?token=ONXF6BONI4)](https://codecov.io/gh/MrBartusek/ReplacementBot)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/MrBartusek/ReplacementBot?color=brightgreen&logo=github)
 [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=MrBartusek/ReplacementBot&identifier=222265419)](https://dependabot.com)
+![version](https://img.shields.io/badge/version-beta-brightgreen)
 
 
 🌱 **Beta Phase** - bot is working but, expect problems bugs and breaking changes
