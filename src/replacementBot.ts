@@ -37,6 +37,11 @@ export default class ReplacementBot extends CommandoClient
 	{
 		return new Promise((resolve, reject) =>
 		{
+			if(process.env.REPLACEMENT_BOT_TOKEN === undefined)
+			{
+				reject('REPLACEMENT_BOT_TOKEN is not provided');
+				return;
+			}
 			this.login(process.env.REPLACEMENT_BOT_TOKEN)
 				.catch((error) =>
 				{

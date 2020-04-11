@@ -1,7 +1,11 @@
 import ReplacementBot from './replacementBot';
 import Logger from './managers/logger';
 
-new ReplacementBot().start();
+new ReplacementBot().start()
+	.catch((error) =>
+	{
+		Logger.fatalAndCrash('Failed to start ReplacementBot: ' + error);
+	});
 
 process.on('unhandledRejection', function(reason, promise)
 {
