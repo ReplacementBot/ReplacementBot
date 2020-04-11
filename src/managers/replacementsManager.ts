@@ -99,7 +99,7 @@ export default class ReplacementsManager
 	private filterReplacement(replacementDay: ReplacementDay): ReplacementDay
 	{
 		const result = new ReplacementDay(replacementDay.date);
-		const regex = new RegExp(Config.get('replacementsFetching').filter);
+		const regex = new RegExp(Config.get('replacementsFilter'));
 		for(const replacement of replacementDay.replacements)
 		{
 			if(regex.test(replacement.description))

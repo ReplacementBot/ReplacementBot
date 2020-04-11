@@ -24,11 +24,9 @@ const configSchema = {
 		},
 		default: '16:00',
 	},
-	replacementsFetching: {
-		filter: {
-			format: RegExp,
-			default: '(.*?)',
-		},
+	replacementsFilter: {
+		format: RegExp,
+		default: '(.*?)',
 	},
 	replacementsChannel:
 	{
