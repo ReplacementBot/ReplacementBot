@@ -37,7 +37,9 @@ npm run build
 
 ## 🔧 Configure Bot
 
-*TODO: Create wiki page for that*
+🔧Read about bot configuration at [wiki](https://github.com/MrBartusek/ReplacementBot/wiki/🔧-Configure-Bot) **(required)**
+
+🍱 Configure replacements channel [wiki](https://github.com/MrBartusek/ReplacementBot/wiki/🍱-Setup-Replacements-Channel) **(optional)**
 
 ## 🚀 Launch!
 
