@@ -16,11 +16,17 @@ describe('ReplacementManager', () =>
 		{
 			return expect(manager.initialize('dummyFetcher')).resolves.toBe(undefined);
 		});
-		test('Should Fetch', () =>
+
+		test('Should Fetch from provided date', () =>
 		{
 			return expect(manager.fetchReplacements(fetchingTime)).resolves.toStrictEqual(
 				new ReplacementDay(fetchingTime, [ new Replacement(new Lesson(0, 'Dummy Lesson'), 'Dummy')]),
 			);
 		});
+
+		// Test day switch hour here too
+		test.todo('Should Fetch from default date');
 	});
+
+	test.todo('Should detect if fetcher send illegal response');
 });

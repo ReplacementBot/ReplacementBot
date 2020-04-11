@@ -34,4 +34,8 @@ describe('ScheduleManager', () =>
 			expect(Logger.error).toHaveBeenCalledWith('Job failed "Test" reason: Test');
 		});
 	});
+	describe('ScheduleManager', () =>
+	{
+		test.todo('Place for tests from #52');
+	});
 });
