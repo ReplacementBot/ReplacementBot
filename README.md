@@ -2,8 +2,8 @@
 [![CircleCI Build](https://img.shields.io/circleci/build/github/MrBartusek/ReplacementBot?logo=circleci&token=6bae64ae7a523f3f207804bf7818dc1d56f420a4)](https://circleci.com/gh/MrBartusek/ReplacementBot)
 [![Codecov](https://img.shields.io/codecov/c/github/MrBartusek/ReplacementBot?logo=codecov&logoColor=white)](https://codecov.io/gh/MrBartusek/ReplacementBot)
 [![GitHub commit activity](https://img.shields.io/github/commit-activity/m/MrBartusek/ReplacementBot?color=brightgreen&logo=github)](https://github.com/MrBartusek/ReplacementBot/pulse/monthly)
-[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=MrBartusek/ReplacementBot&identifier=222265419)](https://dependabot.com)
-![version](https://img.shields.io/badge/version-beta-brightgreen)
+[![Dependabot Status](https://img.shields.io/badge/dependabot-enabled-blueviolet?logo=dependabot)](https://dependabot.com)
+![version](https://img.shields.io/badge/version-beta-blueviolet)
 
 
 🌱 **Beta Phase** - bot is working but, expect problems bugs and breaking changes
