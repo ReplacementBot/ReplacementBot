@@ -1,11 +1,15 @@
 # Contributing 👥 
 
+[![Beginner friendly issues](https://img.shields.io/github/issues/MrBartusek/ReplacementBot/good%20first%20issue?color=blueviolet&label=beginner%20friendly%20issues&logo=github)](https://github.com/MrBartusek/ReplacementBot/labels/good%20first%20issue) 
+
+https://img.shields.io/github/issues/MrBartusek/ReplacementBot?color=blueviolet&label=issues&logo=github
+
 We greatly appreciate any work contributed, no matter how small! Pull Requests and Issues or Feature Requests are welcome 👍
 
-If you are new to Open Source:
+If you are new to Open Source:  
 - Check [this guide](https://help.github.com/en/github/getting-started-with-github) how to use Github
 - If you don't want to mess with GIT command you can use [Github Desktop](https://desktop.github.com)
-- Sometimes you can [find issues labelled with `good first issue`](https://github.com/MrBartusek/ReplacementBot/labels/good%20first%20issue) which are prepared for newcomers like you!
+- Sometimes you can find issues labelled with `good first issue` which are prepared for newcomers like you! Just lick `beginner friendly issues` shield at the top of this file!
 
 
 ## 🐞 Creating issues
