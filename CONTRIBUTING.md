@@ -30,4 +30,7 @@ If you find any bug or want something to be added to ReplacementBot please creat
 ## ✅ Running Tests and Lint 
 You can run tests by running `npm test`. And code style checking by `npm run lint`. Make sure that both check passes locally before making PR
 
-ReplacementBot uses [Jest](https://jestjs.io) for Testing and, [CircleCi](https://circleci.com) for Cloud Testing.
+ReplacementBot uses [Jest](https://jestjs.io) for Testing and, [CircleCi](https://circleci.com) for Cloud Testing ☁️
+
+## 📚 Editing [Wiki](https://github.com/MrBartusek/ReplacementBot/wiki)
+For safety reasons, we don't allow contributors to edit wikis directly but, any contribution to wikis are welcome. If you want to edit wiki regarding an open issue, please comment your proposal on the issue. If there isn't any issue please create an issue by yourself and propose wiki changes!
