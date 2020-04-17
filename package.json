@@ -18,7 +18,7 @@
     "start": "node build/src/index.js",
     "lint": "eslint src/**/**/**/** tests/**/**/**/**"
   },
-  "cacheDirectories": ["node_modules", "build"],
+  "cacheDirectories": ["build"],
   "dependencies": {
     "@types/app-root-path": "^1.2.4",
     "@types/cheerio": "^0.22.17",
