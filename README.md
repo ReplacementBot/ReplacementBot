@@ -45,7 +45,10 @@ Unfortunately, Currently Public Instance isn't available 😞 Check Out: [Public
 
 Check [SETUP.MD](SETUP.MD) for detailed setup instructions!
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/MrBartusek/ReplacementBot) [![Heroku Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy) 
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/MrBartusek/ReplacementBot) [![Heroku Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
+*Heroku is currently not working, see: [#60](https://github.com/MrBartusek/ReplacementBot/issues/60)*
+
 
 ## 👥 Contributing
 

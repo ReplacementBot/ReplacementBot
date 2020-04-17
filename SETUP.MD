@@ -7,7 +7,9 @@ There is a detailed guild which guides you through the process: [Creating a Bot 
 
 ---
 
-## 🌩️ Heroku Hosting
+## ~~🌩️ Heroku Hosting~~
+
+*Heroku is currently not working, see: [#60](https://github.com/MrBartusek/ReplacementBot/issues/60)*
 
 You can easily setup bot to work 24/7 one-click with heroku! This method require [ENV Configuration](https://github.com/MrBartusek/ReplacementBot/wiki/🔧-Configure-Bot#-environmental-variable-config) if you want to using config!
 
