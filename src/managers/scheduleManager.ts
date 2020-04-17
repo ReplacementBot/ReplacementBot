@@ -18,7 +18,6 @@ export class ScheduledJob extends CronJob
 		this.addCallback(this.onTick);
 
 		if(start) this.start();
-		this.onTick();
 	}
 
 	private async onTick(): Promise<void>
