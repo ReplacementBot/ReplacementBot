@@ -1,11 +1,27 @@
 # 🚀 Running Locally
 
-## 🍱 Prepare Discord
+## 🍱 Setup Discord App
 
-To run an instance of any of Discord Bots you must create the app on [Discord Developer Portal](https://discordapp.com/developers/applications) first.<br>
+To run an instance of any of Discord Bots you must first create the app on [Discord Developer Portal](https://discordapp.com/developers/applications) first.<br>
 There is a detailed guild which guides you through the process: [Creating a Bot Account](https://discordpy.readthedocs.io/en/latest/discord.html). Be sure to copy Token from step 7, you will need it!
 
-## ⚡️ Setup Bot
+---
+
+## 🌩️ Heroku Hosting
+
+You can easily setup bot to work 24/7 one-click with heroku! This method require [ENV Configuration](https://github.com/MrBartusek/ReplacementBot/wiki/🔧-Configure-Bot#-environmental-variable-config) if you want to using config!
+
+[![Heroku Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
+## 🖱️ Simple Cloud Development
+
+If you don't want to mess with setup on local machine you can do it in cloud! Note: Free version allow for **50 hours / month** if you would like to work more, consider [Upgrade](https://www.gitpod.io/pricing/) or [Manual Setup](⚡️-Manual-Setup)
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/MrBartusek/ReplacementBot)
+
+## ⚡️ Manual Setup
+
+If you want to work on bot or host no local machine you can setup it with this guide
 
 ### Install Required Software:
 - [GIT](https://git-scm.com) (GUI such [GitHub Desktop](https://desktop.github.com) can be helpful)
@@ -34,12 +50,13 @@ That step will setup files on your local machine that are not copied from the re
 npm install
 npm run build
 ```
+---
 
-## 🔧 Configure Bot
+## 🔧 Configuration
 
-🔧Read about bot configuration at [wiki](https://github.com/MrBartusek/ReplacementBot/wiki/🔧-Configure-Bot) **(required)**
+You probably would like to configure which `fetcher` bot will use, you can reefer to: [Bot Configuration](https://github.com/MrBartusek/ReplacementBot/wiki/🔧-Configure-Bot)
 
-🍱 Configure replacements channel [wiki](https://github.com/MrBartusek/ReplacementBot/wiki/🍱-Setup-Replacements-Channel) **(optional)**
+If you want bot to automatically update replacements reefer to: [Configure Replacements Channel](https://github.com/MrBartusek/ReplacementBot/wiki/🍱-Setup-Replacements-Channel)
 
 ## 🚀 Launch!
 

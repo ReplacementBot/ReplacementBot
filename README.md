@@ -2,9 +2,9 @@
 [![CircleCI Build](https://img.shields.io/circleci/build/github/MrBartusek/ReplacementBot?logo=circleci&token=6bae64ae7a523f3f207804bf7818dc1d56f420a4)](https://circleci.com/gh/MrBartusek/ReplacementBot)
 [![Codecov](https://img.shields.io/codecov/c/github/MrBartusek/ReplacementBot?logo=codecov&logoColor=white&color=blueviolet)](https://codecov.io/gh/MrBartusek/ReplacementBot)
 [![GitHub commit activity](https://img.shields.io/github/commit-activity/m/MrBartusek/ReplacementBot?color=blueviolet&logo=github)](https://github.com/MrBartusek/ReplacementBot/pulse/monthly)
+[![Gitpod Ready](https://img.shields.io/badge/Gitpod-ready-blueviolet?logo=gitpod&logoColor=white)](https://gitpod.io/#https://github.com/MrBartusek/ReplacementBot)
 [![Dependabot Status](https://img.shields.io/badge/dependabot-enabled-blueviolet?logo=dependabot)](https://dependabot.com)
 ![version](https://img.shields.io/badge/version-beta-blueviolet)
-
 
 🌱 **Beta Phase** - bot is working but, expect problems bugs and breaking changes
 
@@ -13,7 +13,6 @@ ReplacementBot is a Discord bot made to make your life easier. The Bot automatic
 ---
 
 ![Presentation Image](https://i.imgur.com/SR7pGcu.png)
-
 
 ## ✨ Feature Rich
 
@@ -44,7 +43,9 @@ Unfortunately, Currently Public Instance isn't available 😞 Check Out: [Public
 
 ## 🚀 Running Locally
 
-Check [SETUP.MD](SETUP.MD) for setup instructions!
+Check [SETUP.MD](SETUP.MD) for detailed setup instructions!
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/MrBartusek/ReplacementBot) [![Heroku Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy) 
 
 ## 👥 Contributing
 
