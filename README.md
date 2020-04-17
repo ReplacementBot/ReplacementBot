@@ -49,6 +49,4 @@ Check [SETUP.MD](SETUP.MD) for detailed setup instructions!
 
 ## 👥 Contributing
 
-We greatly appreciate any work contributed, no matter how small!  Contributions, issues and feature requests are welcome!
-
-Read more about contributing in [CONTRIBUTING.md](CONTRIBUTING.md)
+We greatly appreciate any work contributed, no matter how small!  Contributions, issues and feature requests are welcome ❤️ Read more about contributing in [CONTRIBUTING.md](CONTRIBUTING.md)
