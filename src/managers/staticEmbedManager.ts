@@ -35,7 +35,7 @@ export default class StaticEmbedManager
 				})
 				.catch((error) =>
 				{
-					reject('Failed to update replacements channel: ' + error);
+					reject(new Error('Failed to update replacements channel: ' + error));
 				});
 		});
 	}

@@ -6,13 +6,13 @@ describe('Logger', () =>
 	{
 		console.log = jest.fn();
 		Logger.info('Test');
-		expect(console.log).toHaveBeenCalledWith(chalk.bold.white('[INFO] ') + 'Test');
+		expect(console.log).toHaveBeenCalledWith(chalk.bold.white('[INFO] ') + chalk.white('Test'));
 	});
 	test('should crash on fatal', () =>
 	{
 		expect(() =>
 		{
-			Logger.fatalAndCrash('Test');
+			throw new Error('Test');
 		}).toThrow();
 	});
 });

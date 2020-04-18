@@ -85,8 +85,8 @@ export default class Config
 
 	public static get(key: string): any
 	{
-		if(!Config.data) Logger.fatalAndCrash('Config is not initialized while something tried to get a value of it');
-		if(!Config.data.getSchema().properties[key]) Logger.fatalAndCrash(`'${key}' value don't exist in config schema while something tried to access it`);
+		if(!Config.data) throw new Error('Config is not initialized while something tried to get a value of it');
+		if(!Config.data.getSchema().properties[key]) throw new Error(`'${key}' value don't exist in config schema while something tried to access it`);
 		return Config.data.get(key);
 	}
 }

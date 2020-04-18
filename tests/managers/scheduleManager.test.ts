@@ -29,7 +29,7 @@ describe('ScheduleManager', () =>
 			Logger.error = jest.fn();
 			await new ScheduledJob('* * * * *', 'Test', () =>
 			{
-				return Promise.reject('Test');
+				return Promise.reject(new Error('Test'));
 			}, false).fire();
 			expect(Logger.error).toHaveBeenCalledWith('Job failed "Test" reason: Test');
 		});

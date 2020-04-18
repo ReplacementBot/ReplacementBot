@@ -25,7 +25,6 @@
 		"indent": ["error", "tab"],
 		"max-nested-callbacks": ["error", { "max": 4 }],
 		"max-statements-per-line": ["error", { "max": 2 }],
-		"no-console": "off",
 		"no-empty-function": "error",
 		"no-floating-decimal": "error",
 		"no-inline-comments": "error",
@@ -40,11 +39,6 @@
 		"semi": "off",
 		"@typescript-eslint/semi": ["error"],
 		"space-before-blocks": "error",
-		"space-before-function-paren": ["error", {
-			"anonymous": "never",
-			"named": "never",
-			"asyncArrow": "always"
-		}],
 		"space-in-parens": "error",
 		"space-infix-ops": "error",
 		"space-unary-ops": "error",
@@ -56,6 +50,7 @@
 		"@typescript-eslint/no-namespace": "off",
 		"@typescript-eslint/ban-ts-ignore": "off",
 		"@typescript-eslint/no-use-before-define": "off",
-		"unused-imports/no-unused-imports-ts": "warn"
+		"unused-imports/no-unused-imports-ts": "warn",
+		"prefer-promise-reject-errors": "error"
 	}
 }

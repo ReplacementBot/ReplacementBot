@@ -21,9 +21,9 @@ export default class UpdateCommand extends Command
 		return new Promise((resolve, reject) =>
 		{
 			(this.client as ReplacementBot).staticEmbedManager.updateGuild(message.guild)
-				.catch((reason: string) =>
+				.catch((reason: Error) =>
 				{
-					reject(new FriendlyError(reason));
+					reject(new FriendlyError(reason.message));
 				})
 				.then(() =>
 				{

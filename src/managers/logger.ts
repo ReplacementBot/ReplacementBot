@@ -1,45 +1,51 @@
 import chalk from 'chalk';
 import figlet from 'figlet';
-import TestUtilities from '../../tests/util';
 
 export default class Logger
 {
-	public static fatalAndCrash(message: string, exitCode?: number): void
+	public static critical(message: string): void
 	{
-		if(exitCode == undefined)
+		console.log(chalk.bold.red('[CRITICAL] ') + chalk.red(message));
+		console.log(chalk.red('Process has been terminated because of critical error'));
+		console.log(chalk.red('You can report issues at: https://github.com/MrBartusek/ReplacementBot/issues'));
+		if(this.getHelpfulError(message) !== '')
 		{
-			exitCode = 5;
+			console.log(chalk.green('TIP: ' + this.getHelpfulError(message)));
 		}
-		this.fatal(message);
-		if(TestUtilities.isRunningInTest())
-		{
-			throw Error(message);
-		}
-		else
-		{
-			process.exit(exitCode);
-		}
+		process.exit(5);
 	}
-	public static fatal(message: string): void
-	{
-		console.log(chalk.bold.red('[FATAL ERROR] ') + chalk.redBright(message));
-	}
+
 	public static error(message: string): void
 	{
-		console.log(chalk.bold.red('[ERROR] ') + chalk.redBright(message));
+		console.log(chalk.bold.red('[ERROR] ') + chalk.red(message));
 	}
+
 	public static warn(message: string): void
 	{
-		console.log(chalk.bold.yellow('[WARN] ') + chalk.yellowBright(message));
+		console.log(chalk.bold.yellow('[WARN] ') + chalk.yellow(message));
 	}
+
 	public static info(message: string): void
 	{
-		console.log(chalk.bold.white('[INFO] ') + message);
+		console.log(chalk.bold.white('[INFO] ') + chalk.white(message));
 	}
+
 	public static printLogo(): void
 	{
 		console.log();
 		console.log(chalk.magenta(figlet.textSync('Replacement Bot')));
 		console.log();
+	}
+
+	private static getHelpfulError(error: string): string
+	{
+		if(error.includes('REPLACEMENT_BOT_TOKEN is not provided'))
+		{
+			return 'You are missing bot token, please read "Configure Bot" article on wiki!';
+		}
+		else
+		{
+			return '';
+		}
 	}
 }

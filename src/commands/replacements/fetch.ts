@@ -3,7 +3,7 @@ import { Message } from 'discord.js';
 import ReplacementBot from '../../replacementBot';
 import { ReplacementsEmbed, ReplacementsEmbedFooterType } from '../../models/replacementsEmbed';
 import ReplacementDay from '../../models/replacementDay';
-import { FetchError, ResponseParseError } from '../../models/replacementsFetcher';
+
 import Logger from '../../managers/logger';
 
 export default class FetchReplacementsCommand extends Command
@@ -38,15 +38,7 @@ export default class FetchReplacementsCommand extends Command
 			})
 			.catch((error)=>
 			{
-				Logger.error(`Failed to fetch replacements: ${error.message}\n${error.stack}\n[${message.author.tag} on ${message.guild.name}]`);
-				if(error instanceof FetchError || error instanceof ResponseParseError)
-				{
-					throw new FriendlyError('Failed to fetch replacements: ' + error.message);
-				}
-				else
-				{
-					throw error;
-				}
+				throw new FriendlyError('Failed to fetch replacements: ' + error.message);
 			});
 	}
 }

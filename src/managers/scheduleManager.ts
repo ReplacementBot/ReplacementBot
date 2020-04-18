@@ -29,13 +29,13 @@ export class ScheduledJob extends CronJob
 				{
 					Logger.info(`Successfully executed '${this.name}' job` + (promiseResult ? ` (${promiseResult})` : ''));
 				})
-				.catch((error: void | string) =>
+				.catch((error: Error) =>
 				{
-					if(error == undefined)
+					if(!error)
 					{
-						error = 'No error provided';
+						error = new Error('No error provided');
 					}
-					Logger.error(`Job failed "${this.name}" reason: ` + error);
+					Logger.error(`Job failed "${this.name}" reason: ` + error.message);
 
 				});
 		}

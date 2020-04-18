@@ -1,4 +1,4 @@
-import { ReplacementsFetcher, FetchError, ResponseParseError } from '../models/replacementsFetcher';
+import { ReplacementsFetcher } from '../models/replacementsFetcher';
 import Logger from './logger';
 import ReplacementDay from '../models/replacementDay';
 import { Moment } from 'moment';
@@ -13,7 +13,7 @@ export default class ReplacementsManager
 	{
 		if(this.fetcher !== undefined)
 		{
-			Logger.fatalAndCrash('ReplacementsManager cannot be initialized twice');
+			throw new Error('ReplacementsManager cannot be initialized twice');
 		}
 
 		return new Promise((resolve, reject) =>
@@ -23,7 +23,7 @@ export default class ReplacementsManager
 				{
 					if(!this.isFetcher(fetcherClass))
 					{
-						Logger.fatalAndCrash(`"${fetcherFileName}" is not a ReplacementsFetcher, check config`);
+						reject(new Error(`"${fetcherFileName}" is not a ReplacementsFetcher, check config`));
 					}
 					// fetcher constructor
 					this.fetcher = new fetcherClass.default();
@@ -32,8 +32,7 @@ export default class ReplacementsManager
 				})
 				.catch((error) =>
 				{
-					Logger.fatalAndCrash(`Failed to load ReplacementsFetcher "${fetcherFileName}" file, check config : ${error}`);
-					reject();
+					reject(new Error(`Failed to load ReplacementsFetcher "${fetcherFileName}" file, check config : ${error}`));
 				});
 		});
 	}
@@ -50,50 +49,23 @@ export default class ReplacementsManager
 		return this.fetcher.constructor.name;
 	}
 
-	public fetchReplacements(date?: Moment): Promise<ReplacementDay | FetchError | ResponseParseError>
+	public fetchReplacements(date?: Moment): Promise<ReplacementDay>
 	{
 		if(this.fetcher === undefined) throw new Error('fetchReplacements was called but ReplacementsManager hasn\'t been initialized');
 		if(!date) date = this.getDefaultDate();
 		return new Promise((resolve, reject) =>
 		{
 			this.fetcher.fetchReplacements(date)
-				.catch((error) =>
-				{
-					if(this.verifyFetcherResponse(error, 'reject'))
-					{
-						Logger.warn(`Fetcher produced illegal response(${typeof error} whiled rejected`);
-						resolve(this.filterReplacement(error));
-					}
-					else
-					{
-						reject(error);
-					}
-				})
 				.then((result) =>
 				{
-					if(this.verifyFetcherResponse(result, 'resolve'))
-					{
-						Logger.warn(`Fetcher produced illegal response(${typeof result} whiled resolved`);
-						reject(result);
-					}
-					else
-					{
-						resolve(this.filterReplacement(result as ReplacementDay));
-					}
+					resolve(this.filterReplacement(result as ReplacementDay));
+				})
+				.catch((error) =>
+				{
+					Logger.error('Failed to fetch replacements: ' + error.message);
+					reject(error);
 				});
 		});
-	}
-
-	private verifyFetcherResponse(response: void | ReplacementDay | FetchError | ResponseParseError, method: 'resolve' | 'reject'): boolean
-	{
-		if(method == 'resolve')
-		{
-			return typeof response == typeof ReplacementDay;
-		}
-		else
-		{
-			typeof response != typeof ReplacementDay;
-		}
 	}
 
 	private filterReplacement(replacementDay: ReplacementDay): ReplacementDay

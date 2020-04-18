@@ -39,14 +39,13 @@ export default class ReplacementBot extends CommandoClient
 		{
 			if(process.env.REPLACEMENT_BOT_TOKEN === undefined)
 			{
-				reject('REPLACEMENT_BOT_TOKEN is not provided');
+				reject(new Error('REPLACEMENT_BOT_TOKEN is not provided'));
 				return;
 			}
 			this.login(process.env.REPLACEMENT_BOT_TOKEN)
 				.catch((error) =>
 				{
-					Logger.fatal('Failed to launch ReplacementBot ' + error.message);
-					reject(`Failed to launch ReplacementBot ${error.message}`);
+					reject(new Error(`Failed to launch ReplacementBot ${error.message}`));
 				})
 				.then(async ()=>
 				{
