@@ -10,8 +10,6 @@ export default class DummyFetcher implements ReplacementsFetcher
 	{
 		return new Promise((resolve, reject) =>
 		{
-			reject(new Error('XDDD'));
-			return;
 			const lesson = new Lesson(0, 'Dummy Lesson');
 			resolve(new ReplacementDay(date, [ new Replacement(lesson, 'Dummy') ]));
 		});
