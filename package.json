@@ -16,9 +16,10 @@
     "test": "jest --verbose --silent --forceExit",
     "build": "node_modules/.bin/tsc",
     "start": "node build/src/index.js",
-    "lint": "eslint src/**/**/**/** tests/**/**/**/**"
+    "lint": "eslint src/**/**/**/** tests/**/**/**/**",
+    "check": "npm run build &&  npm test && npm run lint && echo all checks successful"
   },
-  "cacheDirectories": ["build"],
+  "cacheDirectories": [ "build" ],
   "dependencies": {
     "@types/app-root-path": "^1.2.4",
     "@types/cheerio": "^0.22.17",
