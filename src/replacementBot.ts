@@ -1,3 +1,4 @@
+import chalk from 'chalk';
 import Logger from './managers/logger';
 import { CommandoClient } from 'discord.js-commando';
 import path from 'path';
@@ -5,6 +6,7 @@ import Config from './managers/config';
 import ReplacementsManager from './managers/replacementsManager';
 import StaticEmbedManager from './managers/staticEmbedManager';
 import ScheduleManager, { ScheduledJob } from './managers/scheduleManager';
+import { TextChannel } from 'discord.js';
 
 export default class ReplacementBot extends CommandoClient
 {
@@ -18,7 +20,6 @@ export default class ReplacementBot extends CommandoClient
 	{
 		Logger.printLogo();
 		Logger.info('Initialling ReplacementBot...');
-
 		Config.initialize();
 
 		super({
@@ -28,9 +29,22 @@ export default class ReplacementBot extends CommandoClient
 		});
 		this.ready = false;
 
+		// Setup Managers
 		this.replacementsManager = new ReplacementsManager();
 		this.staticEmbedManager = new StaticEmbedManager(this);
 		this.scheduleManager = new ScheduleManager();
+
+		// Setup Listeners
+		this.on('commandError', (command, error, message) =>
+		{
+			const stack = error.stack.replace(error.name + ': ' + error.message + '\n', '');
+			Logger.error(
+				`Failed to execute ${command.name} command` + '\r\n' +
+				`${chalk.bold(error.name)}: ${error.message}` + '\r\n' +
+				chalk.gray(`${message.author.tag} said '${message.content}' on ` +
+				`#${(message.channel as TextChannel).name} (${message.guild.name})`) + '\r\n' +
+				chalk.gray(stack));
+		});
 	}
 
 	public async start(): Promise<string>
@@ -60,6 +74,7 @@ export default class ReplacementBot extends CommandoClient
 				});
 		});
 	}
+
 	public stop(): Promise<void>
 	{
 		this.ready = false;

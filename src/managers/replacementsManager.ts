@@ -62,7 +62,6 @@ export default class ReplacementsManager
 				})
 				.catch((error) =>
 				{
-					Logger.error('Failed to fetch replacements: ' + error.message);
 					reject(error);
 				});
 		});
