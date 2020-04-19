@@ -3,21 +3,19 @@
 ## 🍱 Setup Discord App
 
 To run an instance of any of Discord Bots you must first create the app on [Discord Developer Portal](https://discordapp.com/developers/applications) first.<br>
-There is a detailed guild which guides you through the process: [Creating a Bot Account](https://discordpy.readthedocs.io/en/latest/discord.html). Be sure to copy Token from step 7, you will need it!
+There is a detailed guild which guides you through the process: [Creating a Bot Account](https://discordpy.readthedocs.io/en/latest/discord.html). **Be sure to copy Token from step 7, you will need it!**
 
 ---
 
-## ~~🌩️ Heroku Hosting~~
+## 🌩️ Heroku Hosting
 
-*Heroku is currently not working, see: [#60](https://github.com/MrBartusek/ReplacementBot/issues/60)*
-
-You can easily setup bot to work 24/7 one-click with heroku! This method require [ENV Configuration](https://github.com/MrBartusek/ReplacementBot/wiki/🔧-Configure-Bot#-environmental-variable-config) if you want to using config!
+You can easily setup bot to work 24/7 with heroku! Be sure to enter bot token when deploying, you can get it from the step above. After setup you need to disable `web` dyno and enable `woker` dyno from **Resources** tab or, your bot will [keep crashing](https://github.com/MrBartusek/ReplacementBot/issues/60). This method require [ENV Configuration](https://github.com/MrBartusek/ReplacementBot/wiki/🔧-Configure-Bot#-environmental-variable-config) if you want to use config. 
 
 [![Heroku Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 ## 🖱️ Simple Cloud Development
 
-If you don't want to mess with setup on local machine you can do it in cloud! Note: Free version allow for **50 hours / month** if you would like to work more, consider [Upgrade](https://www.gitpod.io/pricing/) or [Manual Setup](⚡️-Manual-Setup)
+If you don't want to mess with setup on local machine you can do it in cloud with one click! Gitpod will serve you pre-build workspace in couple of seconds! **Note**: Free version allow for **50 hours / month** if you would like to work more, consider [Upgrade](https://www.gitpod.io/pricing/) or [Manual Setup](⚡️-Manual-Setup)
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/MrBartusek/ReplacementBot)
 
