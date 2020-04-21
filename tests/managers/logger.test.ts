@@ -12,7 +12,7 @@ describe('Logger', () =>
 	{
 		expect(() =>
 		{
-			throw new Error('Test');
+			Logger.critical('Test');
 		}).toThrow();
 	});
 });
