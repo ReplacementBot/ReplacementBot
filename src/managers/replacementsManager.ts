@@ -1,5 +1,5 @@
 import { ReplacementsFetcher } from '../models/replacementsFetcher';
-import Logger from './logger';
+
 import ReplacementDay from '../models/replacementDay';
 import { Moment } from 'moment';
 import moment = require('moment');
@@ -9,7 +9,7 @@ export default class ReplacementsManager
 {
 	fetcher: ReplacementsFetcher;
 
-	public initialize(fetcherFileName: string): Promise<void>
+	public initialize(fetcherFileName: string): Promise<string>
 	{
 		if(this.fetcher !== undefined)
 		{
@@ -27,12 +27,11 @@ export default class ReplacementsManager
 					}
 					// fetcher constructor
 					this.fetcher = new fetcherClass.default();
-					Logger.info(`Successfully loaded ReplacementsManager with: "${this.getFetcherName()}"`);
-					resolve();
+					resolve(this.getFetcherName());
 				})
 				.catch((error) =>
 				{
-					reject(new Error(`Failed to load ReplacementsFetcher "${fetcherFileName}" file, check config : ${error}`));
+					reject(new Error(`Failed to load fetcher "${fetcherFileName}" file, check config (${error})`));
 				});
 		});
 	}

@@ -63,7 +63,15 @@ export default class ReplacementBot extends CommandoClient
 				})
 				.then(async ()=>
 				{
-					await this.replacementsManager.initialize(Config.get('fetcher').name);
+					await this.replacementsManager.initialize(Config.get('fetcher').name)
+						.then((fetcherName: string) =>
+						{
+							Logger.info('Successfully loaded ReplacementsManager with: ' + fetcherName);
+						})
+						.catch((error: Error) =>
+						{
+							Logger.error('Failed to load ReplacementManager: ' + error.message);
+						});
 					this.setupCommandsRegistry();
 					this.setupScheduleManager();
 					Logger.info('ReplacementBot successfully launched!');

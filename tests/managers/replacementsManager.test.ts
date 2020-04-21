@@ -9,12 +9,12 @@ describe('ReplacementManager', () =>
 {
 	describe('Should Fetch', () =>
 	{
-		Config.initialize();
+		Config.initialize('{}');
 		const manager = new ReplacementsManager();
 		const fetchingTime = moment();
 		test('Should Initialize', () =>
 		{
-			return expect(manager.initialize('dummyFetcher')).resolves.toBe(undefined);
+			return expect(manager.initialize('dummyFetcher')).resolves.toBe('DummyFetcher');
 		});
 
 		test('Should Fetch from provided date', () =>
