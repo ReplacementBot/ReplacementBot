@@ -1,5 +1,4 @@
 import { ReplacementsFetcher } from '../models/replacementsFetcher';
-
 import ReplacementDay from '../models/replacementDay';
 import { Moment } from 'moment';
 import moment = require('moment');
