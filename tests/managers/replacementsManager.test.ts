@@ -7,7 +7,7 @@ import Config from '../../src/managers/config';
 
 describe('ReplacementManager', () =>
 {
-	describe('Should Fetch', async () =>
+	describe('Should Fetch', () =>
 	{
 		Config.initialize();
 		const manager = new ReplacementsManager();
