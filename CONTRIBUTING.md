@@ -21,7 +21,7 @@ If you find any bug or want something to be added to ReplacementBot please creat
 
 1. Follow the [SETUP.MD](SETUP.MD) to run your own fork and local instancie of the bot.
 2. Make any changes that you want
-3. If you can, write tests for changed that you made to don't lower coverage.
+3. If you can, write tests for changed that you made to don't lower coverage. If you don't know how to write tests please use `test.todo()`
 4. Check if Unit Test and Lint passed locally [Running Tests and Lint](#✅-Running-Tests-and-Lint)
 5. Create a Pull Request
 6. CircleCi will automatically check your PR . CI will run build, testing, and linting tests.
