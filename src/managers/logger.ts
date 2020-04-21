@@ -1,5 +1,6 @@
 import chalk from 'chalk';
 import figlet from 'figlet';
+import TestUtilities from '../../tests/util';
 
 export default class Logger
 {
@@ -11,6 +12,10 @@ export default class Logger
 		if(this.getHelpfulError(message) !== '')
 		{
 			console.log(chalk.green('TIP: ' + this.getHelpfulError(message)));
+		}
+		if(TestUtilities.isRunningInTest())
+		{
+			throw new Error('Critical Error: ' + message);
 		}
 		process.exit(5);
 	}
