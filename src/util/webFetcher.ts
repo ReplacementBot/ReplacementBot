@@ -35,7 +35,7 @@ export class HTTPResponse
 		case HTTPResponseType.NO_RESPONSE:
 			return 'Server didn\'t send any response in time';
 		case HTTPResponseType.FAILED:
-			return `Failed to send response $(${this.result})`;
+			return `Failed to send request (${this.result})`;
 		}
 	}
 }
