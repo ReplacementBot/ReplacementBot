@@ -43,11 +43,11 @@ Unfortunately, Currently Public Instance isn't available 😞 Check Out: [Public
 
 ## 🚀 Running Locally
 
-Check [SETUP.MD](SETUP.MD) for detailed setup instructions!
+Check [wiki](https://github.com/MrBartusek/ReplacementBot/wiki/⚡️-How-to-Setup-Bot) for detailed setup instructions!
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/MrBartusek/ReplacementBot) [![Heroku Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 
 ## 👥 Contributing
 
-We greatly appreciate any work contributed, no matter how small!  Contributions, issues and feature requests are welcome ❤️ Read more about contributing in [CONTRIBUTING.md](CONTRIBUTING.md)
+We greatly appreciate any work contributed, no matter how small!  Contributions, issues and feature requests are welcome ❤️ Read more about contributing in [wiki](https://github.com/MrBartusek/ReplacementBot/wiki/👥-How-to-Contribute)
