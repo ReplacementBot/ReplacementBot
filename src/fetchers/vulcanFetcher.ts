@@ -1,5 +1,4 @@
-import { ReplacementsFetcher, FetchError, ResponseParseError } from '../models/replacementsFetcher';
-import Config from '../managers/config';
+import { ReplacementsFetcher } from '../models/replacementsFetcher';
 import ReplacementDay from '../models/replacementDay';
 import moment = require('moment');
 import WebFetcher, { HTTPResponse } from '../util/webFetcher';
@@ -7,6 +6,7 @@ import cheerio from 'cheerio';
 import Replacement from '../models/replacement';
 import Lesson from '../models/lesson';
 import Teacher from '../models/teacher';
+import { FetchError, ResponseParseError } from '../util/errors';
 
 enum RowFieldType
 {
@@ -18,18 +18,24 @@ enum RowFieldType
 export default class VulcanFetcher implements ReplacementsFetcher
 {
 	webFetcher: WebFetcher;
+	config: any;
 
-	constructor()
+	initialize(config: any): Promise<void>
 	{
 		this.webFetcher = new WebFetcher();
+		this.config = config;
+		if(typeof config.url !== 'string')
+		{
+			return Promise.reject(new Error('url argument not present'));
+		}
+		return Promise.resolve();
 	}
 
-	fetchReplacements(date: moment.Moment): Promise<ReplacementDay | FetchError | ResponseParseError>
+	fetchReplacements(date: moment.Moment): Promise<ReplacementDay>
 	{
 		return new Promise((resolve, reject) =>
 		{
-			const config = Config.get('fetcher').config;
-			this.webFetcher.request(config.url, 'ISO-8859-2')
+			this.webFetcher.request(this.config.url, 'ISO-8859-2')
 				.then((requestResult: HTTPResponse) =>
 				{
 					const data = cheerio.load(requestResult.result.replace(/\r?\n|\r/g, ''));

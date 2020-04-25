@@ -22,15 +22,42 @@ export default class ReplacementsManager
 				{
 					if(!this.isFetcher(fetcherClass))
 					{
-						reject(new Error(`"${fetcherFileName}" is not a ReplacementsFetcher, check config`));
+						reject(new Error(`"${fetcherFileName}" is not a ReplacementsFetcher`));
+						return;
 					}
-					// fetcher constructor
-					this.fetcher = new fetcherClass.default();
-					resolve(this.getFetcherName());
+
+					try
+					{
+						// fetcher constructor
+						this.fetcher = new fetcherClass.default();
+					}
+					catch
+					{
+						reject(new Error('fetcher thrown error inside constructor'));
+						return;
+					}
+
+					if(this.fetcher.initialize)
+					{
+						this.fetcher.initialize(Config.get('fetcher').config)
+							.then(() =>
+							{
+								resolve(this.getFetcherName());
+							})
+							.catch((error) =>
+							{
+								reject(new Error(`fetcher initialization error (${error})`));
+							});
+					}
+					else
+					{
+						resolve(this.getFetcherName());
+					}
+
 				})
 				.catch((error) =>
 				{
-					reject(new Error(`Failed to load fetcher "${fetcherFileName}" file, check config (${error})`));
+					reject(new Error(`failed to import fetcher "${fetcherFileName}" (${error})`));
 				});
 		});
 	}
