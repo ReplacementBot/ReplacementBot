@@ -22,7 +22,7 @@
   "cacheDirectories": [ "build" ],
   "dependencies": {
     "@types/app-root-path": "^1.2.4",
-    "@types/cheerio": "^0.22.17",
+    "@types/cheerio": "^0.22.18",
     "@types/common-tags": "^1.8.0",
     "@types/convict": "^4.2.1",
     "@types/cron": "^1.7.2",
