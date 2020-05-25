@@ -5,6 +5,7 @@
 [![Gitpod Ready](https://img.shields.io/badge/Gitpod-ready-blueviolet?logo=gitpod&logoColor=white)](https://gitpod.io/#https://github.com/MrBartusek/ReplacementBot)
 [![Dependabot Status](https://img.shields.io/badge/dependabot-enabled-blueviolet?logo=dependabot)](https://dependabot.com)
 ![version](https://img.shields.io/badge/version-beta-blueviolet)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FMrBartusek%2FReplacementBot.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FMrBartusek%2FReplacementBot?ref=badge_shield)
 
 🌱 **Beta Phase** - bot is working but, expect problems bugs and breaking changes
 
@@ -51,3 +52,7 @@ Check [wiki](https://github.com/MrBartusek/ReplacementBot/wiki/⚡️-How-to-Set
 ## 👥 Contributing
 
 We greatly appreciate any work contributed, no matter how small!  Contributions, issues and feature requests are welcome ❤️ Read more about contributing in [wiki](https://github.com/MrBartusek/ReplacementBot/wiki/👥-How-to-Contribute)
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FMrBartusek%2FReplacementBot.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FMrBartusek%2FReplacementBot?ref=badge_large)
