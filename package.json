@@ -39,7 +39,7 @@
     "discord.js-commando": "^0.10.0",
     "figlet": "^1.4.0",
     "iconv-lite": "^0.5.1",
-    "moment": "^2.25.3",
+    "moment": "^2.26.0",
     "jest-junit": "^10.0.0"
   },
   "devDependencies": {
