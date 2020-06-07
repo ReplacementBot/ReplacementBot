@@ -34,9 +34,9 @@ const configSchema = {
 			format: String,
 			default: '0,30 * * * *',
 		},
-		topicEmoji: {
+		topicTag: {
 			format: String,
-			default: '🗓️',
+			default: '[RPL-BOT]',
 		},
 	},
 	fetcher: {

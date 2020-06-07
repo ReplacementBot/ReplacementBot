@@ -115,7 +115,7 @@ export default class StaticEmbedManager
 			if(channel.type == 'text')
 			{
 				const topic = channel.topic;
-				const emoji = Config.get('replacementsChannel').topicEmoji;
+				const emoji = Config.get('replacementsChannel').topicTag;
 				if(topic)
 				{
 					return topic.includes(emoji);
