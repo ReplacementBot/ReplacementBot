@@ -1,10 +1,10 @@
 # ReplacementBot 📅
 [![CircleCI Build](https://img.shields.io/circleci/build/github/MrBartusek/ReplacementBot?logo=circleci&token=6bae64ae7a523f3f207804bf7818dc1d56f420a4)](https://circleci.com/gh/MrBartusek/ReplacementBot)
-[![Codecov](https://img.shields.io/codecov/c/github/MrBartusek/ReplacementBot?logo=codecov&logoColor=white&color=blueviolet)](https://codecov.io/gh/MrBartusek/ReplacementBot)
-[![GitHub commit activity](https://img.shields.io/github/commit-activity/m/MrBartusek/ReplacementBot?color=blueviolet&logo=github)](https://github.com/MrBartusek/ReplacementBot/pulse/monthly)
-[![Gitpod Ready](https://img.shields.io/badge/Gitpod-ready-blueviolet?logo=gitpod&logoColor=white)](https://gitpod.io/#https://github.com/MrBartusek/ReplacementBot)
-[![Dependabot Status](https://img.shields.io/badge/dependabot-enabled-blueviolet?logo=dependabot)](https://dependabot.com)
-![version](https://img.shields.io/badge/version-beta-blueviolet)
+[![Coverage](https://img.shields.io/codecov/c/github/MrBartusek/ReplacementBot?logo=codecov&logoColor=white)](https://codecov.io/gh/MrBartusek/ReplacementBot)
+![OSS Lifecycle](https://img.shields.io/osslifecycle/MrBartusek/ReplacementBot)
+[![Gitpod Ready](https://img.shields.io/badge/Gitpod-ready-blue?logo=gitpod&logoColor=white)](https://gitpod.io/#https://github.com/MrBartusek/ReplacementBot)
+[![Dependabot Status](https://img.shields.io/badge/dependabot-enabled-blue?logo=dependabot)](https://dependabot.com)
+![Version](https://img.shields.io/badge/version-beta-sucess)
 
 🌱 **Beta Phase** - bot is working but, expect problems bugs and breaking changes
 
