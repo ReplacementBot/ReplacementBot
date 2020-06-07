@@ -40,7 +40,22 @@ export default class StaticEmbedManager
 		});
 	}
 
-	public async updateChannel(channel: TextChannel): Promise<void>
+	public async updateGuild(guild: Guild): Promise<void[]>
+	{
+		return new Promise((resolve, reject) =>
+		{
+			const channelsUpdatePromises = new Array<Promise<void>>();
+			for(const channel of this.findChannels(guild).array())
+			{
+				channelsUpdatePromises.push(this.updateChannel(channel));
+			}
+			Promise.all(channelsUpdatePromises)
+				.then(resolve)
+				.catch(reject);
+		});
+	}
+
+	private async updateChannel(channel: TextChannel): Promise<void>
 	{
 		return new Promise((resolve, reject) =>
 		{
@@ -73,21 +88,6 @@ export default class StaticEmbedManager
 		});
 	}
 
-	public async updateGuild(guild: Guild): Promise<void[]>
-	{
-		return new Promise((resolve, reject) =>
-		{
-			const channelsUpdatePromises = new Array<Promise<void>>();
-			for(const channel of this.findChannels(guild).array())
-			{
-				channelsUpdatePromises.push(this.updateChannel(channel));
-			}
-			Promise.all(channelsUpdatePromises)
-				.then(resolve)
-				.catch(reject);
-		});
-	}
-
 	private sendPing(channel: TextChannel, embed: RichEmbed): Promise<void>
 	{
 		return new Promise((resolve, reject) =>
@@ -106,7 +106,7 @@ export default class StaticEmbedManager
 		return this.findChannels().size;
 	}
 
-	private findChannels(guild?: Guild): Collection<string, TextChannel>
+	public findChannels(guild?: Guild): Collection<string, TextChannel>
 	{
 		return this.bot.channels.filter((channel: TextChannel) =>
 		{
