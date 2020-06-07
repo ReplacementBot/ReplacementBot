@@ -1,7 +1,6 @@
 version: 2.1
 orbs:
   codecov: codecov/codecov@1.0.2
-  fossa-cli: fossa/cli@0.0.3
 
 executors:
   node-executor:
@@ -74,8 +73,3 @@ workflows:
       - lint:
           requires:
             - build
-  fossa-integration:
-    jobs:
-      - fossa-cli/analyze:
-          post-steps:
-            - run: null
