@@ -4,6 +4,7 @@
 ![OSS Lifecycle](https://img.shields.io/osslifecycle/MrBartusek/ReplacementBot)
 [![Gitpod Ready](https://img.shields.io/badge/Gitpod-ready-blue?logo=gitpod&logoColor=white)](https://gitpod.io/#https://github.com/MrBartusek/ReplacementBot)
 [![Dependabot Status](https://img.shields.io/badge/dependabot-enabled-blue?logo=dependabot)](https://dependabot.com)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FMrBartusek%2FReplacementBot.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FMrBartusek%2FReplacementBot?ref=badge_shield)
 ![Version](https://img.shields.io/badge/version-beta-sucess)
 
 🌱 **Beta Phase** - bot is working but, expect problems bugs and breaking changes
