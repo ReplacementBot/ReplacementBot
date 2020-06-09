@@ -1,4 +1,4 @@
-import { RichEmbed } from 'discord.js';
+import { RichEmbed, MessageEmbed } from 'discord.js';
 import moment = require('moment');
 import Logger from '../managers/logger';
 import ReplacementDay from './replacementDay';
@@ -56,5 +56,16 @@ export class ReplacementsEmbed
 		case ReplacementsEmbedFooterType.UPDATED_ON:
 			return 'Updated on: ' + date.format('dddd HH:mm');
 		}
+	}
+
+	public static compareEmbeds(a: RichEmbed, b: MessageEmbed): boolean
+	{
+		for (let index = 0; index < a.fields.length; index++)
+		{
+			if(a.fields[index].name != b.fields[index].name) return false;
+			if(a.fields[index].value != b.fields[index].value) return false;
+		}
+
+		return (a.author == b.author && a.color == b.color && a.description == b.description && a.title == b.title);
 	}
 }

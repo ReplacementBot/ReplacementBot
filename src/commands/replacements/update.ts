@@ -1,4 +1,4 @@
-import { Command, CommandMessage, FriendlyError } from 'discord.js-commando';
+import { Command, CommandMessage } from 'discord.js-commando';
 import { Message } from 'discord.js';
 import ReplacementBot from '../../replacementBot';
 
@@ -20,14 +20,18 @@ export default class UpdateCommand extends Command
 	{
 		return new Promise((resolve, reject) =>
 		{
-			(this.client as ReplacementBot).staticEmbedManager.updateGuild(message.guild)
-				.catch((reason: Error) =>
+			message.channel.send('Updating this guild...')
+				.then(statusMessage =>
 				{
-					reject(new FriendlyError(reason.message));
-				})
-				.then(() =>
-				{
-					resolve(message.reply('Successfully updated this guild') as Promise<Message>);
+					(this.client as ReplacementBot).replacementChannelsManager.updateSpecificGuild(statusMessage.guild)
+						.catch((reason: Error) =>
+						{
+							reject(statusMessage.edit(reason.message));
+						})
+						.then(() =>
+						{
+							resolve(statusMessage.edit('Successfully updated this guild :tada:') as Promise<Message>);
+						});
 				});
 		});
 	}
