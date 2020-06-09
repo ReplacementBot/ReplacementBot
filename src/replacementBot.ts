@@ -4,15 +4,15 @@ import { CommandoClient } from 'discord.js-commando';
 import path from 'path';
 import Config from './managers/config';
 import ReplacementsManager from './managers/replacementsManager';
-import StaticEmbedManager from './managers/staticEmbedManager';
 import ScheduleManager, { ScheduledJob } from './managers/scheduleManager';
 import { TextChannel } from 'discord.js';
+import ReplacementChannelsManager from './managers/replacementChannelsManager';
 
 export default class ReplacementBot extends CommandoClient
 {
 	replacementsManager: ReplacementsManager;
-	staticEmbedManager: StaticEmbedManager;
 	scheduleManager: ScheduleManager;
+	replacementChannelsManager: ReplacementChannelsManager;
 
 	public ready: boolean;
 
@@ -31,8 +31,8 @@ export default class ReplacementBot extends CommandoClient
 
 		// Setup Managers
 		this.replacementsManager = new ReplacementsManager();
-		this.staticEmbedManager = new StaticEmbedManager(this);
 		this.scheduleManager = new ScheduleManager();
+		this.replacementChannelsManager = new ReplacementChannelsManager(this);
 
 		// Setup Listeners
 		this.on('commandError', (command, error, message) =>
@@ -110,7 +110,7 @@ export default class ReplacementBot extends CommandoClient
 			'Update Channels',
 			() =>
 			{
-				return this.staticEmbedManager.updateAllChannels();
+				return this.replacementChannelsManager.updateAllGuilds();
 			},
 		));
 	}
