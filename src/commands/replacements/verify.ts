@@ -1,5 +1,5 @@
-import { Command, CommandMessage } from 'discord.js-commando';
-import { Message, RichEmbed } from 'discord.js';
+import { Command, CommandoMessage } from 'discord.js-commando';
+import { Message, MessageEmbed } from 'discord.js';
 import ReplacementBot from '../../replacementBot';
 import ReplacementsChannel from '../../models/replacementsChannel';
 
@@ -17,14 +17,14 @@ export default class VerifyCommand extends Command
 		});
 	}
 
-	async run(message: CommandMessage, args: string[]): Promise<Message>
+	async run(message: CommandoMessage, args: string[]): Promise<Message>
 	{
 		const channels = (this.client as ReplacementBot).replacementChannelsManager.findChannels()
 			.filter(x => x.guild.id === message.guild.id);
 
 		if(channels.size == 0)
 		{
-			return message.channel.send(new RichEmbed()
+			return message.channel.send(new MessageEmbed()
 				.setColor('RED')
 				.setTitle('No valid channels found')
 				.setDescription('I don\'t have access to any valid channels on that guild')
@@ -32,11 +32,12 @@ export default class VerifyCommand extends Command
 		}
 		else if(channels.size == 1)
 		{
+			await channels.first().messages.fetch();
 			const replacementsChannel = new ReplacementsChannel(channels.first(), (this.client as ReplacementBot));
 			if(replacementsChannel.isSuitable() === true)
 			{
 				const nextUpdate = (this.client as ReplacementBot).scheduleManager.getJobs()[0].nextDate().fromNow();
-				return message.channel.send(new RichEmbed()
+				return message.channel.send(new MessageEmbed()
 					.setColor('GREEN')
 					.setTitle(':tada: Your server is properly configured')
 					.setDescription(`I will update **${channels.first()}** with newest replacements!\r\nNext update ${nextUpdate}`)
@@ -45,7 +46,7 @@ export default class VerifyCommand extends Command
 			else
 			{
 				const error = replacementsChannel.stringifyIsSatiableError(replacementsChannel.isSuitable());
-				return message.channel.send(new RichEmbed()
+				return message.channel.send(new MessageEmbed()
 					.setColor('RED')
 					.setTitle('One semi-valid channel found')
 					.setDescription(`${channels.first()} ${error}`)
@@ -55,7 +56,7 @@ export default class VerifyCommand extends Command
 		}
 		else
 		{
-			return message.channel.send(new RichEmbed()
+			return message.channel.send(new MessageEmbed()
 				.setColor('RED')
 				.setTitle('Found multiple channels')
 				.setDescription(`Only one channel at the time is allowed per guild, found ${channels.size} channels ${channels.array().join('\r\n')}`)

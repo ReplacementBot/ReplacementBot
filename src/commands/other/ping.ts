@@ -1,4 +1,4 @@
-import { Command, CommandoClient, CommandMessage } from 'discord.js-commando';
+import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
 import { Message } from 'discord.js';
 
 export default class PingCommand extends Command
@@ -13,11 +13,11 @@ export default class PingCommand extends Command
 		});
 	}
 
-	async run(message: CommandMessage, args: any): Promise<Message>
+	async run(message: CommandoMessage, args: any): Promise<Message>
 	{
 		const reply = await message.channel.send('Pinging...') as Message;
 		const messageTripLength = (reply.editedTimestamp || reply.createdTimestamp) - (message.editedTimestamp || message.createdTimestamp);
-		const heartBeatPing = this.client.ping ? Math.round(this.client.ping) : 'unknown';
+		const heartBeatPing = this.client.ws.ping ? Math.round(this.client.ws.ping) : 'unknown';
 
 		return reply.edit(
 			`This message round-trip took ${messageTripLength}ms.` + '\r' +

@@ -20,7 +20,6 @@ const configSchema = {
 		format: function check(val: any): void
 		{
 			if(!moment(val, 'k:m').isValid()) throw new TypeError(`daySwitchHour '${val}' is not in a hh:mm format`);
-
 		},
 		default: '16:00',
 	},
@@ -32,7 +31,7 @@ const configSchema = {
 	{
 		updateCron: {
 			format: String,
-			default: '0,30 * * * *',
+			default: '* * * * *',
 		},
 		topicTag: {
 			format: String,

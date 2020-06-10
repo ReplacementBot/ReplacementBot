@@ -1,4 +1,4 @@
-import { Command, CommandMessage } from 'discord.js-commando';
+import { Command, CommandoMessage } from 'discord.js-commando';
 import { Message } from 'discord.js';
 import ReplacementBot from '../../replacementBot';
 
@@ -16,23 +16,18 @@ export default class UpdateCommand extends Command
 		});
 	}
 
-	async run(message: CommandMessage, args: string[]): Promise<Message>
+	async run(message: CommandoMessage, args: string[]): Promise<Message>
 	{
-		return new Promise((resolve, reject) =>
-		{
-			message.channel.send('Updating this guild...')
-				.then(statusMessage =>
-				{
-					(this.client as ReplacementBot).replacementChannelsManager.updateSpecificGuild(statusMessage.guild)
-						.catch((reason: Error) =>
-						{
-							reject(statusMessage.edit(reason.message));
-						})
-						.then(() =>
-						{
-							resolve(statusMessage.edit('Successfully updated this guild :tada:') as Promise<Message>);
-						});
-				});
-		});
+		const reply = await message.channel.send('Updating this guild...') as Message;
+		return (this.client as ReplacementBot).replacementChannelsManager.updateSpecificGuild(message.guild)
+			.then(() =>
+			{
+				return reply.edit('Successfully updated this guild :tada:');
+
+			})
+			.catch((error)=>
+			{
+				return reply.edit('Failed to update this guild - ' + error + ' :x:');
+			});
 	}
 }

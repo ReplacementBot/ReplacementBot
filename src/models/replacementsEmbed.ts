@@ -1,4 +1,4 @@
-import { RichEmbed, MessageEmbed } from 'discord.js';
+import { MessageEmbed } from 'discord.js';
 import moment = require('moment');
 import Logger from '../managers/logger';
 import ReplacementDay from './replacementDay';
@@ -21,23 +21,23 @@ export class ReplacementsEmbed
 		this.data.push(data);
 	}
 
-	public build(title: string, footerType: ReplacementsEmbedFooterType): RichEmbed
+	public build(title: string, footerType: ReplacementsEmbedFooterType): MessageEmbed
 	{
-		const richEmbed = new RichEmbed();
+		const result = new MessageEmbed();
 
-		richEmbed.setTitle(title)
+		result.setTitle(title)
 			.setColor('DARK_VIVID_PINK')
 			.setThumbnail('https://cdn.pixabay.com/photo/2019/08/11/18/50/icon-4399684_960_720.png')
 			.setFooter(this.getFooter(footerType, moment()));
 
 		for(const replacementDay of this.data)
 		{
-			richEmbed.addField(
+			result.addField(
 				this.data.length > 1 ? `Replacements for: ${replacementDay.getWeekDay()}` : 'Replacements list:',
 				replacementDay.toString(false));
 		}
 
-		return richEmbed;
+		return result;
 	}
 
 	private getFooter(type: ReplacementsEmbedFooterType, date?: moment.Moment): string
@@ -58,7 +58,7 @@ export class ReplacementsEmbed
 		}
 	}
 
-	public static compareEmbeds(a: RichEmbed, b: MessageEmbed): boolean
+	public static compareEmbeds(a: MessageEmbed, b: MessageEmbed): boolean
 	{
 		for (let index = 0; index < a.fields.length; index++)
 		{

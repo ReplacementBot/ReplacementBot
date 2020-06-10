@@ -1,4 +1,3 @@
-import chalk from 'chalk';
 import Logger from './managers/logger';
 import { CommandoClient } from 'discord.js-commando';
 import path from 'path';
@@ -25,7 +24,6 @@ export default class ReplacementBot extends CommandoClient
 		super({
 			commandPrefix: Config.get('prefix'),
 			owner: Config.get('botOwners'),
-			unknownCommandResponse: false,
 		});
 		this.ready = false;
 
@@ -37,13 +35,13 @@ export default class ReplacementBot extends CommandoClient
 		// Setup Listeners
 		this.on('commandError', (command, error, message) =>
 		{
-			const stack = error.stack.replace(error.name + ': ' + error.message + '\n', '');
 			Logger.error(
-				`Failed to execute ${command.name} command` + '\r\n' +
-				`${chalk.bold(error.name)}: ${error.message}` + '\r\n' +
-				chalk.gray(`${message.author.tag} said '${message.content}' on ` +
-				`#${(message.channel as TextChannel).name} (${message.guild.name})`) + '\r\n' +
-				chalk.gray(stack));
+				`Failed to execute "${command.name}" command` + '\r\n' +
+				'Caused by:' + '\r\n' +
+				'User: ' + message.author.tag + '\r\n' +
+				'Message: ' + message.content + '\r\n' +
+				`Channel: #${(message.channel as TextChannel).name} (${message.guild.name})` + '\r\n' + error);
+			console.log(error);
 		});
 	}
 
@@ -75,18 +73,12 @@ export default class ReplacementBot extends CommandoClient
 					this.setupCommandsRegistry();
 					this.setupScheduleManager();
 					Logger.info('ReplacementBot successfully launched!');
-					Logger.info('Bot user is: ' + this.user.tag + ' in ' + this.user.client.guilds.size + ' guilds');
+					Logger.info('Bot user is: ' + this.user.tag + ' in ' + this.user.client.guilds.cache.size + ' guilds');
 					Logger.info('Next embed update: ' + this.scheduleManager.getJobs()[0].nextDate().fromNow());
 					this.ready = true;
 					resolve();
 				});
 		});
-	}
-
-	public stop(): Promise<void>
-	{
-		this.ready = false;
-		return this.destroy();
 	}
 
 	private setupCommandsRegistry(): void

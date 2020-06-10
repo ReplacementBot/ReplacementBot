@@ -1,4 +1,4 @@
-import { TextChannel } from 'discord.js';
+import { TextChannel, Collection, Message } from 'discord.js';
 import moment = require('moment');
 import ReplacementBot from '../replacementBot';
 import ReplacementDay from './replacementDay';
@@ -16,7 +16,8 @@ export default class ReplacementsChannel
 
 	public isSuitable(): true | 'NOT_MANAGEABLE' | 'OTHER_MESSAGES'
 	{
-		const otherMessagesExist = this.channel.messages.some(x => x.author.id == this.bot.user.id);
+		console.log(this.channel.messages.cache, this.bot.user.id);
+		const otherMessagesExist = this.channel.messages.cache.some(x => x.author.id != this.bot.user.id);
 		if(!this.channel.manageable)
 		{
 			return 'NOT_MANAGEABLE';
@@ -51,62 +52,40 @@ export default class ReplacementsChannel
 		}
 	}
 
-	public update(): Promise<void>
+	public update(): Promise<Message>
 	{
-		return new Promise((resolve, reject) =>
-		{
-			if(this.isSuitable() !== true) reject(new Error('Channels is not suitable'));
-			this.cleanUp().then(() =>
+		return this.channel.messages.fetch()
+			.then(() =>
 			{
-				this.channel.fetchMessages({ limit: 1 }).then((messages) =>
-				{
-					const lastMessage = messages.last();
-					this.bot.replacementsManager.fetchReplacements()
-						.then((replacements: ReplacementDay) =>
-						{
-							const embed = new ReplacementsEmbed(replacements).build(
-								`Replacements for ${replacements.getWeekDay()}`,
-								ReplacementsEmbedFooterType.UPDATED_ON);
-							if(lastMessage == undefined)
-							{
-								this.channel.send(embed).then(resolve as any);
-							}
-							else if(ReplacementsEmbed.compareEmbeds(embed, lastMessage.embeds[0]))
-							{
-								lastMessage.edit(embed).then(resolve as any);
-							}
-							else
-							{
-								lastMessage.delete().then(() =>
-								{
-									this.channel.send(embed).then(resolve as any);
-								});
-
-							}
-						});
-				});
-			}).catch(e => reject(e));
-		});
-	}
-
-	private cleanUp(): Promise<void>
-	{
-		return new Promise((resolve, reject) =>
-		{
-			this.channel.fetchMessages().then((messages) =>
+				if(this.isSuitable() !== true) return Promise.reject(new Error('Channel is not suitable'));
+			})
+			.then(() => this.cleanUp())
+			.then(() => this.bot.replacementsManager.fetchReplacements())
+			.then((replacements: ReplacementDay) =>
 			{
-				const messagesToDelete = messages.filter(x => x.id != messages.last().id);
-				if(messagesToDelete.size > 0)
+				console.log('fetched');
+				const embed = new ReplacementsEmbed(replacements).build(
+					`Replacements for ${replacements.getWeekDay()}`,
+					ReplacementsEmbedFooterType.UPDATED_ON);
+				if(!this.channel.lastMessage)
 				{
-					this.channel.bulkDelete(messagesToDelete)
-						.then(() => resolve)
-						.catch(reject);
+					return this.channel.send(embed);
+				}
+				else if(ReplacementsEmbed.compareEmbeds(embed, this.channel.lastMessage.embeds[0]))
+				{
+					return this.channel.lastMessage.edit(embed);
 				}
 				else
 				{
-					resolve();
+					return this.channel.lastMessage.delete()
+						.then(() => this.channel.send(embed));
 				}
 			});
-		});
+	}
+
+	private cleanUp(): Promise<Collection<string, Message>>
+	{
+		console.log('s');
+		return this.channel.bulkDelete(this.channel.messages.cache.filter(x => x.id != this.channel.lastMessageID));
 	}
 }

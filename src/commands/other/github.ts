@@ -1,4 +1,4 @@
-import { Command, CommandoClient, CommandMessage } from 'discord.js-commando';
+import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
 import { Message } from 'discord.js';
 
 export default class GitHubCommand extends Command
@@ -14,7 +14,7 @@ export default class GitHubCommand extends Command
 		});
 	}
 
-	async run(message: CommandMessage, args: any): Promise<Message>
+	async run(message: CommandoMessage, args: any): Promise<Message>
 	{
 		return message.channel.send(
 			'**ReplacementBot** is a Open Source project made with :heart:' + '\r\n' +

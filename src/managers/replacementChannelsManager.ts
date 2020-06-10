@@ -1,7 +1,8 @@
 import ReplacementBot from '../replacementBot';
 import ReplacementsChannels from '../models/replacementsChannel';
-import { TextChannel, Collection, Guild } from 'discord.js';
+import { TextChannel, Collection, Guild, Message } from 'discord.js';
 import Config from './config';
+import Logger from './logger';
 
 export default class ReplacementChannelsManager
 {
@@ -15,23 +16,30 @@ export default class ReplacementChannelsManager
 	{
 		return new Promise((resolve, reject) =>
 		{
-			const channels = this.filterChannels(this.findChannels());
+			const channels = this.filterChannels(this.findChannels()).array();
 			const promises = [];
 			for(const channel of channels)
 			{
-				promises.push(new ReplacementsChannels(channel[1], this.bot).update());
+				promises.push(new ReplacementsChannels(channel, this.bot).update());
 			}
 			Promise.all(promises.map(p => p.catch(e => e)))
-				.then(() =>
+				.then((results) =>
 				{
-					// TODO: inform somehow server owner that something broke
+					for (let i = 0; i < results.length; i++)
+					{
+						const result = results[i];
+						if(result instanceof Error)
+						{
+							Logger.error(`Failed to update channel on ${channels[i].guild.name}\r\n${result}`);
+						}
+					}
 					resolve();
 				})
 				.catch(error => reject(error));
 		});
 	}
 
-	public updateSpecificGuild(guild: Guild): Promise<void>
+	public updateSpecificGuild(guild: Guild): Promise<Message>
 	{
 		const channel = this.filterChannels(this.findChannels()).filter(x => x.guild.id == guild.id).first();
 		return new ReplacementsChannels(channel, this.bot).update();
@@ -40,7 +48,7 @@ export default class ReplacementChannelsManager
 	// Find all replacements channels that has topic tag
 	public findChannels(): Collection<string, TextChannel>
 	{
-		return this.bot.channels.filter((channel: TextChannel) =>
+		return this.bot.channels.cache.filter((channel: TextChannel) =>
 		{
 			if(!channel.guild || channel.type != 'text') return false;
 			return channel.topic && channel.topic.includes(Config.get('replacementsChannel').topicTag);

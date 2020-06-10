@@ -1,4 +1,4 @@
-import { Command, CommandoClient, CommandMessage, FriendlyError } from 'discord.js-commando';
+import { Command, CommandoClient, CommandoMessage, FriendlyError } from 'discord.js-commando';
 import { Message } from 'discord.js';
 import ReplacementBot from '../../replacementBot';
 import { ReplacementsEmbed, ReplacementsEmbedFooterType } from '../../models/replacementsEmbed';
@@ -18,7 +18,7 @@ export default class FetchReplacementsCommand extends Command
 		});
 	}
 
-	async run(message: CommandMessage, args: any): Promise<Message>
+	async run(message: CommandoMessage, args: any): Promise<Message>
 	{
 		const reply = await message.channel.send('Fetching Replacements...') as Message;
 		return (this.client as ReplacementBot).replacementsManager.fetchReplacements()
