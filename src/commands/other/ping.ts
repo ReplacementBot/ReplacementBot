@@ -20,7 +20,8 @@ export default class PingCommand extends Command
 		const heartBeatPing = this.client.ws.ping ? Math.round(this.client.ws.ping) : 'unknown';
 
 		return reply.edit(
-			`Pong :ping_pong: This message round-trip took ${messageTripLength}ms.` + '\r' +
+			'Pong :ping_pong:' + '\r' +
+			`This message round-trip took ${messageTripLength}ms.` + '\r' +
 			`The average heartbeat ping is ${heartBeatPing}ms.`);
 	}
 }
