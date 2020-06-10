@@ -41,7 +41,6 @@ export default class ReplacementBot extends CommandoClient
 				'User: ' + message.author.tag + '\r\n' +
 				'Message: ' + message.content + '\r\n' +
 				`Channel: #${(message.channel as TextChannel).name} (${message.guild.name})` + '\r\n' + error);
-			console.log(error);
 		});
 	}
 

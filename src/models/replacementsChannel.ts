@@ -16,7 +16,6 @@ export default class ReplacementsChannel
 
 	public isSuitable(): true | 'NOT_MANAGEABLE' | 'OTHER_MESSAGES'
 	{
-		console.log(this.channel.messages.cache, this.bot.user.id);
 		const otherMessagesExist = this.channel.messages.cache.some(x => x.author.id != this.bot.user.id);
 		if(!this.channel.manageable)
 		{
@@ -63,7 +62,6 @@ export default class ReplacementsChannel
 			.then(() => this.bot.replacementsManager.fetchReplacements())
 			.then((replacements: ReplacementDay) =>
 			{
-				console.log('fetched');
 				const embed = new ReplacementsEmbed(replacements).build(
 					`Replacements for ${replacements.getWeekDay()}`,
 					ReplacementsEmbedFooterType.UPDATED_ON);
@@ -85,7 +83,6 @@ export default class ReplacementsChannel
 
 	private cleanUp(): Promise<Collection<string, Message>>
 	{
-		console.log('s');
 		return this.channel.bulkDelete(this.channel.messages.cache.filter(x => x.id != this.channel.lastMessageID));
 	}
 }
