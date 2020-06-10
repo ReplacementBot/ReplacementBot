@@ -31,7 +31,7 @@ const configSchema = {
 	{
 		updateCron: {
 			format: String,
-			default: '* * * * *',
+			default: '0,30 * * * *',
 		},
 		topicTag: {
 			format: String,
