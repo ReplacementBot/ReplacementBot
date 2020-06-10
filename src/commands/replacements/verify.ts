@@ -2,6 +2,7 @@ import { Command, CommandoMessage } from 'discord.js-commando';
 import { Message, MessageEmbed } from 'discord.js';
 import ReplacementBot from '../../replacementBot';
 import ReplacementsChannel from '../../models/replacementsChannel';
+import Config from '../../managers/config';
 
 export default class VerifyCommand extends Command
 {
@@ -27,7 +28,8 @@ export default class VerifyCommand extends Command
 			return message.channel.send(new MessageEmbed()
 				.setColor('RED')
 				.setTitle('No valid channels found')
-				.setDescription('I don\'t have access to any valid channels on that guild')
+				.setDescription('I don\'t have access to any valid channels on that guild.' + '\r\n' +
+				`Please keep \`${Config.get('replacementsChannel').topicTag}\` tag in topic of single text channel!`)
 				.setFooter('Documentation: https://bit.ly/2AaJycn'));
 		}
 		else if(channels.size == 1)
@@ -47,9 +49,9 @@ export default class VerifyCommand extends Command
 			{
 				const error = replacementsChannel.stringifyIsSatiableError(replacementsChannel.isSuitable());
 				return message.channel.send(new MessageEmbed()
-					.setColor('RED')
+					.setColor('ORANGE')
 					.setTitle('One semi-valid channel found')
-					.setDescription(`${channels.first()} ${error}`)
+					.setDescription(`${channels.first()} contains \`${Config.get('replacementsChannel').topicTag}\` tag but, ${error}`)
 					.setFooter('Documentation: https://bit.ly/2AaJycn'));
 			}
 
@@ -59,7 +61,10 @@ export default class VerifyCommand extends Command
 			return message.channel.send(new MessageEmbed()
 				.setColor('RED')
 				.setTitle('Found multiple channels')
-				.setDescription(`Only one channel at the time is allowed per guild, found ${channels.size} channels ${channels.array().join('\r\n')}`)
+				.setDescription(
+					'Only one channel at the time is allowed per guild.' + '\r\n' +
+					`Please keep only one channel with \`${Config.get('replacementsChannel').topicTag}\` tag` + '\r\n\r\n' +
+					`Found **${channels.size}** channels \r\n${channels.array().join('\r\n')}`)
 				.setFooter('Documentation: https://bit.ly/2AaJycn'));
 		}
 	}

@@ -35,15 +35,15 @@ export default class ReplacementsChannel
 	{
 		if(error === true)
 		{
-			return 'No Errors Found. Channels is suitable';
+			return 'No Errors Found. Channels is suitable!';
 		}
 		else if(error === 'NOT_MANAGEABLE')
 		{
-			return 'Bot don\'t have permissions to operate that channel';
+			return 'bot don\'t have permissions to operate that channel!';
 		}
 		else if(error === 'OTHER_MESSAGES')
 		{
-			return 'Channel contains messages which are not sent by bot';
+			return 'it contains messages which are not sent by bot. Please remove them or use other channel!';
 		}
 		else
 		{
