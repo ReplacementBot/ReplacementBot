@@ -8,7 +8,7 @@ export default class GitHubCommand extends Command
 		super(client, {
 			name: 'github',
 			group: 'other',
-			aliases: ['gh', 'opensource', 'oss', 'source', 'contribute', 'issue'],
+			aliases: ['gh', 'opensource', 'oss', 'source', 'contribute'],
 			memberName: 'github',
 			description: 'Show Replacement\'s bot GitHub link',
 		});

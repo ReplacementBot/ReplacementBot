@@ -87,6 +87,7 @@ export default class ReplacementBot extends CommandoClient
 			.registerGroups([
 				['replacements', 'Replacements'],
 				['other', 'Other Commands'],
+				['util', 'Utilities'],
 			])
 			.registerCommandsIn({
 				filter: /^([^.].*)\.(js|ts)$/,
