@@ -15,6 +15,10 @@ export default class FetchReplacementsCommand extends Command
 			group: 'replacements',
 			memberName: 'fetch',
 			description: 'Fetch replacements from today',
+			throttling: {
+				usages: 1,
+				duration: 30,
+			},
 		});
 	}
 

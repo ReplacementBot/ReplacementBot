@@ -13,6 +13,10 @@ export default class UpdateCommand extends Command
 			description: 'Updates the replacement embed',
 			aliases: [ 'u' ],
 			guildOnly: true,
+			throttling: {
+				usages: 1,
+				duration: 30,
+			},
 		});
 	}
 
