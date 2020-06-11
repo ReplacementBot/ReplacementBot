@@ -1,5 +1,7 @@
 import { CronJob, CronJobParameters } from 'cron';
 import Logger from './logger';
+import ReplacementBot from '../replacementBot';
+import Config from './config';
 
 export class ScheduledJob extends CronJob
 {
@@ -49,18 +51,49 @@ export class ScheduledJob extends CronJob
 	{
 		return this.onTick();
 	}
+
+	public getName(): string
+	{
+		return this.name;
+	}
+
+	public nextExecution(): string
+	{
+		return this.nextDate().fromNow();
+	}
 }
 
 export default class ScheduleManager
 {
 	private jobs: ScheduledJob[] = [];
 
-	public addJob(newJob: ScheduledJob): number
+	public addJob(newJob: ScheduledJob): ScheduledJob
 	{
-		return this.jobs.push(newJob);
+		const number = this.jobs.push(newJob);
+		return this.jobs[number];
 	}
+
 	public getJobs(): ScheduledJob[]
 	{
 		return this.jobs;
+	}
+
+	public getJobByName(name: string): ScheduledJob
+	{
+		return this.jobs.find(x => x.getName() == name);
+	}
+
+	public scheduleDefaultJobs(bot: ReplacementBot): ScheduledJob[]
+	{
+		const jobs: ScheduledJob[] = [];
+		jobs.push(this.addJob(new ScheduledJob(
+			Config.get('replacementsChannel').updateCron,
+			'Update Channels',
+			() =>
+			{
+				return bot.replacementChannelsManager.updateAllGuilds();
+			},
+		)));
+		return jobs;
 	}
 }

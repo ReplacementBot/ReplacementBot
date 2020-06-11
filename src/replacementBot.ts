@@ -3,7 +3,7 @@ import { CommandoClient } from 'discord.js-commando';
 import path from 'path';
 import Config from './managers/config';
 import ReplacementsManager from './managers/replacementsManager';
-import ScheduleManager, { ScheduledJob } from './managers/scheduleManager';
+import ScheduleManager from './managers/scheduleManager';
 import { TextChannel } from 'discord.js';
 import ReplacementChannelsManager from './managers/replacementChannelsManager';
 
@@ -70,10 +70,10 @@ export default class ReplacementBot extends CommandoClient
 							Logger.error('Failed to load ReplacementManager: ' + error.message);
 						});
 					this.setupCommandsRegistry();
-					this.setupScheduleManager();
+					this.scheduleManager.scheduleDefaultJobs(this);
 					Logger.info('ReplacementBot successfully launched!');
 					Logger.info('Bot user is: ' + this.user.tag + ' in ' + this.user.client.guilds.cache.size + ' guilds');
-					Logger.info('Next embed update: ' + this.scheduleManager.getJobs()[0].nextDate().fromNow());
+					Logger.info('Next embed update: ' + this.scheduleManager.getJobByName('Update Channels').nextExecution());
 					this.ready = true;
 					resolve();
 				});
@@ -93,17 +93,5 @@ export default class ReplacementBot extends CommandoClient
 				filter: /^([^.].*)\.(js|ts)$/,
 				dirname: path.join(__dirname, 'commands'),
 			});
-	}
-
-	private setupScheduleManager(): void
-	{
-		this.scheduleManager.addJob(new ScheduledJob(
-			Config.get('replacementsChannel').updateCron,
-			'Update Channels',
-			() =>
-			{
-				return this.replacementChannelsManager.updateAllGuilds();
-			},
-		));
 	}
 }

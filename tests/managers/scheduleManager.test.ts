@@ -1,5 +1,5 @@
 import Logger from '../../src/managers/logger';
-import { ScheduledJob } from '../../src/managers/scheduleManager';
+import ScheduleManager, { ScheduledJob } from '../../src/managers/scheduleManager';
 describe('ScheduleManager', () =>
 {
 	describe('ScheduledJob', () =>
@@ -33,9 +33,38 @@ describe('ScheduleManager', () =>
 			}, false).fire();
 			expect(Logger.error).toHaveBeenCalledWith('Job failed "Test" reason: Test');
 		});
+
+		test('#nextExecution', () =>
+		{
+			const job = new ScheduledJob('* * * * *', 'Test', () =>
+			{
+				return Promise.resolve();
+			}, false);
+			expect(job.nextExecution() === 'in a minute' || job.nextExecution() === 'in a few seconds').toBeTruthy();
+		});
 	});
 	describe('ScheduleManager', () =>
 	{
-		test.todo('Place for tests from #52');
+		test('should add jobs and list jobs', () =>
+		{
+			const job = new ScheduledJob('* * * * *', 'Test', () =>
+			{
+				return Promise.resolve();
+			}, false);
+			const manager = new ScheduleManager();
+			manager.addJob(job);
+			expect(manager.getJobs()[0].getName()).toBe('Test');
+		});
+
+		test('should get job by name', () =>
+		{
+			const job = new ScheduledJob('* * * * *', 'Test', () =>
+			{
+				return Promise.resolve();
+			}, false);
+			const manager = new ScheduleManager();
+			manager.addJob(job);
+			expect(manager.getJobByName('Test').getName()).toBe('Test');
+		});
 	});
 });
