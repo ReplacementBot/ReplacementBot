@@ -3,17 +3,10 @@
 [![Coverage](https://img.shields.io/codecov/c/github/MrBartusek/ReplacementBot?logo=codecov&logoColor=white)](https://codecov.io/gh/MrBartusek/ReplacementBot)
 ![OSS Lifecycle](https://img.shields.io/osslifecycle/MrBartusek/ReplacementBot)
 [![Gitpod Ready](https://img.shields.io/badge/Gitpod-ready-blue?logo=gitpod&logoColor=white)](https://gitpod.io/#https://github.com/MrBartusek/ReplacementBot)
-[![Dependabot Status](https://img.shields.io/badge/dependabot-enabled-blue?logo=dependabot)](https://dependabot.com)
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FMrBartusek%2FReplacementBot.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FMrBartusek%2FReplacementBot?ref=badge_shield)
 ![Version](https://img.shields.io/badge/version-beta-sucess)
 
-🌱 **Beta Phase** - bot is working but, expect problems bugs and breaking changes
 
-ReplacementBot is a Discord bot made to make your life easier. The Bot automatically fetches replacement from your school website and shows them right on your discord server!
-
----
-
-![Presentation Image](https://i.imgur.com/SR7pGcu.png)
+Meet the **ReplacementBot**, a Discord bot made to make your school life easier. The Bot automatically fetches replacement from your school website and shows them right on your discord server. Automatically, every half an hour.
 
 ## ✨ Feature Rich
 
@@ -38,17 +31,13 @@ Put that file in `src\fetchers` and we handle other things by ourselves
 
 ---
 
-## 💻 Public Instance
-
-Unfortunately, Currently Public Instance isn't available 😞 Check Out: [Public Instance Milestone](https://github.com/MrBartusek/ReplacementBot/milestone/3)
-
 ## 🚀 Running Locally
 
-Check [wiki](https://github.com/MrBartusek/ReplacementBot/wiki/⚡️-How-to-Setup-Bot) for detailed setup instructions!
+Check [SETUP.md](SETUP.md) for detailed setup instructions!
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/MrBartusek/ReplacementBot) [![Heroku Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 
 ## 👥 Contributing
 
-We greatly appreciate any work contributed, no matter how small!  Contributions, issues and feature requests are welcome ❤️ Read more about contributing in [wiki](https://github.com/MrBartusek/ReplacementBot/wiki/👥-How-to-Contribute)
+We greatly appreciate any work contributed, no matter how small!  Contributions, issues and feature requests are welcome ❤️ Read more about contributing in [CONTRIBUTING.md](CONTRIBUTING.md)
