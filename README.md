@@ -1,8 +1,8 @@
 # ReplacementBot 📅
-[![CircleCI Build](https://img.shields.io/circleci/build/github/MrBartusek/ReplacementBot?logo=circleci&token=6bae64ae7a523f3f207804bf7818dc1d56f420a4)](https://circleci.com/gh/MrBartusek/ReplacementBot)
-[![Coverage](https://img.shields.io/codecov/c/github/MrBartusek/ReplacementBot?logo=codecov&logoColor=white)](https://codecov.io/gh/MrBartusek/ReplacementBot)
-![OSS Lifecycle](https://img.shields.io/osslifecycle/MrBartusek/ReplacementBot)
-[![Gitpod Ready](https://img.shields.io/badge/Gitpod-ready-blue?logo=gitpod&logoColor=white)](https://gitpod.io/#https://github.com/MrBartusek/ReplacementBot)
+[![CircleCI Build](https://img.shields.io/circleci/build/github/ReplacementBot/ReplacementBot?logo=circleci&token=6bae64ae7a523f3f207804bf7818dc1d56f420a4)](https://circleci.com/gh/ReplacementBot/ReplacementBot)
+[![Coverage](https://img.shields.io/codecov/c/github/ReplacementBot/ReplacementBot?logo=codecov&logoColor=white)](https://codecov.io/gh/ReplacementBot/ReplacementBot)
+![OSS Lifecycle](https://img.shields.io/osslifecycle/ReplacementBot/ReplacementBot)
+[![Gitpod Ready](https://img.shields.io/badge/Gitpod-ready-blue?logo=gitpod&logoColor=white)](https://gitpod.io/#https://github.com/ReplacementBot/ReplacementBot)
 ![Version](https://img.shields.io/badge/version-beta-sucess)
 
 
@@ -35,7 +35,7 @@ Put that file in `src\fetchers` and we handle other things by ourselves
 
 Check [SETUP.md](SETUP.md) for detailed setup instructions!
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/MrBartusek/ReplacementBot) [![Heroku Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/ReplacementBot/ReplacementBot) [![Heroku Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 
 ## 👥 Contributing

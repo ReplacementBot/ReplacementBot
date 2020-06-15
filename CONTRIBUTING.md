@@ -1,6 +1,6 @@
-[![Beginner friendly issues](https://img.shields.io/github/issues/MrBartusek/ReplacementBot/good%20first%20issue?color=blueviolet&label=beginner%20friendly%20issues&logo=github)](https://github.com/MrBartusek/ReplacementBot/labels/good%20first%20issue) 
-[![Open Issues](https://img.shields.io/github/issues/MrBartusek/ReplacementBot?color=blueviolet&label=issues&logo=github)](https://github.com/MrBartusek/ReplacementBot/issues)
-[![Open PRs](https://img.shields.io/github/issues-pr/MrBartusek/ReplacementBot?color=blueviolet&label=pull%20requests&logo=github)](https://github.com/MrBartusek/ReplacementBot/pulls) 
+[![Beginner friendly issues](https://img.shields.io/github/issues/ReplacementBot/ReplacementBot/good%20first%20issue?color=blueviolet&label=beginner%20friendly%20issues&logo=github)](https://github.com/ReplacementBot/ReplacementBot/labels/good%20first%20issue) 
+[![Open Issues](https://img.shields.io/github/issues/ReplacementBot/ReplacementBot?color=blueviolet&label=issues&logo=github)](https://github.com/ReplacementBot/ReplacementBot/issues)
+[![Open PRs](https://img.shields.io/github/issues-pr/ReplacementBot/ReplacementBot?color=blueviolet&label=pull%20requests&logo=github)](https://github.com/ReplacementBot/ReplacementBot/pulls) 
 
 <!-- There are couple of shields showing open prs issues etc. use markdown preview to view them-->
 

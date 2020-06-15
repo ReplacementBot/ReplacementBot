@@ -18,7 +18,7 @@ export default class GitHubCommand extends Command
 	{
 		return message.channel.send(
 			'**ReplacementBot** is a Open Source project made with :heart:' + '\r\n' +
-            'GitHub: https://github.com/MrBartusek/ReplacementBot',
+            'GitHub: https://github.com/ReplacementBot/ReplacementBot',
 		) as Promise<Message>;
 	}
 }

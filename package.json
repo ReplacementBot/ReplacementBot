@@ -3,13 +3,13 @@
   "description": "Powerful Discord School Replacements bot for your Discord Server",
   "author": "MrBartusek",
   "license": "Apache-2.0",
-  "homepage": "https://github.com/MrBartusek/ReplacementBot",
+  "homepage": "https://github.com/ReplacementBot/ReplacementBot",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MrBartusek/ReplacementBot.git"
+    "url": "git+https://github.com/ReplacementBot/ReplacementBot.git"
   },
   "bugs": {
-    "url": "https://github.com/MrBartusek/ReplacementBot/issues"
+    "url": "https://github.com/ReplacementBot/ReplacementBot/issues"
   },
   "main": "build/src/index.js",
   "scripts": {

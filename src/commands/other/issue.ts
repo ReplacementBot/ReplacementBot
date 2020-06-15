@@ -16,6 +16,6 @@ export default class GitHubCommand extends Command
 
 	async run(message: CommandoMessage, args: any): Promise<Message>
 	{
-		return message.channel.send('Please report any issues or feature request to github:\r\nhttps://github.com/MrBartusek/ReplacementBot/issues');
+		return message.channel.send('Please report any issues or feature request to github:\r\nhttps://github.com/ReplacementBot/ReplacementBot/issues');
 	}
 }

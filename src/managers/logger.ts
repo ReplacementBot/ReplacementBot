@@ -8,7 +8,7 @@ export default class Logger
 	{
 		console.log(chalk.bold.red('[CRITICAL] ') + chalk.red(message));
 		console.log(chalk.red('Process has been terminated because of critical error'));
-		console.log(chalk.red('You can report issues at: https://github.com/MrBartusek/ReplacementBot/issues'));
+		console.log(chalk.red('You can report issues at: https://github.com/ReplacementBot/ReplacementBot/issues'));
 		if(this.getHelpfulError(message) !== '')
 		{
 			console.log(chalk.green('TIP: ' + this.getHelpfulError(message)));
