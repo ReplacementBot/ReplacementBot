@@ -14,11 +14,11 @@ If you are new to Open Source:
 
 ## 🐞 Creating issues
 
-If you find any bug or want something to be added to ReplacementBot please create an [issue](https://github.com/MrBartusek/ReplacementBot/issues). We are offering a couple of templates to chose from so read their descriptions to chose a good one!
+If you find any bug or want something to be added to ReplacementBot please create an [issue](https://github.com/ReplacementBot/ReplacementBot/issues). We are offering a couple of templates to chose from so read their descriptions to chose a good one!
 
 ## ↖️ Pull Request Process
 
-1. Follow the [How To Setup Bot](https://github.com/MrBartusek/ReplacementBot/wiki/⚡️-How-to-Setup-Bot) to run your own fork and local instance of the bot.
+1. Follow the [SETUP.MD](SETUP.md) to run your own fork and local instance of the bot.
 2. Make any changes that you want
 3. If you can, write tests for changes that you made to don't lower coverage. If you don't know how to write tests please use `test.todo()`
 4. Check if Unit Test and Lint passed locally [Running Tests and Lint](#✅-Running-Tests-and-Lint)

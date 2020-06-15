@@ -4,7 +4,7 @@ To run an instance of any of Discord Bots you must first create the app on [Disc
 
 ## Heroku Hosting
 
-You can easily setup bot to work 24/7 with heroku! Be sure to enter bot token when deploying, you can get it from the step above. After setup you need to disable `web` dyno and enable `woker` dyno from **Resources** tab or, your bot will [keep crashing](https://github.com/ReplacementBot/ReplacementBot/issues/60). This method require [ENV Configuration](https://github.com/ReplacementBot/ReplacementBot/wiki/🔧-Configure-Bot#-environmental-variable-config) if you want to use config. 
+You can easily setup bot to work 24/7 with heroku! Be sure to enter bot token when deploying, you can get it from the step above. After setup you need to disable `web` dyno and enable `woker` dyno from **Resources** tab or, your bot will [keep crashing](https://github.com/ReplacementBot/ReplacementBot/issues/60). This method require [ENV Configuration](https://replacementbot.github.io/docs/configuration.html#environmental-variable-env) if you want to use config. 
 
 [![Heroku Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
@@ -36,7 +36,7 @@ If you want to contribute, first [fork the original repository](https://help.git
 git clone https://github.com/<username>/ReplacementBot.git
 cd ReplacementBot
 ```
-Read more about contributing in [How To Contribute](https://github.com/ReplacementBot/ReplacementBot/wiki/👥-How-to-Contribute)
+Read more about contributing in [CONTRIBUTING.MD](CONTRIBUTING.md)
 
 ### Install Dependencies And Build Project
 

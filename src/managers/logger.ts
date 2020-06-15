@@ -46,7 +46,7 @@ export default class Logger
 	{
 		if(error.includes('REPLACEMENT_BOT_TOKEN is not provided'))
 		{
-			return 'You are missing bot token, please read "Configure Bot" article on wiki!';
+			return 'You are missing bot token! https://replacementbot.github.io/docs/bot_token';
 		}
 		else
 		{
