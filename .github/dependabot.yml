@@ -5,7 +5,6 @@ updates:
   schedule:
     interval: weekly
     time: '10:00'
-  open-pull-requests-limit: 10
   assignees:
   - MrBartusek
   labels:
@@ -15,3 +14,4 @@ updates:
   - dependency-name: convict
     versions:
     - ">= 6.0.a, < 6.1"
+ 
