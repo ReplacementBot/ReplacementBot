@@ -27,7 +27,7 @@ export class ReplacementsEmbed
 
 		result.setTitle(title)
 			.setColor('DARK_VIVID_PINK')
-			.setThumbnail('https://cdn.pixabay.com/photo/2019/08/11/18/50/icon-4399684_960_720.png')
+			.setThumbnail('https://replacementbot.github.io/docs/assets/images/replacementbot-logo-512-circle.png')
 			.setFooter(this.getFooter(footerType, moment()));
 
 		for(const replacementDay of this.data)
