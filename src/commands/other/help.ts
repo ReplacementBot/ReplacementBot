@@ -16,6 +16,6 @@ export default class GitHubCommand extends Command
 
 	async run(message: CommandoMessage, args: any): Promise<Message>
 	{
-		return message.reply('You can find list of all commands here: http://localhost:4000/docs/commands') as Promise<Message>;
+		return message.reply('You can find list of all commands here: https://replacementbot.github.io/docs/commands') as Promise<Message>;
 	}
 }
