@@ -14,7 +14,7 @@ export default class FetchReplacementsCommand extends Command
 			name: 'fetch',
 			group: 'replacements',
 			memberName: 'fetch',
-			description: 'Fetch replacements from today',
+			description: 'Fetch replacements and display them as reply',
 			throttling: {
 				usages: 1,
 				duration: 30,

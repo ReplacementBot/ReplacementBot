@@ -9,7 +9,7 @@ export default class PingCommand extends Command
 			name: 'ping',
 			group: 'other',
 			memberName: 'ping',
-			description: 'Checks the bot\'s ping to the Discord server.',
+			description: 'Shows current heartbeat ping and message round-trip',
 		});
 	}
 

@@ -10,7 +10,7 @@ export default class UpdateCommand extends Command
 			name: 'update',
 			group: 'replacements',
 			memberName: 'update',
-			description: 'Updates the replacement embed',
+			description: 'Updates Replacements Channel of current guild',
 			aliases: [ 'u' ],
 			guildOnly: true,
 			throttling: {
