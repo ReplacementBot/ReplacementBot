@@ -4,9 +4,7 @@ updates:
   directory: "/"
   schedule:
     interval: weekly
-    time: '10:00'
-  assignees:
-  - MrBartusek
+    time: '12:00'
   labels:
   - dependabot
   - dependencies
