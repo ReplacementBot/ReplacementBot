@@ -40,7 +40,7 @@
     "discord.js-commando": "github:discordjs/Commando#bdbd84e2a978322f3af12c21e729eb7b7cd4a3dc",
     "figlet": "^1.4.0",
     "iconv-lite": "^0.6.0",
-    "jest-junit": "^11.0.0",
+    "jest-junit": "^11.0.1",
     "moment": "^2.27.0"
   },
   "devDependencies": {
