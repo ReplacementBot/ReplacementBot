@@ -33,7 +33,7 @@ export class HTTPResponse
 		case HTTPResponseType.BAD_CODE:
 			return `Server returned bad code (${this.statusCode})`;
 		case HTTPResponseType.NO_RESPONSE:
-			return 'Server didn\'t send any response in time';
+			return 'Server didn\'t send any response';
 		case HTTPResponseType.FAILED:
 			return `Failed to send request (${this.result})`;
 		}
