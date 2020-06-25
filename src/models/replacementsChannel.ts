@@ -6,7 +6,7 @@ import { ReplacementsEmbed, ReplacementsEmbedFooterType } from './replacementsEm
 
 export default class ReplacementsChannel
 {
-	private channel: TextChannel;
+	public channel: TextChannel;
 	private bot: ReplacementBot;
 	constructor(channel: TextChannel, bot: ReplacementBot)
 	{
@@ -31,7 +31,7 @@ export default class ReplacementsChannel
 		}
 	}
 
-	public stringifyIsSatiableError(error: true | string): string
+	public static stringifyIsSatiableError(error: true | string): string
 	{
 		if(error === true)
 		{

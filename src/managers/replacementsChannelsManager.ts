@@ -1,6 +1,6 @@
 import ReplacementBot from '../replacementBot';
-import ReplacementsChannels from '../models/replacementsChannel';
-import { TextChannel, Collection, Guild, Message } from 'discord.js';
+import ReplacementsChannel from '../models/replacementsChannel';
+import { TextChannel, Collection, Guild } from 'discord.js';
 import Config from './config';
 import Logger from './logger';
 
@@ -12,15 +12,15 @@ export default class ReplacementsChannelsManager
 		this.bot = bot;
 	}
 
-	public updateAllGuilds(): Promise<void>
+	public updateAllChannels(): Promise<void>
 	{
 		return new Promise((resolve, reject) =>
 		{
-			const channels = this.filterChannels(this.findChannels()).array();
+			const channels = this.findAllChannels().array();
 			const promises = [];
 			for(const channel of channels)
 			{
-				promises.push(new ReplacementsChannels(channel, this.bot).update());
+				promises.push(channel.update());
 			}
 			Promise.all(promises.map(p => p.catch(e => e)))
 				.then((results) =>
@@ -30,7 +30,7 @@ export default class ReplacementsChannelsManager
 						const result = results[i];
 						if(result instanceof Error)
 						{
-							Logger.error(`Failed to update channel on ${channels[i].guild.name}\r\n${result}`);
+							Logger.error(`Failed to update channel on ${channels[i].channel.guild.name}\r\n${result}`);
 						}
 					}
 					resolve();
@@ -39,37 +39,24 @@ export default class ReplacementsChannelsManager
 		});
 	}
 
-	public updateSpecificGuild(guild: Guild): Promise<Message>
+	public findAllChannels(): Collection<string, ReplacementsChannel>
 	{
-		const channel = this.filterChannels(this.findChannels()).filter(x => x.guild.id == guild.id).first();
-		return new ReplacementsChannels(channel, this.bot).update();
+		const result = new Collection<string, ReplacementsChannel>();
+		const channels = this.bot.channels.cache
+			.filter((channel: TextChannel) =>
+			{
+				if(!channel.guild || channel.type != 'text') return false;
+				return channel.topic && channel.topic.includes(Config.get('replacementsChannel').topicTag);
+			});
+		channels.forEach((channel: TextChannel) =>
+		{
+			result.set(channel.id, new ReplacementsChannel(channel, this.bot));
+		});
+		return result;
 	}
 
-	// Find all replacements channels that has topic tag
-	public findChannels(): Collection<string, TextChannel>
+	public findAllGuildChannels(guild: Guild): Collection<string, ReplacementsChannel>
 	{
-		return this.bot.channels.cache.filter((channel: TextChannel) =>
-		{
-			if(!channel.guild || channel.type != 'text') return false;
-			return channel.topic && channel.topic.includes(Config.get('replacementsChannel').topicTag);
-		}) as Collection<string, TextChannel>;
-	}
-
-	// Reduce replacements channels to only one per guild
-	private filterChannels(channels: Collection<string, TextChannel>): Collection<string, TextChannel>
-	{
-		const foundGuilds: string[] = [];
-		return channels.filter((channel: TextChannel) =>
-		{
-			if(foundGuilds.includes(channel.guild.id))
-			{
-				return false;
-			}
-			else
-			{
-				foundGuilds.push(channel.guild.id);
-				return true;
-			}
-		}) as Collection<string, TextChannel>;
+		return this.findAllChannels().filter(x => x.channel.guild.id === guild.id);
 	}
 }

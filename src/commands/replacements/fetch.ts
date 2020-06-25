@@ -24,19 +24,21 @@ export default class FetchReplacementsCommand extends Command
 
 	async run(message: CommandoMessage, args: any): Promise<Message>
 	{
-		const reply = await message.channel.send('Fetching Replacements...') as Message;
 		return (this.client as ReplacementBot).replacementsManager.fetchReplacements()
 			.then((replacements: ReplacementDay)=>
 			{
 				try
 				{
-					const embed = new ReplacementsEmbed(replacements as ReplacementDay).build(`Replacements For ${replacements.getWeekDay()}`, ReplacementsEmbedFooterType.GENERATED_ON);
-					return reply.edit(`<@${message.author.id}> Sure, there are replacements for ${replacements.getWeekDay()}!`, embed);
+					const embed = new ReplacementsEmbed(replacements as ReplacementDay).build(
+						`Replacements For ${replacements.getWeekDay()}`,
+						ReplacementsEmbedFooterType.GENERATED_ON,
+					);
+					return message.reply(`<@${message.author.id}> Sure, there are replacements for ${replacements.getWeekDay()}!`, embed) as Promise<Message>;
 				}
 				catch (error)
 				{
 					Logger.warn(`Failed to create Replacements Embed. Sending as text (${error.message}`);
-					return reply.edit(`<@${message.author.id}> Sure, there are replacements for ${replacements.getWeekDay()}!\r\r${replacements.toString(true, true)}`);
+					return message.reply(`<@${message.author.id}> Sure, there are replacements for ${replacements.getWeekDay()}!\r\r${replacements.toString(true, true)}`) as Promise<Message>;
 				}
 
 			})

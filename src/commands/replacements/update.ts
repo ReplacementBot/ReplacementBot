@@ -1,6 +1,7 @@
 import { Command, CommandoMessage } from 'discord.js-commando';
 import { Message } from 'discord.js';
 import ReplacementBot from '../../replacementBot';
+import Config from '../../managers/config';
 
 export default class UpdateCommand extends Command
 {
@@ -23,16 +24,20 @@ export default class UpdateCommand extends Command
 
 	async run(message: CommandoMessage, args: string[]): Promise<Message>
 	{
-		const reply = await message.channel.send('Updating this guild...') as Message;
-		return (this.client as ReplacementBot).replacementsChannelsManager.updateSpecificGuild(message.guild)
+		const channel = (this.client as ReplacementBot).replacementsChannelsManager.findAllGuildChannels(message.guild).first();
+		if(!channel || !channel.isSuitable())
+		{
+			return message.reply(`No valid channels found! Please use \`${Config.get('prefix')}verify\` for more information :x:`) as Promise<Message>;
+		}
+		return channel.update()
 			.then(() =>
 			{
-				return reply.edit('Successfully updated this guild :tada:');
+				return message.reply('Successfully updated this guild :tada:') as Promise<Message>;
 
 			})
 			.catch((error)=>
 			{
-				return reply.edit('Failed to update this guild - ' + error + ' :x:');
+				return message.reply('Failed to update this guild - ' + error + ' :x:') as Promise<Message>;
 			});
 	}
 }
