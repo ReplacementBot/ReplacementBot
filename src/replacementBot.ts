@@ -5,13 +5,13 @@ import Config from './managers/config';
 import ReplacementsManager from './managers/replacementsManager';
 import ScheduleManager from './managers/scheduleManager';
 import { TextChannel } from 'discord.js';
-import ReplacementChannelsManager from './managers/replacementChannelsManager';
+import ReplacementsChannelsManager from './managers/replacementsChannelsManager';
 
 export default class ReplacementBot extends CommandoClient
 {
 	replacementsManager: ReplacementsManager;
 	scheduleManager: ScheduleManager;
-	replacementChannelsManager: ReplacementChannelsManager;
+	replacementsChannelsManager: ReplacementsChannelsManager;
 
 	public ready: boolean;
 
@@ -30,7 +30,7 @@ export default class ReplacementBot extends CommandoClient
 		// Setup Managers
 		this.replacementsManager = new ReplacementsManager();
 		this.scheduleManager = new ScheduleManager();
-		this.replacementChannelsManager = new ReplacementChannelsManager(this);
+		this.replacementsChannelsManager = new ReplacementsChannelsManager(this);
 
 		// Setup Listeners
 		this.on('commandError', (command, error, message) =>

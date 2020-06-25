@@ -20,7 +20,7 @@ export default class VerifyCommand extends Command
 
 	async run(message: CommandoMessage, args: string[]): Promise<Message>
 	{
-		const channels = (this.client as ReplacementBot).replacementChannelsManager.findChannels()
+		const channels = (this.client as ReplacementBot).replacementsChannelsManager.findChannels()
 			.filter(x => x.guild.id === message.guild.id);
 
 		if(channels.size == 0)

@@ -4,7 +4,7 @@ import { TextChannel, Collection, Guild, Message } from 'discord.js';
 import Config from './config';
 import Logger from './logger';
 
-export default class ReplacementChannelsManager
+export default class ReplacementsChannelsManager
 {
 	private bot: ReplacementBot;
 	constructor(bot: ReplacementBot)

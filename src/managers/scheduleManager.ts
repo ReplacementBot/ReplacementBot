@@ -91,7 +91,7 @@ export default class ScheduleManager
 			'Update Channels',
 			() =>
 			{
-				return bot.replacementChannelsManager.updateAllGuilds();
+				return bot.replacementsChannelsManager.updateAllGuilds();
 			},
 		)));
 		return jobs;

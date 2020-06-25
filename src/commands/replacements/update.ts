@@ -24,7 +24,7 @@ export default class UpdateCommand extends Command
 	async run(message: CommandoMessage, args: string[]): Promise<Message>
 	{
 		const reply = await message.channel.send('Updating this guild...') as Message;
-		return (this.client as ReplacementBot).replacementChannelsManager.updateSpecificGuild(message.guild)
+		return (this.client as ReplacementBot).replacementsChannelsManager.updateSpecificGuild(message.guild)
 			.then(() =>
 			{
 				return reply.edit('Successfully updated this guild :tada:');
