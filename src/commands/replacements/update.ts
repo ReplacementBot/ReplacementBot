@@ -13,6 +13,7 @@ export default class UpdateCommand extends Command
 			description: 'Updates Replacements Channel of current guild',
 			aliases: [ 'u' ],
 			guildOnly: true,
+			userPermissions: ['MANAGE_CHANNELS'],
 			throttling: {
 				usages: 1,
 				duration: 30,
