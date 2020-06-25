@@ -26,7 +26,7 @@ describe('Vulcan Fetcher', () =>
 				new Replacement(new Lesson(2), 'Description2', new Teacher('AbsentTeacher2'), new Teacher('NewTeacher2'), 'Comment2'),
 			]),
 		);
-	});
+	}, 20 * 1000);
 
 	test('should give empty result', async () =>
 	{
@@ -40,7 +40,7 @@ describe('Vulcan Fetcher', () =>
 		await expect(manager.fetchReplacements(fetchingTime)).resolves.toStrictEqual(
 			new ReplacementDay(fetchingTime, []),
 		);
-	});
+	}, 20 * 1000);
 
 	test('should handle errors', async () =>
 	{
@@ -52,5 +52,5 @@ describe('Vulcan Fetcher', () =>
 		const manager = new ReplacementsManager();
 		await expect(manager.initialize('vulcanFetcher')).resolves.toBe('VulcanFetcher');
 		await expect(manager.fetchReplacements(fetchingTime)).rejects.toEqual(new FetchError('Server returned bad code (500)'));
-	});
+	}, 20 * 1000);
 });
