@@ -1,5 +1,4 @@
 import { TextChannel, Collection, Message } from 'discord.js';
-import moment = require('moment');
 import ReplacementBot from '../replacementBot';
 import ReplacementDay from './replacementDay';
 import { ReplacementsEmbed, ReplacementsEmbedFooterType } from './replacementsEmbed';
