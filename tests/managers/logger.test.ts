@@ -24,6 +24,6 @@ describe('Logger', () =>
 		{
 			Logger.critical('REPLACEMENT_BOT_TOKEN is not provided');
 		}).toThrow();
-		expect(console.log).toHaveBeenCalledWith(chalk.green('TIP: You are missing bot token! https://replacementbot.github.io/docs/bot_token'));
+		expect(console.log).toHaveBeenCalledWith(chalk.green(chalk.bold('Known Error: ') + 'You are missing bot token! https://replacementbot.github.io/docs/bot_token'));
 	});
 });
