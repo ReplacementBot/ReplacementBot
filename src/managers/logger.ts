@@ -8,11 +8,11 @@ export default class Logger
 	{
 		console.log(chalk.bold.red('[CRITICAL] ') + chalk.red(message));
 		console.log(chalk.red('Process has been terminated because of critical error'));
-		console.log(chalk.red('You can report issues at: https://github.com/ReplacementBot/ReplacementBot/issues'));
 		if(this.getHelpfulError(message) !== '')
 		{
-			console.log(chalk.green('TIP: ' + this.getHelpfulError(message)));
+			console.log(chalk.green(chalk.bold('Known Error: ') + this.getHelpfulError(message)));
 		}
+		console.log(chalk.red('You can report issues at: https://github.com/ReplacementBot/ReplacementBot/issues'));
 		if(TestUtilities.isRunningInTest())
 		{
 			throw new Error('Critical Error: ' + message);
@@ -47,6 +47,10 @@ export default class Logger
 		if(error.includes('REPLACEMENT_BOT_TOKEN is not provided'))
 		{
 			return 'You are missing bot token! https://replacementbot.github.io/docs/bot_token';
+		}
+		else if(error.includes('A command with the name/alias') && error.includes('already registered.'))
+		{
+			return 'Try to delete build folder and rebuild (Windows: rmdir build /s && npm run build)';
 		}
 		else
 		{
