@@ -2,6 +2,7 @@ import { TextChannel, Collection, Message } from 'discord.js';
 import ReplacementBot from '../replacementBot';
 import ReplacementDay from './replacementDay';
 import { ReplacementsEmbed, ReplacementsEmbedFooterType } from './replacementsEmbed';
+import Config from '../managers/config';
 
 export default class ReplacementsChannel
 {
@@ -13,10 +14,14 @@ export default class ReplacementsChannel
 		this.bot = bot;
 	}
 
-	public isSuitable(): true | 'NOT_MANAGEABLE' | 'OTHER_MESSAGES'
+	public isSuitable(): true | 'TAG_MISSING' | 'NOT_MANAGEABLE' | 'OTHER_MESSAGES'
 	{
 		const otherMessagesExist = this.channel.messages.cache.some(x => x.author.id != this.bot.user.id);
-		if(!this.channel.manageable)
+		if(!this.channel.topic.includes(Config.get('replacementsChannel').topicTag))
+		{
+			return 'TAG_MISSING';
+		}
+		else if(!this.channel.manageable)
 		{
 			return 'NOT_MANAGEABLE';
 		}
@@ -35,6 +40,10 @@ export default class ReplacementsChannel
 		if(error === true)
 		{
 			return 'No Errors Found. Channels is suitable!';
+		}
+		else if(error === 'TAG_MISSING')
+		{
+			return 'ReplacementBot tag is missing';
 		}
 		else if(error === 'NOT_MANAGEABLE')
 		{

@@ -25,7 +25,7 @@ export default class UpdateCommand extends Command
 	async run(message: CommandoMessage, args: string[]): Promise<Message>
 	{
 		const channel = (this.client as ReplacementBot).replacementsChannelsManager.findAllGuildChannels(message.guild).first();
-		if(!channel || !channel.isSuitable())
+		if(!channel || channel.isSuitable() !== true)
 		{
 			return message.reply(`No valid channels found! Please use \`${Config.get('prefix')}verify\` for more information :x:`) as Promise<Message>;
 		}
