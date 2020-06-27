@@ -2,7 +2,6 @@
     "compilerOptions": {
         "sourceMap": true,
         "esModuleInterop": true,
-        "allowJs": true,
         "noImplicitAny": true,
         "moduleResolution": "node",
         "lib": [
@@ -10,6 +9,7 @@
         ],
         "module": "commonjs",
         "target": "es2018",
+        "resolveJsonModule": true,
         "baseUrl": ".",
         "paths": {
             "*": [
@@ -25,7 +25,8 @@
     },
     "include": [
         "./src/**/*",
-        "jest.config.js"
+        "jest.config.js",
+        "./src/**/metadata.json"
     ],
     "exclude": [
         "node_modules"

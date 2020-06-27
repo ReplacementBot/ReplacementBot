@@ -13,8 +13,6 @@ export default class ReplacementBot extends CommandoClient
 	scheduleManager: ScheduleManager;
 	replacementsChannelsManager: ReplacementsChannelsManager;
 
-	public ready: boolean;
-
 	constructor()
 	{
 		Logger.printLogo();
@@ -25,7 +23,6 @@ export default class ReplacementBot extends CommandoClient
 			commandPrefix: Config.get('prefix'),
 			owner: Config.get('botOwners'),
 		});
-		this.ready = false;
 
 		// Setup Managers
 		this.replacementsManager = new ReplacementsManager();
@@ -63,18 +60,14 @@ export default class ReplacementBot extends CommandoClient
 					await this.replacementsManager.initialize(Config.get('fetcher').name)
 						.then((fetcherName: string) =>
 						{
-							Logger.info('Successfully loaded ReplacementsManager with: ' + fetcherName);
+							Logger.info('Successfully loaded ReplacementsManager with ' + fetcherName);
 						})
-						.catch((error: Error) =>
-						{
-							Logger.error('Failed to load ReplacementManager: ' + error.message);
-						});
+						.catch(reject);
 					this.setupCommandsRegistry();
 					this.scheduleManager.scheduleDefaultJobs(this);
 					Logger.info('ReplacementBot successfully launched!');
 					Logger.info('Bot user is: ' + this.user.tag + ' in ' + this.user.client.guilds.cache.size + ' guilds');
 					Logger.info('Next embed update: ' + this.scheduleManager.getJobByName('Update Channels').nextExecution());
-					this.ready = true;
 					resolve();
 				});
 		});

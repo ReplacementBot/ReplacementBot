@@ -7,7 +7,7 @@ export default class GitHubCommand extends Command
 	{
 		super(client, {
 			name: 'help',
-			group: 'other',
+			group: 'util',
 			memberName: 'help',
 			aliases: ['commands'],
 			description: 'Point to documentation list of available commands',
