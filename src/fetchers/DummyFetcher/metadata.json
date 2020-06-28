@@ -1,0 +1,8 @@
+{
+   "version": 0,
+   "author": "MrBartusek",
+   "built-in": true,
+   "system": true,
+   "service": "Dummy",
+   "description": "Fetcher that show same data, always"
+}
