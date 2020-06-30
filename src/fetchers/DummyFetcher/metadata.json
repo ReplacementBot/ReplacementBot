@@ -2,6 +2,5 @@
    "version": 0,
    "author": "MrBartusek",
    "built-in": true,
-   "service": "Dummy",
    "description": "Fetcher that show same data, always"
 }

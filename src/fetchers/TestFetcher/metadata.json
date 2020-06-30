@@ -3,6 +3,5 @@
    "author": "MrBartusek",
    "built-in": true,
    "system": true,
-   "service": "Test",
    "description": "Fetcher made for Automated Testing"
 }

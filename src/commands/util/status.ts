@@ -51,8 +51,8 @@ export default class StatusCommand extends Command
 	private getFetcherMetadata(manager: ReplacementsManager): string
 	{
 		const metadata = manager.getMetadata();
-		return `This instancie uses **${metadata.name}** by **${metadata.author}**` + '\r\n' +
-             `**${metadata.builtIn ? 'Built-In' : 'Custom'}** fetcher made for **${metadata.system}**` + '\r\n' +
-             metadata.description;
+		return `This instancie uses **${metadata.getName()}** by **${metadata.getAuthor()}**` + '\r\n' +
+             `**${metadata.isBuiltIn() ? 'Built-In' : 'Custom'}** fetcher made for **${metadata.getService()}**` + '\r\n' +
+             metadata.getDescription();
 	}
 }

@@ -6,13 +6,13 @@ const currentVersion = 0;
 
 export default class FetcherMetadata
 {
-	public validVersion: boolean;
-	public name: string;
-	public description: string;
-	public author: string;
-	public service: string;
-	public builtIn: true;
-	public system: boolean;
+	private validVersion: boolean;
+	private name: string;
+	private description: string;
+	private author: string;
+	private service: string;
+	private builtIn: true;
+	private system: boolean;
 
 	constructor(json: string, name: string)
 	{
@@ -36,6 +36,79 @@ export default class FetcherMetadata
 		{
 			// TODO: add documentation link
 			Logger.warn(`Loaded ${chalk.bold('SYSTEM')} fetcher. This fetcher shouldn't be used in normally`);
+		}
+	}
+
+	public isValidVersion(): boolean
+	{
+		return this.validVersion;
+	}
+
+	public getName(): string
+	{
+		if(this.name != null)
+		{
+			return this.name;
+		}
+		else
+		{
+			return 'Unknown Name';
+		}
+	}
+
+	public getDescription(): string
+	{
+		if(this.description != null)
+		{
+			return this.description;
+		}
+		else
+		{
+			return 'Unknown Description';
+		}
+	}
+
+	public getAuthor(): string
+	{
+		if(this.author != null)
+		{
+			return this.author;
+		}
+		else
+		{
+			return 'Unknown Author';
+		}
+	}
+
+	public getService(): string
+	{
+		if(this.service != null)
+		{
+			return this.service;
+		}
+	}
+
+	public isBuiltIn(): boolean
+	{
+		if(this.builtIn != null)
+		{
+			return this.builtIn;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	public isSystem(): boolean
+	{
+		if(this.system != null)
+		{
+			return this.system;
+		}
+		else
+		{
+			return false;
 		}
 	}
 }
