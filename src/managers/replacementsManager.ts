@@ -5,6 +5,7 @@ import fs from 'fs';
 import RootPath from 'app-root-path';
 import FetcherMetadata from '../models/fetcherMetadata';
 import moment, { Moment } from 'moment';
+import TestUtilities from '../../tests/util';
 
 export default class ReplacementsManager
 {
@@ -29,7 +30,11 @@ export default class ReplacementsManager
 	{
 		return new Promise((resolve, reject) =>
 		{
-			import(`${RootPath.path}/build/src/fetchers/${fetcherName}/fetcher.js`)
+			// While running bot it doesn't work with ts files anymore
+			// Hoverer, Jest don't create js files and still operates on ts
+			const path = `../fetchers/${fetcherName}/fetcher.${TestUtilities.isRunningInTest() ? 'ts' : 'js'}`;
+
+			import(path)
 				.then((fetcherClass) =>
 				{
 					if(!this.isFetcher(fetcherClass))
