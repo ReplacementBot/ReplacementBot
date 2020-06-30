@@ -29,7 +29,7 @@ export default class ReplacementsManager
 	{
 		return new Promise((resolve, reject) =>
 		{
-			import(`../fetchers/${fetcherName}/fetcher.js`)
+			import(`${RootPath.path}/build/src/fetchers/${fetcherName}/fetcher.js`)
 				.then((fetcherClass) =>
 				{
 					if(!this.isFetcher(fetcherClass))
@@ -68,7 +68,7 @@ export default class ReplacementsManager
 				})
 				.catch((error) =>
 				{
-					reject(new Error(`failed to import fetcher "${fetcherName}" (${error})`));
+					reject(new Error(`Failed to import fetcher "${fetcherName}" (${error})`));
 				});
 		});
 	}

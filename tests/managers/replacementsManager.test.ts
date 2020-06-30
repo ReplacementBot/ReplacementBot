@@ -14,12 +14,12 @@ describe('ReplacementManager', () =>
 		const fetchingTime = moment();
 		test('should Initialize itself', () =>
 		{
-			return expect(manager.initialize('testFetcher')).resolves.toBe('TestFetcher');
+			return expect(manager.initialize('TestFetcher')).resolves.toBe('TestFetcher');
 		});
 
 		test('should fetch from provided date && initializeFetcher', () =>
 		{
-			return expect(manager.fetchReplacements(fetchingTime)).resolves.toStrictEqual(
+			return expect(manager.fetchReplacements(fetchingTime)).resolves.toEqual(
 				new ReplacementDay(fetchingTime, [ new Replacement(new Lesson(0, 'Test'), 'initialized: true')]),
 			);
 		});

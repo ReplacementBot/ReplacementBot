@@ -1,5 +1,6 @@
 import Logger from '../managers/logger';
 import chalk from 'chalk';
+import TestUtilities from '../../tests/util';
 
 const currentVersion = 0;
 
@@ -29,7 +30,7 @@ export default class FetcherMetadata
 		this.builtIn = metadata['built-in'];
 		this.system = metadata.system;
 
-		if(this.system)
+		if(this.system && !TestUtilities.isRunningInTest())
 		{
 			// TODO: add documentation link
 			Logger.warn(`Loaded ${chalk.bold('SYSTEM')} fetcher. This fetcher shouldn't be used in normally`);
