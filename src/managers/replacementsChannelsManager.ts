@@ -30,7 +30,7 @@ export default class ReplacementsChannelsManager
 						const result = results[i];
 						if(result instanceof Error)
 						{
-							Logger.error(`Failed to update channel on ${channels[i].channel.guild.name}\r\n${result}`);
+							Logger.error('ReplacementsChannelsManager', `Failed to update channel on ${channels[i].channel.guild.name}\r\n${result}`);
 						}
 					}
 					resolve();

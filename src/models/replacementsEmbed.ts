@@ -1,6 +1,6 @@
 import { MessageEmbed } from 'discord.js';
 import moment = require('moment');
-import Logger from '../managers/logger';
+
 import ReplacementDay from './replacementDay';
 
 export enum ReplacementsEmbedFooterType { NONE, GENERATED_ON, UPDATED_ON}
@@ -40,13 +40,8 @@ export class ReplacementsEmbed
 		return result;
 	}
 
-	private getFooter(type: ReplacementsEmbedFooterType, date?: moment.Moment): string
+	private getFooter(type: ReplacementsEmbedFooterType, date: moment.Moment): string
 	{
-		if(!date && type != ReplacementsEmbedFooterType.NONE)
-		{
-			Logger.error('Cannot generate embed footer without date');
-			return '';
-		}
 		switch(type)
 		{
 		case ReplacementsEmbedFooterType.NONE:

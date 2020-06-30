@@ -21,7 +21,7 @@ export default class FetcherMetadata
 		this.validVersion = true;
 		if(metadata.version !== currentVersion)
 		{
-			Logger.warn(`Fetcher uses unsupported metadata schema. Expected version: ${currentVersion} found ${metadata.version}`);
+			Logger.warn('FetcherMetadata', `Fetcher uses unsupported metadata schema. Expected version: ${currentVersion} found ${metadata.version}`);
 			this.validVersion = false;
 		}
 
@@ -35,7 +35,7 @@ export default class FetcherMetadata
 		if(this.system && !TestUtilities.isRunningInTest())
 		{
 			// TODO: add documentation link
-			Logger.warn(`Loaded ${chalk.bold('SYSTEM')} fetcher. This fetcher shouldn't be used in normally`);
+			Logger.warn('FetcherMetadata', `Loaded ${chalk.bold('SYSTEM')} fetcher. This fetcher shouldn't be used in normally`);
 		}
 	}
 

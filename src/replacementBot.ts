@@ -4,8 +4,9 @@ import path from 'path';
 import Config from './managers/config';
 import ReplacementsManager from './managers/replacementsManager';
 import ScheduleManager from './managers/scheduleManager';
-import { TextChannel } from 'discord.js';
+
 import ReplacementsChannelsManager from './managers/replacementsChannelsManager';
+import chalk from 'chalk';
 
 export default class ReplacementBot extends CommandoClient
 {
@@ -16,7 +17,7 @@ export default class ReplacementBot extends CommandoClient
 	constructor()
 	{
 		Logger.printLogo();
-		Logger.info('Initialling ReplacementBot...');
+		Logger.info('Startup', 'Initialling ReplacementBot...');
 		Config.initialize();
 
 		super({
@@ -33,11 +34,11 @@ export default class ReplacementBot extends CommandoClient
 		this.on('commandError', (command, error, message) =>
 		{
 			Logger.error(
-				`Failed to execute "${command.name}" command` + '\r\n' +
-				'Caused by:' + '\r\n' +
-				'User: ' + message.author.tag + '\r\n' +
-				'Message: ' + message.content + '\r\n' +
-				`Channel: #${(message.channel as TextChannel).name} (${message.guild.name})` + '\r\n' + error.stack);
+				'Commando Error',
+				`${chalk.bold(command.name)} produced error while processing ` +
+				`${chalk.bold(message.content)} by ${chalk.bold(message.author.id)} on ` +
+				`${chalk.bold(message.guild.id)}`,
+				error);
 		});
 	}
 
@@ -60,14 +61,12 @@ export default class ReplacementBot extends CommandoClient
 					await this.replacementsManager.initialize(Config.get('fetcher').name)
 						.then((fetcherName: string) =>
 						{
-							Logger.info('Successfully loaded ReplacementsManager with ' + fetcherName);
+							Logger.info('Startup', 'Successfully loaded ReplacementsManager with ' + fetcherName);
 						})
 						.catch(reject);
 					this.setupCommandsRegistry();
 					this.scheduleManager.scheduleDefaultJobs(this);
-					Logger.info('ReplacementBot successfully launched!');
-					Logger.info('Bot user is: ' + this.user.tag + ' in ' + this.user.client.guilds.cache.size + ' guilds');
-					Logger.info('Next embed update: ' + this.scheduleManager.getJobByName('Update Channels').nextExecution());
+					Logger.info('Startup', 'ReplacementBot Ready!');
 					resolve();
 				});
 		});

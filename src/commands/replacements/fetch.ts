@@ -4,8 +4,6 @@ import ReplacementBot from '../../replacementBot';
 import { ReplacementsEmbed, ReplacementsEmbedFooterType } from '../../models/replacementsEmbed';
 import ReplacementDay from '../../models/replacementDay';
 
-import Logger from '../../managers/logger';
-
 export default class FetchReplacementsCommand extends Command
 {
 	constructor(client: CommandoClient)
@@ -37,7 +35,6 @@ export default class FetchReplacementsCommand extends Command
 				}
 				catch (error)
 				{
-					Logger.warn(`Failed to create Replacements Embed. Sending as text (${error.message}`);
 					return message.reply(`<@${message.author.id}> Sure, there are replacements for ${replacements.getWeekDay()}!\r\r${replacements.toString(true, true)}`) as Promise<Message>;
 				}
 

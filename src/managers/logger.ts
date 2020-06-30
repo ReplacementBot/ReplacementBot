@@ -4,7 +4,7 @@ import TestUtilities from '../../tests/util';
 
 export default class Logger
 {
-	public static critical(message: string): void
+	public static critical(source: string, message: string, error?: Error): void
 	{
 		console.log(chalk.bold.red('[CRITICAL] ') + chalk.red(message));
 		console.log(chalk.red('Process has been terminated because of critical error'));
@@ -20,24 +20,23 @@ export default class Logger
 		process.exit(5);
 	}
 
-	public static error(message: string): void
+	public static error(source: string, message: string, error?: Error): void
 	{
 		console.log(chalk.bold.red('[ERROR] ') + chalk.red(message));
 	}
 
-	public static warn(message: string): void
+	public static warn(source: string, message: string, error?: Error): void
 	{
 		console.log(chalk.bold.yellow('[WARN] ') + chalk.yellow(message));
 	}
 
-	public static info(message: string): void
+	public static info(source: string, message: string, error?: Error): void
 	{
 		console.log(chalk.bold.white('[INFO] ') + chalk.white(message));
 	}
 
 	public static printLogo(): void
 	{
-		console.log();
 		console.log(chalk.magenta(figlet.textSync('Replacement Bot')));
 		console.log();
 	}

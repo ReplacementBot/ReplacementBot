@@ -77,7 +77,7 @@ export default class Config
 		}
 		else
 		{
-			Logger.warn('Configuration file or ENV not found ' + chalk.gray(appDir + '\\config\\config.json'));
+			Logger.warn('Config', 'Configuration file or ENV not found ' + chalk.gray(appDir + '\\config\\config.json'));
 			return '{}';
 		}
 	}
