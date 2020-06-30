@@ -1,0 +1,7 @@
+{
+   "version": 0,
+   "author": "MrBartusek",
+   "built-in": true,
+   "service": "Vulcan UONET+",
+   "description": "Built-in fetcher for Vulcan UONET+ replacements"
+}

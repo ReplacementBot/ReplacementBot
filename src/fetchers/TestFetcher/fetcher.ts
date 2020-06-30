@@ -1,9 +1,9 @@
-import { ReplacementsFetcher } from '../models/replacementsFetcher';
-import Replacement from '../models/replacement';
-import Lesson from '../models/lesson';
-import ReplacementDay from '../models/replacementDay';
+import { ReplacementsFetcher } from '../../models/replacementsFetcher';
+import Replacement from '../../models/replacement';
+import Lesson from '../../models/lesson';
+import ReplacementDay from '../../models/replacementDay';
 import moment from 'moment';
-import TestUtilities from '../../tests/util';
+import TestUtilities from '../../../tests/util';
 
 export default class TestFetcher implements ReplacementsFetcher
 {

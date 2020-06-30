@@ -1,29 +1,45 @@
 import { ReplacementsFetcher } from '../models/replacementsFetcher';
 import ReplacementDay from '../models/replacementDay';
-import { Moment } from 'moment';
-import moment = require('moment');
 import Config from './config';
+import fs from 'fs';
+
+import FetcherMetadata from '../models/fetcherMetadata';
+import moment, { Moment } from 'moment';
+import TestUtilities from '../../tests/util';
 
 export default class ReplacementsManager
 {
 	fetcher: ReplacementsFetcher;
+	metadata: FetcherMetadata;
 
-	public initialize(fetcherFileName: string): Promise<string>
+	// INITIALIZATION
+
+	public async initialize(fetcherName: string): Promise<string>
 	{
 		if(this.fetcher !== undefined)
 		{
 			throw new Error('ReplacementsManager cannot be initialized twice');
 		}
 
+		await this.loadFetcher(fetcherName);
+		this.metadata = this.loadMetadata(fetcherName);
+		return fetcherName;
+	}
+
+	private loadFetcher(fetcherName: string): Promise<void>
+	{
 		return new Promise((resolve, reject) =>
 		{
-			import('../fetchers/' + fetcherFileName)
+			// While running bot it doesn't work with ts files anymore
+			// Hoverer, Jest don't create js files and still operates on ts
+			const path = `../fetchers/${fetcherName}/fetcher.${TestUtilities.isRunningInTest() ? 'ts' : 'js'}`;
+
+			import(path)
 				.then((fetcherClass) =>
 				{
 					if(!this.isFetcher(fetcherClass))
 					{
-						reject(new Error(`"${fetcherFileName}" is not a ReplacementsFetcher`));
-						return;
+						return Promise.reject(new Error(`"${fetcherName}" is not a ReplacementsFetcher`));
 					}
 
 					try
@@ -42,7 +58,7 @@ export default class ReplacementsManager
 						this.fetcher.initialize(Config.get('fetcher').config)
 							.then(() =>
 							{
-								resolve(this.getFetcherName());
+								resolve();
 							})
 							.catch((error) =>
 							{
@@ -51,15 +67,21 @@ export default class ReplacementsManager
 					}
 					else
 					{
-						resolve(this.getFetcherName());
+						resolve();
 					}
 
 				})
 				.catch((error) =>
 				{
-					reject(new Error(`failed to import fetcher "${fetcherFileName}" (${error})`));
+					reject(new Error(`Failed to import fetcher "${fetcherName}" (${error})`));
 				});
 		});
+	}
+
+	private loadMetadata(fetcherName: string): FetcherMetadata
+	{
+		const data = fs.readFileSync(__dirname + `/../fetchers/${fetcherName}/metadata.json`);
+		return new FetcherMetadata(data.toString(), fetcherName);
 	}
 
 	private isFetcher(object: any): boolean
@@ -69,9 +91,11 @@ export default class ReplacementsManager
 		return testObject.fetchReplacements != undefined;
 	}
 
-	private getFetcherName(): string | undefined
+	// RETRIEVING DATA
+
+	public getMetadata(): FetcherMetadata
 	{
-		return this.fetcher.constructor.name;
+		return this.metadata;
 	}
 
 	public fetchReplacements(date?: Moment): Promise<ReplacementDay>
@@ -106,7 +130,9 @@ export default class ReplacementsManager
 		return result;
 	}
 
-	private getDefaultDate(): moment.Moment
+	// HELPERS
+
+	private getDefaultDate(): Moment
 	{
 		const switchHour = Config.get('daySwitchHour');
 		if(!switchHour)

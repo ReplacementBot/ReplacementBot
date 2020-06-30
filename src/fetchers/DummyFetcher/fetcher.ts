@@ -1,7 +1,7 @@
-import { ReplacementsFetcher } from '../models/replacementsFetcher';
-import Replacement from '../models/replacement';
-import Lesson from '../models/lesson';
-import ReplacementDay from '../models/replacementDay';
+import { ReplacementsFetcher } from '../../models/replacementsFetcher';
+import Replacement from '../../models/replacement';
+import Lesson from '../../models/lesson';
+import ReplacementDay from '../../models/replacementDay';
 import moment from 'moment';
 
 export default class DummyFetcher implements ReplacementsFetcher

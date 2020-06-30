@@ -1,12 +1,12 @@
-import { ReplacementsFetcher } from '../models/replacementsFetcher';
-import ReplacementDay from '../models/replacementDay';
+import { ReplacementsFetcher } from '../../models/replacementsFetcher';
+import ReplacementDay from '../../models/replacementDay';
 import moment = require('moment');
-import WebFetcher, { HTTPResponse } from '../util/webFetcher';
+import WebFetcher, { HTTPResponse } from '../../util/webFetcher';
 import cheerio from 'cheerio';
-import Replacement from '../models/replacement';
-import Lesson from '../models/lesson';
-import Teacher from '../models/teacher';
-import { FetchError, ResponseParseError } from '../util/errors';
+import Replacement from '../../models/replacement';
+import Lesson from '../../models/lesson';
+import Teacher from '../../models/teacher';
+import { FetchError, ResponseParseError } from '../../util/errors';
 
 enum RowFieldType
 {
