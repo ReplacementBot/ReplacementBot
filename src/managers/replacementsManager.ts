@@ -81,7 +81,7 @@ export default class ReplacementsManager
 	private loadMetadata(fetcherName: string): FetcherMetadata
 	{
 		const data = fs.readFileSync(__dirname + `/../fetchers/${fetcherName}/metadata.json`);
-		return new FetcherMetadata(data.toString());
+		return new FetcherMetadata(data.toString(), fetcherName);
 	}
 
 	private isFetcher(object: any): boolean
