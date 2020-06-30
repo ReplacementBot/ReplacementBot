@@ -1,5 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import iconov from 'iconv-lite';
+import RootPath from 'app-root-path';
+import fs from 'fs';
 
 export enum HTTPResponseType
 {
@@ -44,6 +46,12 @@ export default class WebFetcher
 {
 	public request(url: string, encoding: string): Promise<HTTPResponse>
 	{
+		if(url.startsWith('testData:///'))
+		{
+			const file = url.replace('testData:///', RootPath.path + '/webFetcher pages/');
+			const data = fs.readFileSync(file).toString();
+			return Promise.resolve(new HTTPResponse(HTTPResponseType.SUCCESSFUL, data, 200));
+		}
 		return new Promise((resolve, reject) =>
 		{
 			axios.get(url,

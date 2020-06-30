@@ -12,12 +12,12 @@ describe('Vulcan Fetcher', () =>
 	test('should fetch replacements', async () =>
 	{
 		const fetcher = new VulcanFetcher();
-		fetcher.initialize({ url: 'http://mrbartusek.000webhostapp.com/ReplacementBot/VulcanUnitTest.html' });
+		fetcher.initialize({ url: 'testData:///VulcanUnitTest.html' });
 		await expect(fetcher.fetchReplacements(fetchingTime)).resolves.toStrictEqual(
 			new ReplacementDay(fetchingTime, [
 				new Replacement(new Lesson(1), 'Description1', new Teacher('AbsentTeacher1'), new Teacher('NewTeacher1'), 'Comment1'),
 				new Replacement(new Lesson(2), 'Description2', new Teacher('AbsentTeacher2'), new Teacher('NewTeacher2'), 'Comment2'),
 			]),
 		);
-	}, 20 * 1000);
+	});
 });
