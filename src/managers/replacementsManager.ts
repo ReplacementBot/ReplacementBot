@@ -2,7 +2,7 @@ import { ReplacementsFetcher } from '../models/replacementsFetcher';
 import ReplacementDay from '../models/replacementDay';
 import Config from './config';
 import fs from 'fs';
-import RootPath from 'app-root-path';
+
 import FetcherMetadata from '../models/fetcherMetadata';
 import moment, { Moment } from 'moment';
 import TestUtilities from '../../tests/util';
@@ -80,7 +80,7 @@ export default class ReplacementsManager
 
 	private loadMetadata(fetcherName: string): FetcherMetadata
 	{
-		const data = fs.readFileSync(RootPath.path + `/build/src/fetchers/${fetcherName}/metadata.json`);
+		const data = fs.readFileSync(__dirname + `/../fetchers/${fetcherName}/metadata.json`);
 		return new FetcherMetadata(data.toString());
 	}
 
