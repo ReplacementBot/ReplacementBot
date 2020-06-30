@@ -1,4 +1,4 @@
-import DummyFetcher from '../../src/fetchers/dummyFetcher';
+import DummyFetcher from '../../src/fetchers/DummyFetcher/fetcher';
 import moment from 'moment';
 import ReplacementDay from '../../src/models/replacementDay';
 import Replacement from '../../src/models/replacement';

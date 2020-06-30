@@ -2,6 +2,6 @@
    "version": 0,
    "author": "MrBartusek",
    "built-in": true,
-   "service": "Vuclan UONET+",
+   "service": "Vulcan UONET+",
    "description": "Built-in fetcher for Vulcan UONET+ replacements"
 }
