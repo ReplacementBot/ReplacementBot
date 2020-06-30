@@ -29,7 +29,7 @@ export class ScheduledJob extends CronJob
 			await this.jobFunction()
 				.then((promiseResult: void | string) =>
 				{
-					Logger.info('ScheduleManager', `Successfully executed '${this.name}' job` + (promiseResult ? ` (${promiseResult})` : ''));
+					Logger.info('ScheduleManager', `Successfully executed "${this.name}" job` + (promiseResult ? ` (${promiseResult})` : ''));
 				})
 				.catch((error: Error) =>
 				{
@@ -37,13 +37,13 @@ export class ScheduledJob extends CronJob
 					{
 						error = new Error('No error provided');
 					}
-					Logger.error('ScheduleManager', `Job "${this.name}" failed `, error);
+					Logger.error('ScheduleManager', `Error while executing "${this.name}" (Promise)`, error);
 
 				});
 		}
 		catch (error)
 		{
-			Logger.error('ScheduleManager', `Error while executing "${this.name}" Job: `, error);
+			Logger.error('ScheduleManager', `Error while executing "${this.name}" (Error)`, error);
 		}
 	}
 

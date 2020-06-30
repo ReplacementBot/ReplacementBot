@@ -11,7 +11,7 @@ describe('ScheduleManager', () =>
 			{
 				Promise.resolve();
 			}, false).fire();
-			expect(Logger.info).toHaveBeenCalledWith('Successfully executed \'Test\' job');
+			expect(Logger.info).toHaveBeenCalledWith('ScheduleManager', 'Successfully executed "Test" job');
 		});
 
 		test('should catch errors', () =>
@@ -19,9 +19,9 @@ describe('ScheduleManager', () =>
 			Logger.error = jest.fn();
 			new ScheduledJob('* * * * *', 'Test', () =>
 			{
-				throw Error('Test');
+				throw Error('Test-Error');
 			}, false).fire();
-			expect(Logger.error).toHaveBeenCalledWith('System encountered error while executing "Test" Job: Error: Test');
+			expect(Logger.error).toHaveBeenCalledWith('ScheduleManager', 'Error while executing "Test" (Error)', new Error('Test-Error'));
 		});
 
 		test('should catch rejections', async () =>
@@ -29,9 +29,9 @@ describe('ScheduleManager', () =>
 			Logger.error = jest.fn();
 			await new ScheduledJob('* * * * *', 'Test', () =>
 			{
-				return Promise.reject(new Error('Test'));
+				return Promise.reject(new Error('Test-Promise'));
 			}, false).fire();
-			expect(Logger.error).toHaveBeenCalledWith('Job failed "Test" reason: Test');
+			expect(Logger.error).toHaveBeenCalledWith('ScheduleManager', 'Error while executing "Test" (Promise)', new Error('Test-Promise'));
 		});
 
 		test('#nextExecution', () =>

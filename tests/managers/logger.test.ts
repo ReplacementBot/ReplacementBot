@@ -5,25 +5,15 @@ describe('Logger', () =>
 	test('should info', () =>
 	{
 		console.log = jest.fn();
-		Logger.info('Test');
-		expect(console.log).toHaveBeenCalledWith(chalk.bold.white('[INFO] ') + chalk.white('Test'));
+		Logger.info('Source', 'Message');
+		expect(console.log).toHaveBeenCalledWith(chalk.white.bold('[INFO] ') + chalk.white('Source - Message'));
 	});
 
 	test('should crash on fatal', () =>
 	{
 		expect(() =>
 		{
-			Logger.critical('Test');
+			Logger.critical('Test', 'Test');
 		}).toThrow();
-	});
-
-	test('should give tips', () =>
-	{
-		console.log = jest.fn();
-		expect(() =>
-		{
-			Logger.critical('REPLACEMENT_BOT_TOKEN is not provided');
-		}).toThrow();
-		expect(console.log).toHaveBeenCalledWith(chalk.green(chalk.bold('Known Error: ') + 'You are missing bot token! https://replacementbot.github.io/docs/bot_token'));
 	});
 });

@@ -44,7 +44,7 @@ export default class Logger
 	private static log(severity: 'CRITICAL' | 'ERROR' | 'WARN' | 'INFO', source: string, message: string, error?: Error): void
 	{
 		const color = this.getColor(severity);
-		console.log(color.bold(`[${severity}]`) + color(` ${source} - ${message} ${this.formatError(error)}`));
+		console.log(color.bold(`[${severity}] `) + color(`${source} - ${message}${this.formatError(error)}`));
 	}
 
 	private static getColor(severity: 'CRITICAL' | 'ERROR' | 'WARN' | 'INFO'): chalk.Chalk
