@@ -29,11 +29,5 @@ describe('ReplacementManager', () =>
 			process.env.TEST_FETCHER_FAIL = 'error';
 			return expect(manager.fetchReplacements(fetchingTime)).rejects.toStrictEqual(new Error('Triggered Fail'));
 		});
-
-		test('should handle fail', () =>
-		{
-			process.env.TEST_FETCHER_FAIL = 'error';
-			return expect(manager.fetchReplacements(fetchingTime)).rejects.toStrictEqual(new Error('Triggered Fail'));
-		});
 	});
 });
