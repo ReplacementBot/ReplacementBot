@@ -48,9 +48,17 @@ export default class WebFetcher
 	{
 		if(url.startsWith('testData:///'))
 		{
-			const file = url.replace('testData:///', RootPath.path + '/webFetcher pages/');
-			const data = fs.readFileSync(file).toString();
-			return Promise.resolve(new HTTPResponse(HTTPResponseType.SUCCESSFUL, data, 200));
+			const file = url.replace('testData:///', RootPath.path + '/tests/resources/webFetcher/');
+			if(fs.existsSync(file))
+			{
+				const data = fs.readFileSync(file).toString();
+				return Promise.resolve(new HTTPResponse(HTTPResponseType.SUCCESSFUL, data, 200));
+			}
+			else
+			{
+				return Promise.reject(new HTTPResponse(HTTPResponseType.BAD_CODE, undefined, 404));
+			}
+
 		}
 		return new Promise((resolve, reject) =>
 		{
