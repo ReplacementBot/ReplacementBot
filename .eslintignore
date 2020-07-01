@@ -2,3 +2,4 @@ build/*
 *.md
 *.yaml
 *.json
+*.html
