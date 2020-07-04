@@ -44,7 +44,7 @@ export class HTTPResponse
 
 export default class WebFetcher
 {
-	public request(url: string, encoding: string): Promise<HTTPResponse>
+	public request(url: string, encoding = 'UTF-8'): Promise<HTTPResponse>
 	{
 		if(url.startsWith('testData:///'))
 		{
