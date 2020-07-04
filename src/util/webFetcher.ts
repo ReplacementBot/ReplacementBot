@@ -3,7 +3,7 @@ import iconov from 'iconv-lite';
 import RootPath from 'app-root-path';
 import fs from 'fs';
 
-export enum HTTPResponseType
+export enum WebFetcherResponseType
 {
 	SUCCESSFUL,
 	BAD_CODE,
@@ -11,12 +11,12 @@ export enum HTTPResponseType
 	FAILED,
 }
 
-export class HTTPResponse
+export class WebFetcherResponse
 {
-	type: HTTPResponseType;
+	type: WebFetcherResponseType;
 	result: string;
 	statusCode: number;
-	constructor(type: HTTPResponseType, result?: string, statusCode?: number)
+	constructor(type: WebFetcherResponseType, result?: string, statusCode?: number)
 	{
 		this.type = type;
 		this.result = result;
@@ -30,13 +30,13 @@ export class HTTPResponse
 	{
 		switch(this.type)
 		{
-		case HTTPResponseType.SUCCESSFUL:
+		case WebFetcherResponseType.SUCCESSFUL:
 			return 'Request Successfully';
-		case HTTPResponseType.BAD_CODE:
+		case WebFetcherResponseType.BAD_CODE:
 			return `Server returned bad code (${this.statusCode})`;
-		case HTTPResponseType.NO_RESPONSE:
+		case WebFetcherResponseType.NO_RESPONSE:
 			return 'Server didn\'t send any response';
-		case HTTPResponseType.FAILED:
+		case WebFetcherResponseType.FAILED:
 			return `Failed to send request (${this.result})`;
 		}
 	}
@@ -44,7 +44,7 @@ export class HTTPResponse
 
 export default class WebFetcher
 {
-	public request(url: string, encoding = 'UTF-8'): Promise<HTTPResponse>
+	public request(url: string, encoding = 'UTF-8'): Promise<WebFetcherResponse>
 	{
 		if(url.startsWith('testData:///'))
 		{
@@ -52,11 +52,11 @@ export default class WebFetcher
 			if(fs.existsSync(file))
 			{
 				const data = fs.readFileSync(file).toString();
-				return Promise.resolve(new HTTPResponse(HTTPResponseType.SUCCESSFUL, data, 200));
+				return Promise.resolve(new WebFetcherResponse(WebFetcherResponseType.SUCCESSFUL, data, 200));
 			}
 			else
 			{
-				return Promise.reject(new HTTPResponse(HTTPResponseType.BAD_CODE, undefined, 404));
+				return Promise.reject(new WebFetcherResponse(WebFetcherResponseType.BAD_CODE, undefined, 404));
 			}
 
 		}
@@ -71,23 +71,23 @@ export default class WebFetcher
 				{
 					if(!iconov.encodingExists(encoding))
 					{
-						reject(new HTTPResponse(HTTPResponseType.FAILED, `WebFetcher Error: "${encoding}" encoding don't exist`));
+						reject(new WebFetcherResponse(WebFetcherResponseType.FAILED, `WebFetcher Error: "${encoding}" encoding don't exist`));
 					}
-					resolve(new HTTPResponse(HTTPResponseType.SUCCESSFUL, iconov.decode(response.data, encoding), response.status));
+					resolve(new WebFetcherResponse(WebFetcherResponseType.SUCCESSFUL, iconov.decode(response.data, encoding), response.status));
 				})
 				.catch((error: any) =>
 				{
 					if (error.response)
 					{
-						reject(new HTTPResponse(HTTPResponseType.BAD_CODE, undefined, error.response.status));
+						reject(new WebFetcherResponse(WebFetcherResponseType.BAD_CODE, undefined, error.response.status));
 					}
 					else if (error.request)
 					{
-						reject(new HTTPResponse(HTTPResponseType.NO_RESPONSE, error.request));
+						reject(new WebFetcherResponse(WebFetcherResponseType.NO_RESPONSE, error.request));
 					}
 					else
 					{
-						reject(new HTTPResponse(HTTPResponseType.FAILED, error.message));
+						reject(new WebFetcherResponse(WebFetcherResponseType.FAILED, error.message));
 					}
 				});
 		});

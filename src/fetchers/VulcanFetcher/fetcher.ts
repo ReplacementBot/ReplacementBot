@@ -1,7 +1,7 @@
 import { ReplacementsFetcher } from '../../models/replacementsFetcher';
 import ReplacementDay from '../../models/replacementDay';
 import moment = require('moment');
-import WebFetcher, { HTTPResponse } from '../../util/webFetcher';
+import WebFetcher, { WebFetcherResponse } from '../../util/webFetcher';
 import cheerio from 'cheerio';
 import Replacement from '../../models/replacement';
 import Lesson from '../../models/lesson';
@@ -36,7 +36,7 @@ export default class VulcanFetcher implements ReplacementsFetcher
 		return new Promise((resolve, reject) =>
 		{
 			this.webFetcher.request(this.config.url, 'ISO-8859-2')
-				.then((requestResult: HTTPResponse) =>
+				.then((requestResult: WebFetcherResponse) =>
 				{
 					const data = cheerio.load(requestResult.result.replace(/\r?\n|\r/g, ''));
 					const result = this.praseResult(data);
@@ -50,7 +50,7 @@ export default class VulcanFetcher implements ReplacementsFetcher
 					}
 
 				})
-				.catch((error: HTTPResponse) =>
+				.catch((error: WebFetcherResponse) =>
 				{
 					if(error.statusCode == 404)
 					{
