@@ -39,8 +39,7 @@ export default class FetcherMetadata
 
 		if(this.system && !TestUtilities.isRunningInTest())
 		{
-			// TODO: add documentation link
-			Logger.warn('FetcherMetadata', `Loaded ${chalk.bold('SYSTEM')} fetcher. This fetcher shouldn't be used in normally`);
+			Logger.warn('FetcherMetadata', `Loaded ${chalk.bold('SYSTEM')} fetcher. It is not intended for that`);
 		}
 	}
 
@@ -49,7 +48,7 @@ export default class FetcherMetadata
 		return this.validVersion;
 	}
 
-	public getName(): string
+	public getName(): string | 'Unknown Name'
 	{
 		if(this.name != null)
 		{
@@ -61,7 +60,7 @@ export default class FetcherMetadata
 		}
 	}
 
-	public getDescription(): string
+	public getDescription(): string | null
 	{
 		if(this.description != null)
 		{
@@ -69,11 +68,11 @@ export default class FetcherMetadata
 		}
 		else
 		{
-			return 'Unknown Description';
+			return null;
 		}
 	}
 
-	public getAuthor(): string
+	public getAuthor(): string | 'Unknown Author'
 	{
 		if(this.author != null)
 		{
@@ -85,11 +84,15 @@ export default class FetcherMetadata
 		}
 	}
 
-	public getService(): string
+	public getService(): string | null
 	{
 		if(this.service != null)
 		{
 			return this.service;
+		}
+		else
+		{
+			return null;
 		}
 	}
 

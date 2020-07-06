@@ -12,7 +12,7 @@ export default class StatusCommand extends Command
 			name: 'status',
 			group: 'util',
 			memberName: 'status',
-			aliases: ['info', 'health', 'fetcher'],
+			aliases: ['info', 'health', 'fetcher', 's'],
 			description: 'Display information about current instance',
 		});
 	}
@@ -25,8 +25,8 @@ export default class StatusCommand extends Command
 			.setThumbnail('https://replacementbot.github.io/docs/assets/images/replacementbot-logo-512-circle.png')
 			.setTitle('ReplacementBot status')
 			.setDescription('Powerful School Replacements bot for your Discord Server')
-			.addField('🌍 Fetcher', this.getFetcherMetadata(bot.replacementsManager))
-			.addField('🕑 Uptime', 'This instancie is running since ' + this.getUptime(this.client));
+			.addField('Fetcher', this.getFetcherMetadata(bot.replacementsManager))
+			.addField('Uptime', 'This instancie is running since ' + this.getUptime(this.client));
 
 		return message.channel.send(embed);
 	}
@@ -51,8 +51,15 @@ export default class StatusCommand extends Command
 	private getFetcherMetadata(manager: ReplacementsManager): string
 	{
 		const metadata = manager.getMetadata();
-		return `This instancie uses **${metadata.getName()}** by **${metadata.getAuthor()}**` + '\r\n' +
-             `**${metadata.isBuiltIn() ? 'Built-In' : 'Custom'}** fetcher made for **${metadata.getService()}**` + '\r\n' +
-             metadata.getDescription();
+		let result = `${metadata.isBuiltIn() ? '[Built-In]' : '[Custom]'} ${metadata.getName()} by ${metadata.getAuthor()}`;
+		if(metadata.getAuthor() != 'Unknown Author')
+		{
+			result += '\r\nhttps://github.com/' + metadata.getAuthor();
+		}
+		if(metadata.getDescription() != null)
+		{
+			result += '\r\n' + metadata.getDescription();
+		}
+		return result;
 	}
 }
