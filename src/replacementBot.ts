@@ -42,7 +42,7 @@ export default class ReplacementBot extends CommandoClient
 		});
 	}
 
-	public async start(): Promise<string>
+	public async start(): Promise<void>
 	{
 		return new Promise((resolve, reject) =>
 		{
@@ -52,23 +52,24 @@ export default class ReplacementBot extends CommandoClient
 				return;
 			}
 			this.login(process.env.REPLACEMENT_BOT_TOKEN)
-				.catch((error) =>
-				{
-					reject(new Error(`Failed to launch ReplacementBot ${error.message}`));
-				})
 				.then(async ()=>
 				{
 					await this.replacementsManager.initialize(Config.get('fetcher').name)
 						.then((fetcherName: string) =>
 						{
-							Logger.info('Startup', 'Successfully loaded ReplacementsManager with ' + fetcherName);
+							Logger.info('Startup', 'Loaded Fetcher: ' + fetcherName);
 						})
 						.catch(reject);
 					this.setupCommandsRegistry();
 					this.scheduleManager.scheduleDefaultJobs(this);
-					Logger.info('Startup', 'ReplacementBot Ready!');
+					const nextExecution = this.scheduleManager.getJobByName('Update Channels').nextDate();
+					Logger.info('Startup', 'ReplacementBot Ready! ' + chalk.gray(
+						`Servers: ${this.guilds.cache.size} | ` +
+						`Next Update: ${nextExecution.format('dddd HH:mm')} (${nextExecution.fromNow()})`,
+					));
 					resolve();
-				});
+				})
+				.catch(reject);
 		});
 	}
 

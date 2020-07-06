@@ -63,7 +63,7 @@ export default class VerifyCommand extends Command
 				.setDescription(
 					`Only${channels.first().channel} will be updated. This is not supported!` + '\r\n' +
 					`Please keep only one channel with \`${Config.get('replacementsChannel').topicTag}\` tag` + '\r\n\r\n' +
-					`Found **${channels.size}** channels \r\n${channels.array().join('\r\n')}`)
+					`Found **${channels.size}** channels \r\n${channels.map(c => c.channel.toString()).join('\r\n')}`)
 				.setFooter('Documentation: https://bit.ly/2AaJycn'));
 		}
 	}
