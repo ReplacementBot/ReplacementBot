@@ -10,19 +10,14 @@ import TestUtilities from '../../tests/util';
 
 const configSchema = {
 	prefix: {
-		doc: 'A prefix that needed to be written before every command like: r!help',
 		format: String,
 		default: 'r!'
 	},
 	botOwners: {
 		format: Array,
-		doc: 'List of users ID that can execute owner only commands. Recommended to give it only to people managing specific bot instance.',
 		default: [] as string[]
 	},
 	daySwitchHour: {
-		doc: 'A time that bot will fetch replacements for next day' + '\n' +
-			'Monday 15:30 - Fetch for Monday' + '\n' +
-			'Monday 16:00 - Fetch for Thursday',
 		format: function check(val: any): void
 		{
 			if(!moment(val, 'k:m').isValid()) throw new TypeError(`daySwitchHour '${val}' is not in a hh:mm format`);
@@ -30,31 +25,26 @@ const configSchema = {
 		default: '16:00'
 	},
 	replacementsFilter: {
-		doc: 'RegExp that all replacement’s description will be passed through. If it won’t match this replacement won’t be shown.',
 		format: RegExp,
 		default: '(.*?)'
 	},
 	replacementsChannel:
 	{
 		updateCron: {
-			doc: 'Cron Expression when replacements channels will be updated',
 			format: String,
 			default: '0,30 * * * *'
 		},
 		topicTag: {
-			doc: 'Text that replacement’s channel must match to be detected as replacement channel.',
 			format: String,
 			default: '[RPL-BOT]'
 		}
 	},
 	fetcher: {
 		name: {
-			doc: 'Name of the fetcher file that will be used.',
 			format: String,
 			default: 'DummyFetcher'
 		},
 		config: {
-			doc: 'Configuration of the fetcher. Different for all fetchers',
 			format: Object,
 			default: {}
 		}
