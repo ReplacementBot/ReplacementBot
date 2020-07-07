@@ -14,7 +14,7 @@ export default class UpdateCommand extends Command
 			memberName: 'setup',
 			description: 'Creates and configures Replacements Channel',
 			guildOnly: true,
-			userPermissions: ['MANAGE_CHANNELS'],
+			userPermissions: ['MANAGE_CHANNELS']
 		});
 	}
 
@@ -28,7 +28,7 @@ export default class UpdateCommand extends Command
 				.setTitle('Cannot Create Channel')
 				.setDescription(
 					'I cannot create any more channels because one or more is already created' + '\r\n' +
-					`Use \`${Config.get('prefix')}verify\` for more information`,
+					`Use \`${Config.get('prefix')}verify\` for more information`
 				)
 				.setFooter('Documentation: https://bit.ly/2AaJycn'));
 		}
@@ -55,7 +55,7 @@ export default class UpdateCommand extends Command
 								.setTitle('Channel created but not updated')
 								.setDescription(
 									`Channel ${channel.channel} has been successfully created but update failed` + '\r\n' +
-									`Please try \`${Config.get('prefix')}update\` to update manually`,
+									`Please try \`${Config.get('prefix')}update\` to update manually`
 								)
 								.setFooter('Documentation: https://bit.ly/2AaJycn'));
 						});
@@ -70,7 +70,7 @@ export default class UpdateCommand extends Command
 								.setTitle('Channel hasn\'t been created')
 								.setDescription(
 									'Creator tried to create channel but failed, rollback was successful' + '\r\n' +
-									'Please use manual setup!',
+									'Please use manual setup!'
 								)
 								.addField('Error', 'Channel not suitable - ' + ReplacementsChannel.stringifyIsSatiableError(channel.isSuitable()))
 								.setFooter('Documentation: https://bit.ly/2AaJycn'));
@@ -82,7 +82,7 @@ export default class UpdateCommand extends Command
 								.setTitle('Creator Failed Terribly')
 								.setDescription(
 									'Creator tried to create channel but failed, rollback also failed' + '\r\n' +
-									'Please delete ${channel.channel} channel and use manual setup!',
+									'Please delete ${channel.channel} channel and use manual setup!'
 								)
 								.addField('Error', error)
 								.setFooter('Documentation: https://bit.ly/2AaJycn'));
@@ -112,8 +112,8 @@ export default class UpdateCommand extends Command
 					'That channel will be automatically updated by ReplacementBot ' + '\r\n' +
 					'Website: https://replacementbot.github.io' + '\r\n' +
 					'Documentation: https://replacementbot.github.io/docs/replacements_channel',
-				reason: `Channel created by ${author.discriminator} (${author.id})`,
-			},
+				reason: `Channel created by ${author.discriminator} (${author.id})`
+			}
 		);
 	}
 }

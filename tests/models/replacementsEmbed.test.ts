@@ -13,7 +13,7 @@ describe('ReplacementsEmbed', () =>
 				new Lesson(0, 'Test'),
 				'Dummy',
 				new Teacher('TestTeacher1'),
-				new Teacher('TestTeacher2')),
+				new Teacher('TestTeacher2'))
 		]);
 	test('Should Build', () =>
 	{

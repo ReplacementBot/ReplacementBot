@@ -10,7 +10,7 @@ export default class GitHubCommand extends Command
 			group: 'other',
 			aliases: ['gh', 'opensource', 'oss', 'source', 'contribute'],
 			memberName: 'github',
-			description: 'Show Replacement\'s bot GitHub link',
+			description: 'Show Replacement\'s bot GitHub link'
 		});
 	}
 
@@ -18,7 +18,7 @@ export default class GitHubCommand extends Command
 	{
 		return message.channel.send(
 			'**ReplacementBot** is a Open Source project made with :heart:' + '\r\n' +
-            'GitHub: https://github.com/ReplacementBot/ReplacementBot',
+            'GitHub: https://github.com/ReplacementBot/ReplacementBot'
 		) as Promise<Message>;
 	}
 }

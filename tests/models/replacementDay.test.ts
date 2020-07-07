@@ -14,8 +14,8 @@ describe('ReplacementDay', () =>
 		expect(replacementDay.replacements).toStrictEqual(
 			[
 				new Replacement(new Lesson(0), 'Test'),
-				new Replacement(new Lesson(0), 'Test2'),
-			],
+				new Replacement(new Lesson(0), 'Test2')
+			]
 		);
 	});
 	test('should convert to string', () =>

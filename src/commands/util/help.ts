@@ -10,7 +10,7 @@ export default class GitHubCommand extends Command
 			group: 'util',
 			memberName: 'help',
 			aliases: ['commands'],
-			description: 'Point to documentation list of available commands',
+			description: 'Point to documentation list of available commands'
 		});
 	}
 

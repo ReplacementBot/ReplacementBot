@@ -13,7 +13,7 @@ export default class StatusCommand extends Command
 			group: 'util',
 			memberName: 'status',
 			aliases: ['info', 'health', 'fetcher', 's'],
-			description: 'Display information about current instance',
+			description: 'Display information about current instance'
 		});
 	}
 

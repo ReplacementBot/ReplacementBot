@@ -17,8 +17,8 @@ export default class UpdateCommand extends Command
 			userPermissions: ['MANAGE_CHANNELS'],
 			throttling: {
 				usages: 1,
-				duration: 30,
-			},
+				duration: 30
+			}
 		});
 	}
 

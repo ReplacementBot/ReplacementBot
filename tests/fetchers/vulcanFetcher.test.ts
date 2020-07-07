@@ -16,8 +16,8 @@ describe('Vulcan Fetcher', () =>
 		await expect(fetcher.fetchReplacements(fetchingTime)).resolves.toStrictEqual(
 			new ReplacementDay(fetchingTime, [
 				new Replacement(new Lesson(1), 'Description1', new Teacher('AbsentTeacher1'), new Teacher('NewTeacher1'), 'Comment1'),
-				new Replacement(new Lesson(2), 'Description2', new Teacher('AbsentTeacher2'), new Teacher('NewTeacher2'), 'Comment2'),
-			]),
+				new Replacement(new Lesson(2), 'Description2', new Teacher('AbsentTeacher2'), new Teacher('NewTeacher2'), 'Comment2')
+			])
 		);
 	});
 });

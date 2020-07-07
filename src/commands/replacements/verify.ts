@@ -15,7 +15,7 @@ export default class VerifyCommand extends Command
 			memberName: 'verify',
 			description: 'Verify the setup of Replacements Channel in current guild',
 			aliases: [ 'v' ],
-			guildOnly: true,
+			guildOnly: true
 		});
 	}
 

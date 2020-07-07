@@ -10,7 +10,7 @@ export default class GitHubCommand extends Command
 			group: 'other',
 			aliases: ['bug', 'problem', 'broken', 'feature', 'enhancement'],
 			memberName: 'issue',
-			description: 'Display instruction for reporting bugs and features',
+			description: 'Display instruction for reporting bugs and features'
 		});
 	}
 

@@ -10,7 +10,7 @@ describe('Dummy Fetcher', () =>
 	test('should give dummy result', async () =>
 	{
 		await expect(new DummyFetcher().fetchReplacements(fetchingTime)).resolves.toStrictEqual(
-			new ReplacementDay(fetchingTime, [ new Replacement(new Lesson(0, 'Dummy Lesson'), 'Dummy')]),
+			new ReplacementDay(fetchingTime, [ new Replacement(new Lesson(0, 'Dummy Lesson'), 'Dummy')])
 		);
 	});
 });

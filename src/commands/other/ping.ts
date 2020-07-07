@@ -9,7 +9,7 @@ export default class PingCommand extends Command
 			name: 'ping',
 			group: 'other',
 			memberName: 'ping',
-			description: 'Shows current heartbeat ping and message round-trip',
+			description: 'Shows current heartbeat ping and message round-trip'
 		});
 	}
 

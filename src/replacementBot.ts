@@ -22,7 +22,7 @@ export default class ReplacementBot extends CommandoClient
 
 		super({
 			commandPrefix: Config.get('prefix'),
-			owner: Config.get('botOwners'),
+			owner: Config.get('botOwners')
 		});
 
 		// Setup Managers
@@ -65,7 +65,7 @@ export default class ReplacementBot extends CommandoClient
 					const nextExecution = this.scheduleManager.getJobByName('Update Channels').nextDate();
 					Logger.info('Startup', 'ReplacementBot Ready! ' + chalk.gray(
 						`Servers: ${this.guilds.cache.size} | ` +
-						`Next Update: ${nextExecution.format('dddd HH:mm')} (${nextExecution.fromNow()})`,
+						`Next Update: ${nextExecution.format('dddd HH:mm')} (${nextExecution.fromNow()})`
 					));
 					resolve();
 				})
@@ -80,11 +80,11 @@ export default class ReplacementBot extends CommandoClient
 			.registerGroups([
 				['replacements', 'Replacements'],
 				['util', 'Utility Commands'],
-				['other', 'Other Commands'],
+				['other', 'Other Commands']
 			])
 			.registerCommandsIn({
 				filter: /^([^.].*)\.(js|ts)$/,
-				dirname: path.join(__dirname, 'commands'),
+				dirname: path.join(__dirname, 'commands')
 			});
 	}
 }

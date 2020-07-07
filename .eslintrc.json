@@ -17,7 +17,7 @@
 	"rules": {
 		"brace-style": ["error", "allman", { "allowSingleLine": false }],
 		"no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 1, "maxBOF": 0 }],
-		"comma-dangle": ["error", "always-multiline"],
+		"comma-dangle": ["error", "never"],
 		"comma-spacing": ["error", { "before": false, "after": true }],
 		"comma-style": "error",
 		"curly": ["error", "multi-line", "consistent"],

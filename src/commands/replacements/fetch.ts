@@ -15,8 +15,8 @@ export default class FetchReplacementsCommand extends Command
 			description: 'Fetch replacements and display them as reply',
 			throttling: {
 				usages: 1,
-				duration: 30,
-			},
+				duration: 30
+			}
 		});
 	}
 
@@ -29,7 +29,7 @@ export default class FetchReplacementsCommand extends Command
 				{
 					const embed = new ReplacementsEmbed(replacements as ReplacementDay).build(
 						`Replacements For ${replacements.getWeekDay()}`,
-						ReplacementsEmbedFooterType.GENERATED_ON,
+						ReplacementsEmbedFooterType.GENERATED_ON
 					);
 					return message.reply(`<@${message.author.id}> Sure, there are replacements for ${replacements.getWeekDay()}!`, embed) as Promise<Message>;
 				}

@@ -20,7 +20,7 @@ describe('ReplacementManager', () =>
 		test('should fetch from provided date && initializeFetcher', () =>
 		{
 			return expect(manager.fetchReplacements(fetchingTime)).resolves.toEqual(
-				new ReplacementDay(fetchingTime, [ new Replacement(new Lesson(0, 'Test'), 'initialized: true')]),
+				new ReplacementDay(fetchingTime, [ new Replacement(new Lesson(0, 'Test'), 'initialized: true')])
 			);
 		});
 

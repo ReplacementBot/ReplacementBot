@@ -12,7 +12,7 @@ export class ScheduledJob extends CronJob
 	{
 		const options: CronJobParameters = {
 			cronTime: jobTime,
-			onTick: undefined,
+			onTick: undefined
 		};
 		super(options);
 		this.jobFunction = jobFunction;
@@ -92,7 +92,7 @@ export default class ScheduleManager
 			() =>
 			{
 				return bot.replacementsChannelsManager.updateAllChannels();
-			},
+			}
 		)));
 		return jobs;
 	}

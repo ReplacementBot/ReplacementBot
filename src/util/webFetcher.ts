@@ -65,7 +65,7 @@ export default class WebFetcher
 			axios.get(url,
 				{
 					responseType: 'arraybuffer',
-					headers: { 'User-Agent': 'Replacementbot' },
+					headers: { 'User-Agent': 'Replacementbot' }
 				})
 				.then((response: AxiosResponse<Buffer>) =>
 				{
