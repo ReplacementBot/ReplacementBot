@@ -44,7 +44,7 @@ export class WebFetcherResponse
 
 export default class WebFetcher
 {
-	public request(url: string, encoding = 'UTF-8', config?: AxiosRequestConfig): Promise<WebFetcherResponse>
+	public request(url: string, encoding = 'UTF-8', config: AxiosRequestConfig = {}): Promise<WebFetcherResponse>
 	{
 		if(url.startsWith('testData:///'))
 		{
