@@ -18,11 +18,6 @@ export default class FetcherMetadata
 	{
 		const metadata = JSON.parse(json);
 
-		if(metadata == {})
-		{
-			Logger.warn('FetcherMetadata', 'metadata.json is empty or don\'t exist');
-		}
-
 		this.validVersion = true;
 		if(metadata.version !== currentVersion)
 		{
