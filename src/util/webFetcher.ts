@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from 'axios';
+import axios, { AxiosResponse, AxiosRequestConfig } from 'axios';
 import iconov from 'iconv-lite';
 import RootPath from 'app-root-path';
 import fs from 'fs';
@@ -44,7 +44,7 @@ export class WebFetcherResponse
 
 export default class WebFetcher
 {
-	public request(url: string, encoding = 'UTF-8'): Promise<WebFetcherResponse>
+	public request(url: string, encoding = 'UTF-8', config?: AxiosRequestConfig): Promise<WebFetcherResponse>
 	{
 		if(url.startsWith('testData:///'))
 		{
@@ -60,36 +60,31 @@ export default class WebFetcher
 			}
 
 		}
-		return new Promise((resolve, reject) =>
+		config.responseType = 'arraybuffer';
+		config.headers = { 'User-Agent': 'Replacementbot' };
+		if(!iconov.encodingExists(encoding))
 		{
-			axios.get(url,
+			return Promise.reject(new WebFetcherResponse(WebFetcherResponseType.FAILED, `WebFetcher Error: "${encoding}" encoding don't exist`));
+		}
+		return axios.get(url, config)
+			.then((response: AxiosResponse<Buffer>) =>
+			{
+				return Promise.resolve(new WebFetcherResponse(WebFetcherResponseType.SUCCESSFUL, iconov.decode(response.data, encoding), response.status));
+			})
+			.catch((error: any) =>
+			{
+				if (error.response)
 				{
-					responseType: 'arraybuffer',
-					headers: { 'User-Agent': 'Replacementbot' }
-				})
-				.then((response: AxiosResponse<Buffer>) =>
+					return Promise.reject(new WebFetcherResponse(WebFetcherResponseType.BAD_CODE, undefined, error.response.status));
+				}
+				else if (error.request)
 				{
-					if(!iconov.encodingExists(encoding))
-					{
-						reject(new WebFetcherResponse(WebFetcherResponseType.FAILED, `WebFetcher Error: "${encoding}" encoding don't exist`));
-					}
-					resolve(new WebFetcherResponse(WebFetcherResponseType.SUCCESSFUL, iconov.decode(response.data, encoding), response.status));
-				})
-				.catch((error: any) =>
+					return Promise.reject(new WebFetcherResponse(WebFetcherResponseType.NO_RESPONSE, error.request));
+				}
+				else
 				{
-					if (error.response)
-					{
-						reject(new WebFetcherResponse(WebFetcherResponseType.BAD_CODE, undefined, error.response.status));
-					}
-					else if (error.request)
-					{
-						reject(new WebFetcherResponse(WebFetcherResponseType.NO_RESPONSE, error.request));
-					}
-					else
-					{
-						reject(new WebFetcherResponse(WebFetcherResponseType.FAILED, error.message));
-					}
-				});
-		});
+					return Promise.reject(new WebFetcherResponse(WebFetcherResponseType.FAILED, error.message));
+				}
+			});
 	}
 }

@@ -34,10 +34,7 @@ export default class ReplacementsManager
 				{
 					resolve(this.filterReplacement(result as ReplacementDay));
 				})
-				.catch((error) =>
-				{
-					reject(error);
-				});
+				.catch(reject);
 		});
 	}
 
