@@ -63,10 +63,9 @@ export default class ReplacementBot extends CommandoClient
 					this.setupCommandsRegistry();
 					this.scheduleManager.scheduleDefaultJobs(this);
 					const nextExecution = this.scheduleManager.getJobByName('Update Channels').nextDate();
-					Logger.info('Startup', 'ReplacementBot Ready! ' + chalk.gray(
-						`Servers: ${this.guilds.cache.size} | ` +
-						`Next Update: ${nextExecution.format('dddd HH:mm')} (${nextExecution.fromNow()})`
-					));
+					Logger.info('Startup', 'ReplacementBot Ready!');
+					Logger.info('Startup', `Total Servers: ${this.guilds.cache.size}`);
+					Logger.info('Startup', `Next Update: ${nextExecution.format('dddd HH:mm')} (${nextExecution.fromNow()})`);
 					resolve();
 				})
 				.catch(reject);
