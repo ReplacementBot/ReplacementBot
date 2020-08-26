@@ -3,3 +3,4 @@ build/*
 *.yaml
 *.json
 *.html
+*.config.js

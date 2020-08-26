@@ -7,12 +7,14 @@ import ScheduleManager from './managers/scheduleManager';
 
 import ReplacementsChannelsManager from './managers/replacementsChannelsManager';
 import chalk from 'chalk';
+import MetricsManager from './managers/metricsManager';
 
 export default class ReplacementBot extends CommandoClient
 {
 	replacementsManager: ReplacementsManager;
 	scheduleManager: ScheduleManager;
 	replacementsChannelsManager: ReplacementsChannelsManager;
+	metricsManager: MetricsManager;
 
 	constructor()
 	{
@@ -29,6 +31,7 @@ export default class ReplacementBot extends CommandoClient
 		this.replacementsManager = new ReplacementsManager();
 		this.scheduleManager = new ScheduleManager();
 		this.replacementsChannelsManager = new ReplacementsChannelsManager(this);
+		this.metricsManager = new MetricsManager();
 
 		// Setup Listeners
 		this.on('commandError', (command, error, message) =>
@@ -54,6 +57,7 @@ export default class ReplacementBot extends CommandoClient
 			this.login(process.env.REPLACEMENT_BOT_TOKEN)
 				.then(async ()=>
 				{
+					this.stop();
 					await this.replacementsManager.initialize(Config.get('fetcher').name)
 						.then((fetcherName: string) =>
 						{
@@ -62,6 +66,8 @@ export default class ReplacementBot extends CommandoClient
 						.catch(reject);
 					this.setupCommandsRegistry();
 					this.scheduleManager.scheduleDefaultJobs(this);
+					this.metricsManager.start(this);
+
 					const nextExecution = this.scheduleManager.getJobByName('Update Channels').nextDate();
 					Logger.info('Startup', 'ReplacementBot Ready!');
 					Logger.info('Startup', `Total Servers: ${this.guilds.cache.size}`);
@@ -70,6 +76,11 @@ export default class ReplacementBot extends CommandoClient
 				})
 				.catch(reject);
 		});
+	}
+
+	public stop(): void
+	{
+		this.destroy();
 	}
 
 	private setupCommandsRegistry(): void
