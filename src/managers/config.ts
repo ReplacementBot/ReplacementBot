@@ -57,23 +57,33 @@ export default class Config
 
 	public static initialize(data?: string): void
 	{
-		const parsedJSONData = JSON.parse(data ? data : Config.getJSONData());
+		let parsedJSONData = {};
+		try
+		{
+			parsedJSONData = JSON.parse(data ? data : Config.getJSONData());
+		}
+		catch(error)
+		{
+			Logger.warn('Config', 'Failed to prase config JSON', error);
+		}
 		Config.data = convict(configSchema);
 		Config.data.load(parsedJSONData);
 
 		// Slightly hacky way to remove default convict prefix https://github.com/mozilla/node-convict/issues/363
 		// @ts-ignore types file is outdated
-		Config.data.validate({ allowed: 'warn', output: (warning: string) => Logger.warn('Configuration Warning: ' + warning.substr(20)) });
+		Config.data.validate({ allowed: 'warn', output: (warning: string) => Logger.warn('Config', 'Found Configuration Errors:\n' + warning.substr(20)) });
 	}
 
 	private static getJSONData(): string
 	{
 		if(fs.existsSync(appDir + '/config/config.json') && !TestUtilities.isRunningInTest())
 		{
+			Logger.info('Config', 'Loading configuration from config.json');
 			return fs.readFileSync(appDir + '/config/config.json').toString();
 		}
 		else if(process.env.REPLACEMENT_BOT_CONFIG)
 		{
+			Logger.info('Config', 'Loading configuration from REPLACEMENT_BOT_CONFIG');
 			return process.env.REPLACEMENT_BOT_CONFIG;
 		}
 		else

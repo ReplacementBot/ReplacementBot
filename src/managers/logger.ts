@@ -17,7 +17,7 @@ export default class Logger
 			throw new Error('Critical Error: ' + message);
 		}
 		this.log('CRITICAL', source, message, error);
-		process.exit(5);
+		process.exit(1);
 	}
 
 	public static error(source: string, message: string, error?: Error): void
