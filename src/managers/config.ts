@@ -55,19 +55,26 @@ export default class Config
 {
 	private static data: convict.Config<any>;
 
-	public static initialize(data?: string): void
+	public static initialize(data?: string, customSchema?: any): void
 	{
-		let parsedJSONData = {};
-		try
+		let parsedData = {};
+		if(typeof data === 'string')
 		{
-			parsedJSONData = JSON.parse(data ? data : Config.getJSONData());
+			try
+			{
+				parsedData = JSON.parse(data ? data : Config.getJSONData());
+			}
+			catch(error)
+			{
+				Logger.warn('Config', 'Failed to prase config JSON', error);
+			}
 		}
-		catch(error)
+		else
 		{
-			Logger.warn('Config', 'Failed to prase config JSON', error);
+			parsedData = data;
 		}
-		Config.data = convict(configSchema);
-		Config.data.load(parsedJSONData);
+		Config.data = convict(customSchema ? customSchema : configSchema);
+		Config.data.load(parsedData);
 
 		// Slightly hacky way to remove default convict prefix https://github.com/mozilla/node-convict/issues/363
 		// @ts-ignore types file is outdated
