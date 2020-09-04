@@ -9,7 +9,7 @@ executors:
       - image: 'circleci/node:latest'
 
 jobs:
-  build:
+  prepare:
     executor: node-executor
     steps:
       - checkout
@@ -62,14 +62,28 @@ jobs:
           name: Check Code Styling
           command: npm run lint
 
+  lint:
+    executor: node-executor
+    steps:
+      - checkout:
+          path: ~/replacementBot
+      - attach_workspace:
+          at: ~/replacementBot
+      - run:
+          name: Build Typescript
+          command: npm run build
+
 workflows:
   version: 2
-  build-test-lint:
+  build:
     jobs:
-      - build
+      - prepare
       - test:
           requires:
-            - build
+            - prepare
       - lint:
           requires:
-            - build
+            - prepare
+      - build:
+          requires:
+            - prepare
