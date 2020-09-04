@@ -57,22 +57,7 @@ export default class Config
 
 	public static initialize(data?: string, customSchema?: any): void
 	{
-		let parsedData = {};
-		if(typeof data === 'string')
-		{
-			try
-			{
-				parsedData = JSON.parse(data ? data : Config.getJSONData());
-			}
-			catch(error)
-			{
-				Logger.warn('Config', 'Failed to prase config JSON', error);
-			}
-		}
-		else
-		{
-			parsedData = data;
-		}
+		const parsedData = typeof data === 'object' ? data : JSON.parse(data ? data : Config.getJSONData());
 		Config.data = convict(customSchema ? customSchema : configSchema);
 		Config.data.load(parsedData);
 
@@ -85,12 +70,10 @@ export default class Config
 	{
 		if(fs.existsSync(appDir + '/config/config.json') && !TestUtilities.isRunningInTest())
 		{
-			Logger.info('Config', 'Loading configuration from config.json');
 			return fs.readFileSync(appDir + '/config/config.json').toString();
 		}
 		else if(process.env.REPLACEMENT_BOT_CONFIG)
 		{
-			Logger.info('Config', 'Loading configuration from REPLACEMENT_BOT_CONFIG');
 			return process.env.REPLACEMENT_BOT_CONFIG;
 		}
 		else
