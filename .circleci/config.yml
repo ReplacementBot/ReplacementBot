@@ -62,7 +62,7 @@ jobs:
           name: Check Code Styling
           command: npm run lint
 
-  lint:
+  build:
     executor: node-executor
     steps:
       - checkout:
