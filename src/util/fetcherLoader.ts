@@ -18,7 +18,7 @@ export default class FetcherLoader
 		return new Promise((resolve, reject) =>
 		{
 			// While running bot it doesn't work with ts files anymore
-			// Hoverer, Jest don't create js files and still operates on ts
+			// However, Jest don't create js files and still operates on ts
 			const path = `../fetchers/${fetcherName}/fetcher.${TestUtilities.isRunningInTest() ? 'ts' : 'js'}`;
 
 			import(path)
