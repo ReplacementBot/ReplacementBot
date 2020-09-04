@@ -57,7 +57,6 @@ export default class ReplacementBot extends CommandoClient
 			this.login(process.env.REPLACEMENT_BOT_TOKEN)
 				.then(async ()=>
 				{
-					this.stop();
 					await this.replacementsManager.initialize(Config.get('fetcher').name)
 						.then((fetcherName: string) =>
 						{
