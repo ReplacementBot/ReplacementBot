@@ -20,7 +20,7 @@ describe('ReplacementsEmbed', () =>
 		const embed = new ReplacementsEmbed(replacementDay);
 		const richEmbed = embed.build('TestTitle', ReplacementsEmbedFooterType.GENERATED_ON);
 		expect(richEmbed.fields[0].value).toBe(
-			':closed_book: [Test] Dummy' + '\r\n' +
-			'TestTeacher1 :arrow_right: TestTeacher2');
+			':closed_book: **[Test]** Dummy' + '\r\n' +
+			'TestTeacher1 :arrow_right: **TestTeacher2**');
 	});
 });

@@ -30,8 +30,9 @@ export class ReplacementsEmbed
 			.setThumbnail('https://replacementbot.github.io/docs/assets/images/replacementbot-logo-512-circle.png')
 			.setFooter(this.getFooter(footerType, moment()));
 
-		for(const replacementDay of this.data)
+		for (let i = 0; i < this.data.length; i++)
 		{
+			const replacementDay = this.data[i];
 			result.addField(
 				this.data.length > 1 ? `Replacements for: ${replacementDay.getWeekDay()}` : 'Replacements list:',
 				replacementDay.toString(false));

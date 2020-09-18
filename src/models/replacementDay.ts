@@ -38,9 +38,14 @@ export default class ReplacementDay
 	{
 		let result = title ? `**Replacements for: ${this.getWeekDay()}**\r\n` : '';
 		if(this.replacements.length == 0) return ':x: No Replacements';
-		for(const replacement of this.replacements)
+		for (let i = 0; i < this.replacements.length; i++)
 		{
-			result += replacement.toString() + '\r\n\r\n';
+			const replacement = this.replacements[i];
+			result += replacement.toString();
+			if(i < this.replacements.length - 1)
+			{
+				result += '\r\n\r\n';
+			}
 		}
 		if(safe)
 		{

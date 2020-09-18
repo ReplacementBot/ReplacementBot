@@ -20,7 +20,7 @@ describe('ReplacementDay', () =>
 	});
 	test('should convert to string', () =>
 	{
-		expect(replacementDay.toString()).toContain('[0] Test:');
+		expect(replacementDay.toString()).toContain('**[0]** Test');
 		expect(replacementDay.toString()).toContain(`**Replacements for: ${moment().format('dddd')}**`);
 	});
 	test('should detect too big strings', () =>

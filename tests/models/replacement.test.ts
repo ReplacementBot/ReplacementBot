@@ -14,9 +14,9 @@ describe('Replacement', () =>
 			'Comment'
 		);
 		expect(replacement.toString()).toBe(
-			':closed_book: [42 - Test] Description' + '\r\n' +
-			'New Teacher :arrow_right: Replaced Teacher' + '\r\n' +
-			'Comment'
+			':closed_book: **[42 - Test]** Description' + '\r\n' +
+			'New Teacher :arrow_right: **Replaced Teacher**' + '\r\n' +
+			'**Comment**: *Comment*'
 		);
 	});
 });
