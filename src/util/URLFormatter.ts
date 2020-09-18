@@ -1,0 +1,36 @@
+import moment from 'moment';
+
+export default class URLFormatter
+{
+	public static formatUrl(url: string): string
+	{
+		this.checkURL(url);
+		const variablesRegex = new RegExp(/{(.*?)\((.*?)\)}/g);
+		const variables = url.match(variablesRegex);
+		if(variables && variables.length > 0)
+		{
+			for(const variableRaw of variables)
+			{
+				const variable = variableRaw.slice(0, -1).slice(1);
+				if(variable.startsWith('moment'))
+				{
+					const format = variable.replace('moment(', '').replace(')', '');
+					url = url.replace(variableRaw, moment().format(format));
+				}
+			}
+		}
+		return url;
+	}
+
+	private static checkURL(url: string): void
+	{
+		if(typeof url !== 'string')
+		{
+			throw TypeError('URL passed to URLFormatter must be string');
+		}
+		else if(!url || url.length == 0)
+		{
+			throw TypeError('URL passed to URLFormatter cannot be empty');
+		}
+	}
+}

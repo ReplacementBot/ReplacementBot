@@ -1,12 +1,13 @@
 import { ReplacementsFetcher } from '../../models/replacementsFetcher';
 import ReplacementDay from '../../models/replacementDay';
-import moment = require('moment');
+import moment from 'moment';
 import WebFetcher, { WebFetcherResponse } from '../../util/webFetcher';
 import cheerio from 'cheerio';
 import Replacement from '../../models/replacement';
 import Lesson from '../../models/lesson';
 import Teacher from '../../models/teacher';
 import { FetchError, ResponseParseError } from '../../util/errors';
+import URLFormatter from '../../util/URLFormatter';
 
 enum RowFieldType
 {
@@ -39,7 +40,7 @@ export default class VulcanFetcher implements ReplacementsFetcher
 	{
 		return new Promise((resolve, reject) =>
 		{
-			this.webFetcher.request(this.config.get('url'), 'ISO-8859-2')
+			this.webFetcher.request(URLFormatter.formatUrl(this.config.get('url')), 'ISO-8859-2')
 				.then((response: WebFetcherResponse) =>
 				{
 					const data = cheerio.load(response.result.replace(/\r?\n|\r/g, ''));

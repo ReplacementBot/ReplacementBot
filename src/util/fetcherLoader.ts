@@ -53,7 +53,6 @@ export default class FetcherLoader
 				})
 				.catch((error) =>
 				{
-					console.log(error);
 					reject(new Error(`Failed to import fetcher "${fetcherName}" (${error})`));
 				});
 		});
