@@ -20,25 +20,29 @@ export default class VulcanFetcher implements ReplacementsFetcher
 	webFetcher: WebFetcher;
 	config: any;
 
-	initialize(config: any): Promise<void>
+	public static configSchema =
+	{
+		url: {
+			format: String,
+			default: ''
+		}
+	};
+
+	public initialize(config: any): Promise<void>
 	{
 		this.webFetcher = new WebFetcher();
 		this.config = config;
-		if(typeof config.url !== 'string')
-		{
-			return Promise.reject(new Error('url argument not present'));
-		}
 		return Promise.resolve();
 	}
 
-	fetchReplacements(date: moment.Moment): Promise<ReplacementDay>
+	public fetchReplacements(date: moment.Moment): Promise<ReplacementDay>
 	{
 		return new Promise((resolve, reject) =>
 		{
-			this.webFetcher.request(this.config.url, 'ISO-8859-2')
-				.then((requestResult: WebFetcherResponse) =>
+			this.webFetcher.request(this.config.get('url'), 'ISO-8859-2')
+				.then((response: WebFetcherResponse) =>
 				{
-					const data = cheerio.load(requestResult.result.replace(/\r?\n|\r/g, ''));
+					const data = cheerio.load(response.result.replace(/\r?\n|\r/g, ''));
 					const result = this.praseResult(data);
 					if(result instanceof ResponseParseError)
 					{

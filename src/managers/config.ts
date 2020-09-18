@@ -6,8 +6,6 @@ import moment from 'moment';
 import chalk from 'chalk';
 import TestUtilities from '../../tests/util';
 
-// doc fields are displayed on documentation
-
 const configSchema = {
 	prefix: {
 		format: String,
@@ -55,10 +53,10 @@ export default class Config
 {
 	private static data: convict.Config<any>;
 
-	public static initialize(data?: string, customSchema?: any): void
+	public static initialize(data?: string): void
 	{
-		const parsedData = typeof data === 'object' ? data : JSON.parse(data ? data : Config.getJSONData());
-		Config.data = convict(customSchema ? customSchema : configSchema);
+		const parsedData = JSON.parse(data ? data : Config.getJSONData());
+		Config.data = convict(configSchema);
 		Config.data.load(parsedData);
 
 		// Slightly hacky way to remove default convict prefix https://github.com/mozilla/node-convict/issues/363

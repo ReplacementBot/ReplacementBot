@@ -31,11 +31,11 @@ export default class FetchReplacementsCommand extends Command
 						`Replacements For ${replacements.getWeekDay()}`,
 						ReplacementsEmbedFooterType.GENERATED_ON
 					);
-					return message.reply(`<@${message.author.id}> Sure, there are replacements for ${replacements.getWeekDay()}!`, embed) as Promise<Message>;
+					return message.reply(`Sure, there are replacements for ${replacements.getWeekDay()}!`, embed) as Promise<Message>;
 				}
 				catch (error)
 				{
-					return message.reply(`<@${message.author.id}> Sure, there are replacements for ${replacements.getWeekDay()}!\r\r${replacements.toString(true, true)}`) as Promise<Message>;
+					return message.reply(`Sure, there are replacements for ${replacements.getWeekDay()}!\r\r${replacements.toString(true, true)}`) as Promise<Message>;
 				}
 
 			})

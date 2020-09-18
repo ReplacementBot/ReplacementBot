@@ -3,6 +3,8 @@ import FetcherMetadata from '../models/fetcherMetadata';
 import TestUtilities from '../../tests/util';
 import Config from '../managers/config';
 import fs from 'fs';
+import convict from 'convict';
+import Logger from '../managers/logger';
 
 export default class FetcherLoader
 {
@@ -25,10 +27,7 @@ export default class FetcherLoader
 				.then((fetcherClass) =>
 				{
 					let fetcher: ReplacementsFetcher;
-					if(!this.isFetcher(fetcherClass))
-					{
-						return Promise.reject(new Error(`"${fetcherName}" is not a ReplacementsFetcher`));
-					}
+					if(!this.isFetcher(fetcherClass)) return Promise.reject(new Error(`"${fetcherName}" is not a ReplacementsFetcher`));
 
 					try
 					{
@@ -46,7 +45,7 @@ export default class FetcherLoader
 					}
 					else
 					{
-						fetcher.initialize(Config.get('fetcher').config)
+						fetcher.initialize(this.loadFetcherConfig(fetcherClass))
 							.then(() => resolve(fetcher))
 							.catch((error: Error) => reject(new Error(`Fetcher initialization error (${error})`)));
 					}
@@ -54,6 +53,7 @@ export default class FetcherLoader
 				})
 				.catch((error) =>
 				{
+					console.log(error);
 					reject(new Error(`Failed to import fetcher "${fetcherName}" (${error})`));
 				});
 		});
@@ -69,6 +69,21 @@ export default class FetcherLoader
 		else
 		{
 			return new FetcherMetadata('{}', fetcherName);
+		}
+	}
+
+	private static loadFetcherConfig(fetcherClass: any): any
+	{
+		const schema = fetcherClass.default.configSchema;
+		if(schema && Object.keys(schema) && Object.keys(schema).length > 0)
+		{
+			const config = convict(schema);
+			config.load(Config.get('fetcher').config);
+
+			// Slightly hacky way to remove default convict prefix https://github.com/mozilla/node-convict/issues/363
+			// @ts-ignore types file is outdated
+			config.validate({ allowed: 'warn', output: (warning: string) => Logger.warn('Config', 'Found Fetcher Configuration Errors:\n' + warning.substr(20)) });
+			return config;
 		}
 	}
 

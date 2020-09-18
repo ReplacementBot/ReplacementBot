@@ -18,14 +18,14 @@ export default class Replacement
 	}
 	public toString(): string
 	{
-		let result = `:closed_book: [${this.lesson.toString()}] ${this.description}`;
+		let result = `:closed_book: **[${this.lesson.toString()}]** ${this.description}`;
 		if(this.newTeacher && this.replacedTeacher)
 		{
-			result += `\r\n${this.newTeacher} :arrow_right: ${this.replacedTeacher}`;
+			result += `\r\n${this.newTeacher} :arrow_right: **${this.replacedTeacher}**`;
 		}
 		if(this.comments != undefined)
 		{
-			result += `\r\n${this.comments}`;
+			result += `\r\n**Comment**: *${this.comments}*`;
 		}
 		return result;
 	}

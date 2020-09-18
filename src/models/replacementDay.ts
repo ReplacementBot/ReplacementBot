@@ -40,7 +40,7 @@ export default class ReplacementDay
 		if(this.replacements.length == 0) return ':x: No Replacements';
 		for(const replacement of this.replacements)
 		{
-			result += replacement.toString();
+			result += replacement.toString() + '\r\n\r\n';
 		}
 		if(safe)
 		{
