@@ -12,10 +12,18 @@ export default class URLFormatter
 			for(const variableRaw of variables)
 			{
 				const variable = variableRaw.slice(0, -1).slice(1);
-				if(variable.startsWith('moment'))
+				if(variable.startsWith('moment('))
 				{
 					const format = variable.replace('moment(', '').replace(')', '');
 					url = url.replace(variableRaw, moment().format(format));
+				}
+				else if(variable.startsWith('random('))
+				{
+					url = url.replace(variableRaw, Math.floor(Math.random() * (1000 - 1 + 1) + 1).toString());
+				}
+				else
+				{
+					throw new Error(`Unknown URLFormatter variable "${variable}"`);
 				}
 			}
 		}
