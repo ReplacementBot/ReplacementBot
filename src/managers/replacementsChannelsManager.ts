@@ -16,7 +16,7 @@ export default class ReplacementsChannelsManager
 	{
 		return new Promise((resolve, reject) =>
 		{
-			const channels = this.findAllChannels().array();
+			const channels = this.findOneChannelPerGuild().array();
 			const promises = [];
 			for(const channel of channels)
 			{
@@ -52,6 +52,22 @@ export default class ReplacementsChannelsManager
 		{
 			result.set(channel.id, new ReplacementsChannel(channel, this.bot));
 		});
+		return result;
+	}
+
+	public findOneChannelPerGuild(): Collection<string, ReplacementsChannel>
+	{
+		const foundGuilds: string[] = [];
+		const result: Collection<string, ReplacementsChannel> = new Collection<string, ReplacementsChannel>();
+		this.findAllChannels()
+			.forEach((channel) =>
+			{
+				if(!foundGuilds.includes(channel.channel.guild.id))
+				{
+					foundGuilds.push(channel.channel.guild.id);
+					result.set(channel.channel.id, channel);
+				}
+			});
 		return result;
 	}
 
