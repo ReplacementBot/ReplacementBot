@@ -1,6 +1,6 @@
 import Logger from './managers/logger';
-
 import ReplacementBot from '../src/replacementBot';
+require('source-map-support').install();
 
 new ReplacementBot().start()
 	.catch((error) =>
