@@ -7,7 +7,6 @@ export default class Logger
 	public static critical(source: string, message: string, error?: Error): void
 	{
 		message += 'Process has been terminated because of critical error';
-		console.log(chalk.red('Process has been terminated because of critical error'));
 		if(this.getHelpfulError(message) !== '')
 		{
 			message += chalk.green(chalk.bold('That is Known Error: ') + this.getHelpfulError(message));
