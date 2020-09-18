@@ -2,7 +2,7 @@ import moment from 'moment';
 
 export default class URLFormatter
 {
-	public static formatUrl(url: string): string
+	public static formatUrl(url: string, date: moment.Moment): string
 	{
 		this.checkURL(url);
 		const variablesRegex = new RegExp(/{(.*?)\((.*?)\)}/g);
@@ -15,7 +15,7 @@ export default class URLFormatter
 				if(variable.startsWith('moment('))
 				{
 					const format = variable.replace('moment(', '').replace(')', '');
-					url = url.replace(variableRaw, moment().format(format));
+					url = url.replace(variableRaw, date.format(format));
 				}
 				else if(variable.startsWith('random('))
 				{

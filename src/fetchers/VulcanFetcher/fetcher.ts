@@ -40,7 +40,7 @@ export default class VulcanFetcher implements ReplacementsFetcher
 	{
 		return new Promise((resolve, reject) =>
 		{
-			this.webFetcher.request(URLFormatter.formatUrl(this.config.get('url')), 'ISO-8859-2')
+			this.webFetcher.request(URLFormatter.formatUrl(this.config.get('url'), date), 'ISO-8859-2')
 				.then((response: WebFetcherResponse) =>
 				{
 					const data = cheerio.load(response.result.replace(/\r?\n|\r/g, ''));

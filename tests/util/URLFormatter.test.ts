@@ -5,17 +5,17 @@ describe('URLFormatter', () =>
 {
 	test('should not modify url without arguments', async () =>
 	{
-		expect(URLFormatter.formatUrl('http://example.com')).toBe('http://example.com');
+		expect(URLFormatter.formatUrl('http://example.com', moment())).toBe('http://example.com');
 	});
 
 	test('should replace `moment` variable', async () =>
 	{
-		expect(URLFormatter.formatUrl('http://example.com/{moment(YYYY)}')).toBe('http://example.com/' + moment().format('YYYY'));
+		expect(URLFormatter.formatUrl('http://example.com/{moment(YYYY)}', moment())).toBe('http://example.com/' + moment().format('YYYY'));
 	});
 
 	test('should replace `random` variable', async () =>
 	{
-		const result = URLFormatter.formatUrl('http://example.com/{random()}');
+		const result = URLFormatter.formatUrl('http://example.com/{random()}', moment());
 		const num = Number(result.replace('http://example.com/', ''));
 		expect(num).toBeGreaterThan(0);
 		expect(num).toBeLessThan(1001);
@@ -25,7 +25,7 @@ describe('URLFormatter', () =>
 	{
 		expect(() =>
 		{
-			URLFormatter.formatUrl('http://example.com/{unknown()}');
+			URLFormatter.formatUrl('http://example.com/{unknown()}', moment());
 		}).toThrow('Unknown URLFormatter variable "unknown()"');
 	});
 });

@@ -4,6 +4,7 @@ import Config from './config';
 import FetcherMetadata from '../models/fetcherMetadata';
 import moment, { Moment } from 'moment';
 import FetcherLoader from '../util/fetcherLoader';
+import Logger from './logger';
 
 export default class ReplacementsManager
 {
@@ -56,7 +57,11 @@ export default class ReplacementsManager
 	{
 		const switchHour = Config.get('daySwitchHour');
 		const switchHourMoment = moment(switchHour, 'k-m');
-		if(switchHourMoment.isValid() && moment().diff(switchHourMoment, 'minutes') >= 0)
+		if(!switchHourMoment.isValid())
+		{
+			Logger.warn('ReplacementsManager', '"daySwitchHour" config entry is not valid. Day switching is not enabled');
+		}
+		else if(moment().diff(switchHourMoment, 'minutes') >= 0)
 		{
 			return moment().add(1, 'days');
 		}
