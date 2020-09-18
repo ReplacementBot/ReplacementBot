@@ -2,6 +2,7 @@
   "name": "replacementbot",
   "description": "Powerful Discord School Replacements bot for your Discord Server",
   "author": "MrBartusek",
+  "version": "1.0.0-rc.1",
   "license": "Apache-2.0",
   "homepage": "https://github.com/ReplacementBot/ReplacementBot",
   "repository": {
