@@ -31,7 +31,7 @@ typings/
 .eslintcache
 
 # config files
-config/*
+config/config.json
 
 # builds
 build/
