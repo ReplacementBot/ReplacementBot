@@ -50,7 +50,7 @@ export default class VerifyCommand extends Command
 				return message.channel.send(new MessageEmbed()
 					.setColor('ORANGE')
 					.setTitle('One semi-valid channel found')
-					.setDescription(`${channels.first()} contains \`${Config.get('replacementsChannel').topicTag}\` tag but, ${error}`)
+					.setDescription(`${channels.first().channel} contains \`${Config.get('replacementsChannel').topicTag}\` tag but, ${error}`)
 					.setFooter('Documentation: https://bit.ly/2AaJycn'));
 			}
 
