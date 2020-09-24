@@ -8,11 +8,4 @@ updates:
   labels:
   - dependabot
   - dependencies
-  ignore:
-  - dependency-name: convict
-    versions:
-    - ">= 6.0.a, < 6.1"
-  - dependency-name: axios
-    versions:
-    - "0.20.0"
- 
+  - automerge
