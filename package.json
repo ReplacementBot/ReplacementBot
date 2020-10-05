@@ -42,7 +42,7 @@
     "discord.js-commando": "github:discordjs/Commando#bdbd84e2a978322f3af12c21e729eb7b7cd4a3dc",
     "figlet": "^1.5.0",
     "iconv-lite": "^0.6.2",
-    "jest-junit": "^11.1.0",
+    "jest-junit": "^12.0.0",
     "moment": "^2.29.0",
     "source-map-support": "^0.5.19"
   },
@@ -55,6 +55,6 @@
     "jest": "^25.5.4",
     "ts-jest": "^25.5.1",
     "typescript": "^3.9.7",
-    "jest-junit": "^11.1.0"
+    "jest-junit": "^12.0.0"
   }
 }
