@@ -31,7 +31,7 @@
     "@types/convict": "^5.2.1",
     "@types/cron": "^1.7.2",
     "@types/figlet": "^1.2.0",
-    "@types/ws": "^7.2.7",
+    "@types/ws": "^7.2.9",
     "app-root-path": "^3.0.0",
     "axios": "^0.19.0",
     "chalk": "^4.1.0",
