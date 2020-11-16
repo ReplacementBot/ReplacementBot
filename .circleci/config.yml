@@ -6,7 +6,7 @@ executors:
   node-executor:
     working_directory: ~/replacementBot
     docker:
-      - image: 'circleci/node:latest'
+      - image: 'circleci/node:lts'
 
 jobs:
   prepare:
