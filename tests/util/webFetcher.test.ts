@@ -1,14 +1,12 @@
 import WebFetcher, { WebFetcherResponse, WebFetcherResponseType } from '../../src/util/webFetcher';
 
-const TEST_URL = 'https://webscraper.io/test-sites/tables';
-
 describe('WebFetcher', () =>
 {
 	test('should fetch example page', async () =>
 	{
-		await expect(new WebFetcher().request(TEST_URL, 'UTF-8')).resolves.toEqual(
+		await expect(new WebFetcher().request('https://httpstat.us/200', 'UTF-8')).resolves.toEqual(
 			expect.objectContaining({
-				result: expect.stringContaining('Table playground')
+				result: expect.stringContaining('200')
 			})
 		);
 	}, 20 * 1000);
@@ -22,7 +20,7 @@ describe('WebFetcher', () =>
 
 	test('should throw error on invalid encoding argument', async () =>
 	{
-		await expect(new WebFetcher().request(TEST_URL, 'Lorem ipsum')).rejects.toEqual(
+		await expect(new WebFetcher().request('https://httpstat.us/200', 'Lorem ipsum')).rejects.toEqual(
 			new WebFetcherResponse(WebFetcherResponseType.FAILED, 'WebFetcher Error: "Lorem ipsum" encoding don\'t exist')
 		);
 	}, 20 * 1000);
