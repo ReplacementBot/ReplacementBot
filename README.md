@@ -1,8 +1,8 @@
-![Banner](https://replacementbot.github.io/docs/assets/images/replacementbot-banner.png)
+![Banner](https://raw.githubusercontent.com/ReplacementBot/docs/master/.gitbook/assets/replacementbot-banner.png)
 
 # ReplacementBot 📅 [![CircleCI Build](https://img.shields.io/circleci/build/github/ReplacementBot/ReplacementBot?logo=circleci&token=6bae64ae7a523f3f207804bf7818dc1d56f420a4)](https://circleci.com/gh/ReplacementBot/ReplacementBot) [![Coverage](https://img.shields.io/codecov/c/github/ReplacementBot/ReplacementBot?logo=codecov&logoColor=white)](https://codecov.io/gh/ReplacementBot/ReplacementBot) [![Gitpod Ready](https://img.shields.io/badge/Gitpod-ready-blue?logo=gitpod&logoColor=white)](https://gitpod.io/#https://github.com/ReplacementBot/ReplacementBot)
 
-[Webiste](https://replacementbot.github.io) | [Documentation](https://replacementbot.github.io/docs) | [Contributing](https://replacementbot.github.io/docs/contributing)
+[Documentation](https://mrbartusek.gitbook.io/replacementbot) | [Contributing](https://mrbartusek.gitbook.io/replacementbot/contribute/contributing-guidelines)
 
 
 Meet the **ReplacementBot**, a Discord bot made to make your school life easier. The Bot automatically fetches replacements from your school website and shows them right on your discord server. Automatically, every half an hour. And it even support custom fetchers.
