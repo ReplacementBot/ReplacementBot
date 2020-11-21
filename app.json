@@ -2,15 +2,15 @@
 	"name": "ReplacementBot",
 	"description": "Powerful Discord School Replacements bot for your Discord Server",
 	"repository": "https://github.com/ReplacementBot/ReplacementBot",
-	"logo": "https://replacementbot.github.io/docs/assets/images/replacementbot-logo-512-circle.png",
+	"logo": "https://raw.githubusercontent.com/ReplacementBot/docs/master/.gitbook/assets/replacementbot-logo-512-circle.png",
 	"keywords": ["typescript", "discord", "discord-js", "discord-js-commando", "bot", "jest", "school", "scraping", "nodejs", "discord-bot"],
 	"env": {
 		"REPLACEMENT_BOT_TOKEN": {
-			"description": "A secret token for the bot client - https://replacementbot.github.io/docs/setup",
+			"description": "A secret token for the bot client",
 			"required": true
 		},
 		"REPLACEMENT_BOT_CONFIG": {
-			"description": "Optional bot configuration - https://replacementbot.github.io/docs/configuration",
+			"description": "Optional bot configuration",
 			"required": false
 		}
 	}

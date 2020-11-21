@@ -78,7 +78,7 @@ export default class Logger
 	{
 		if(error.includes('REPLACEMENT_BOT_TOKEN is not provided'))
 		{
-			return 'You are missing bot token! https://replacementbot.github.io/docs/bot_token';
+			return 'You are missing bot token!';
 		}
 		else if(error.includes('A command with the name/alias') && error.includes('already registered.'))
 		{

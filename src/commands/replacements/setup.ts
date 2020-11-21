@@ -110,8 +110,7 @@ export default class UpdateCommand extends Command
 				topic:
 					Config.get('replacementsChannel').topicTag + '\r\n' +
 					'That channel will be automatically updated by ReplacementBot ' + '\r\n' +
-					'Website: https://replacementbot.github.io' + '\r\n' +
-					'Documentation: https://replacementbot.github.io/docs/replacements_channel',
+					'Documentation: https://mrbartusek.gitbook.io/replacementbot/',
 				reason: `Channel created by ${author.discriminator} (${author.id})`
 			}
 		);

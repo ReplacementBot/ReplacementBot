@@ -22,7 +22,7 @@ export default class StatusCommand extends Command
 		const bot = this.client as ReplacementBot;
 		const embed = new MessageEmbed()
 			.setColor('DARK_VIVID_PINK')
-			.setThumbnail('https://replacementbot.github.io/docs/assets/images/replacementbot-logo-512-circle.png')
+			.setThumbnail('https://raw.githubusercontent.com/ReplacementBot/docs/master/.gitbook/assets/replacementbot-logo-512-circle.png')
 			.setTitle('ReplacementBot status')
 			.setDescription('Powerful School Replacements bot for your Discord Server')
 			.addField('Fetcher', this.getFetcherMetadata(bot.replacementsManager))

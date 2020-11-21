@@ -27,7 +27,7 @@ export class ReplacementsEmbed
 
 		result.setTitle(title)
 			.setColor('DARK_VIVID_PINK')
-			.setThumbnail('https://replacementbot.github.io/docs/assets/images/replacementbot-logo-512-circle.png')
+			.setThumbnail('https://raw.githubusercontent.com/ReplacementBot/docs/master/.gitbook/assets/replacementbot-logo-512-circle.png')
 			.setFooter(this.getFooter(footerType, moment()));
 
 		for (let i = 0; i < this.data.length; i++)

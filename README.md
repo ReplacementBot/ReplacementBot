@@ -5,7 +5,7 @@
 [Documentation](https://mrbartusek.gitbook.io/replacementbot) | [Contributing](https://mrbartusek.gitbook.io/replacementbot/contribute/contributing-guidelines)
 
 
-Meet the **ReplacementBot**, a Discord bot made to make your school life easier. The Bot automatically fetches replacements from your school website and shows them right on your discord server. Automatically, every half an hour. And it even support custom fetchers.
+**ReplacementBot** is a feature-rich discord bot to fetch, parse, and display school substitutions right on your discord server!
 
 ## Public Instance
 
@@ -13,11 +13,12 @@ Unfortunately, Public Instance isn’t available right now. I would love to host
 
 ## Running Locally
 
-If you would like to use own bot instance to work on it locally or host it locally, or on heroku, we made a [Helpfully Guide](https://replacementbot.github.io/docs/setup)
+If you would like to use own bot instance to work on it locally or host it locally, or on heroku, we made a [Helpfully Guide](https://mrbartusek.gitbook.io/replacementbot/setup-the-bot/self-hosting)
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/ReplacementBot/ReplacementBot) [![Heroku Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 
 ## Contributing
+*See: [Contributing Guidelines](https://mrbartusek.gitbook.io/replacementbot/contribute/contributing-guidelines)*
 
-We greatly appreciate any work contributed, no matter how small!  Contributions, issues and feature requests are welcome ❤️ [Read more about contributing](https://replacementbot.github.io/docs/contributing)
+We greatly appreciate any work contributed, no matter how small!  Contributions, issues and feature requests are welcome ❤️
