@@ -50,7 +50,6 @@
 		"@typescript-eslint/no-namespace": "off",
 		"@typescript-eslint/ban-ts-ignore": "off",
 		"@typescript-eslint/no-use-before-define": "off",
-		"unused-imports/no-unused-imports-ts": "warn",
 		"prefer-promise-reject-errors": "error"
 	}
 }
