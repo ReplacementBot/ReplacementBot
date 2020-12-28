@@ -33,7 +33,7 @@
     "@types/figlet": "^1.2.1",
     "@types/ws": "^7.4.0",
     "app-root-path": "^3.0.0",
-    "axios": "^0.21.0",
+    "axios": "^0.21.1",
     "chalk": "^4.1.0",
     "cheerio": "^1.0.0-rc.5",
     "convict": "^5.2.0",
