@@ -54,7 +54,7 @@
     "eslint-plugin-unused-imports": "^1.0.3",
     "jest": "^25.5.4",
     "ts-jest": "^25.5.1",
-    "typescript": "^3.9.7",
+    "typescript": "^3.9.9",
     "jest-junit": "^12.0.0"
   }
 }
