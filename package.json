@@ -24,7 +24,7 @@
     "build"
   ],
   "dependencies": {
-    "@pm2/io": "^4.3.5",
+    "@pm2/io": "^5.0.0",
     "@types/app-root-path": "^1.2.4",
     "@types/cheerio": "^0.22.21",
     "@types/common-tags": "^1.8.0",
