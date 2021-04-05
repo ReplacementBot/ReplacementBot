@@ -26,7 +26,7 @@
   "dependencies": {
     "@pm2/io": "^5.0.0",
     "@types/app-root-path": "^1.2.4",
-    "@types/cheerio": "^0.22.21",
+    "@types/cheerio": "^0.22.28",
     "@types/common-tags": "^1.8.0",
     "@types/convict": "^5.2.2",
     "@types/cron": "^1.7.2",
