@@ -34,7 +34,7 @@
     "@types/ws": "^7.4.1",
     "app-root-path": "^3.0.0",
     "axios": "^0.21.1",
-    "chalk": "^4.1.0",
+    "chalk": "^4.1.1",
     "cheerio": "^1.0.0-rc.6",
     "convict": "^5.2.0",
     "cron": "^1.8.2",
