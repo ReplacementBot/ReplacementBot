@@ -36,7 +36,7 @@
     "axios": "^0.21.1",
     "chalk": "^4.1.1",
     "cheerio": "^1.0.0-rc.6",
-    "convict": "^5.2.0",
+    "convict": "^6.0.1",
     "cron": "^1.8.2",
     "discord.js": "^12.5.3",
     "discord.js-commando": "github:discordjs/Commando#bdbd84e2a978322f3af12c21e729eb7b7cd4a3dc",
