@@ -28,7 +28,7 @@
     "@types/app-root-path": "^1.2.4",
     "@types/cheerio": "^0.22.21",
     "@types/common-tags": "^1.8.0",
-    "@types/convict": "^5.2.2",
+    "@types/convict": "^6.0.1",
     "@types/cron": "^1.7.2",
     "@types/figlet": "^1.5.1",
     "@types/ws": "^7.4.2",
